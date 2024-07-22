@@ -16,6 +16,9 @@
 		270A84AE2C4E550500B61721 /* MovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84AD2C4E550500B61721 /* MovieInfoView.swift */; };
 		270A84B02C4E554200B61721 /* ReservaitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84AF2C4E554200B61721 /* ReservaitionView.swift */; };
 		270A84B32C4E573A00B61721 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 270A84B22C4E573A00B61721 /* SnapKit */; };
+		270A84B82C4E6BCD00B61721 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84B72C4E6BCD00B61721 /* UserData.swift */; };
+		270A84BA2C4E6BE300B61721 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84B92C4E6BE300B61721 /* MainController.swift */; };
+		270A84BD2C4E6C1500B61721 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84BC2C4E6C1500B61721 /* Manager.swift */; };
 		276B93D22C4E103C00170CBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D12C4E103C00170CBF /* AppDelegate.swift */; };
 		276B93D42C4E103C00170CBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D32C4E103C00170CBF /* SceneDelegate.swift */; };
 		276B93D62C4E103C00170CBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D52C4E103C00170CBF /* ViewController.swift */; };
@@ -32,6 +35,9 @@
 		270A84AB2C4E54DC00B61721 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		270A84AD2C4E550500B61721 /* MovieInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoView.swift; sourceTree = "<group>"; };
 		270A84AF2C4E554200B61721 /* ReservaitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaitionView.swift; sourceTree = "<group>"; };
+		270A84B72C4E6BCD00B61721 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		270A84B92C4E6BE300B61721 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		270A84BC2C4E6C1500B61721 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		276B93CE2C4E103C00170CBF /* MovieReservation_4Team.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieReservation_4Team.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		276B93D12C4E103C00170CBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		276B93D32C4E103C00170CBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +62,7 @@
 		270A849C2C4E53CA00B61721 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				270A84B72C4E6BCD00B61721 /* UserData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -78,15 +85,17 @@
 		270A849E2C4E53F500B61721 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				270A84B92C4E6BE300B61721 /* MainController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		270A849F2C4E540600B61721 /* Manager */ = {
+		270A84BB2C4E6BEF00B61721 /* Manage */ = {
 			isa = PBXGroup;
 			children = (
+				270A84BC2C4E6C1500B61721 /* Manager.swift */,
 			);
-			path = Manager;
+			path = Manage;
 			sourceTree = "<group>";
 		};
 		276B93C52C4E103C00170CBF = {
@@ -111,7 +120,7 @@
 				270A849C2C4E53CA00B61721 /* Model */,
 				270A849D2C4E53EF00B61721 /* View */,
 				270A849E2C4E53F500B61721 /* Controller */,
-				270A849F2C4E540600B61721 /* Manager */,
+				270A84BB2C4E6BEF00B61721 /* Manage */,
 				276B93D12C4E103C00170CBF /* AppDelegate.swift */,
 				276B93D32C4E103C00170CBF /* SceneDelegate.swift */,
 				276B93D52C4E103C00170CBF /* ViewController.swift */,
@@ -204,10 +213,13 @@
 				270A84A82C4E549200B61721 /* SearchView.swift in Sources */,
 				276B93D22C4E103C00170CBF /* AppDelegate.swift in Sources */,
 				270A84AC2C4E54DC00B61721 /* MyPageView.swift in Sources */,
+				270A84B82C4E6BCD00B61721 /* UserData.swift in Sources */,
 				276B93D42C4E103C00170CBF /* SceneDelegate.swift in Sources */,
 				270A84AA2C4E54A500B61721 /* BookmarkView.swift in Sources */,
 				270A84A42C4E546E00B61721 /* SignUpVIew.swift in Sources */,
 				270A84AE2C4E550500B61721 /* MovieInfoView.swift in Sources */,
+				270A84BD2C4E6C1500B61721 /* Manager.swift in Sources */,
+				270A84BA2C4E6BE300B61721 /* MainController.swift in Sources */,
 				270A84B02C4E554200B61721 /* ReservaitionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
