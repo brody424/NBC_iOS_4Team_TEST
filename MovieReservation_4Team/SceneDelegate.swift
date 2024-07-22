@@ -7,20 +7,28 @@
 
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var window: UIWindow?
+        var window: UIWindow?
 
+        func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+            guard let windowScene = (scene as? UIWindowScene) else { return }
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = ViewController()
-        window?.makeKeyAndVisible()
-    }
+            // 윈도우 생성
+            window = UIWindow(windowScene: windowScene)
+
+            // 첫 번째 뷰 컨트롤러 생성
+            let mainViewController = MainView()
+
+            // 네비게이션 컨트롤러 생성 및 루트 뷰 컨트롤러 설정
+            let navigationController = UINavigationController(rootViewController: mainViewController)
+
+            // 윈도우의 루트 뷰 컨트롤러 설정
+            window?.rootViewController = navigationController
+            window?.makeKeyAndVisible()
+        }
+
+        // 다른 씬 딜리게이트 메서드는 필요에 따라 추가
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
