@@ -1,7 +1,7 @@
 ---
-name: BUG issue template
+name: "[ bug ] issue template"
 about: Describe this issue template's purpose here.
-title: "[ BUG ] #00 00페이지_00버그"
+title: "[ bug ] #00 00페이지_00버그"
 labels: ''
 assignees: ''
 

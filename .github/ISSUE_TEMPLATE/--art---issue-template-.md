@@ -1,7 +1,7 @@
 ---
-name: ART issue template
+name: "[ art ] issue template "
 about: Describe this issue template's purpose here.
-title: "[ ART ] #00 00페이지_00UI"
+title: "[ art ] #00 00페이지_00UI"
 labels: ''
 assignees: ''
 

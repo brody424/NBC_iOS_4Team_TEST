@@ -1,5 +1,5 @@
 ---
-name: FEAT issue template
+name: "[ feat ] issue template"
 about: Describe this issue template's purpose here.
 title: "[ FEAT ] #00  00페이지_00기능 "
 labels: ''
