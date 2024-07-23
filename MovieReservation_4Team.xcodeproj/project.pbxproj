@@ -30,6 +30,8 @@
 		C26C081D2C4F3407009F5B06 /* LINESeedKR-Bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C26C08192C4F3407009F5B06 /* LINESeedKR-Bd.ttf */; };
 		C26C081E2C4F3407009F5B06 /* LINESeedKR-Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C26C081A2C4F3407009F5B06 /* LINESeedKR-Rg.ttf */; };
 		C26C081F2C4F3407009F5B06 /* LINESeedKR-Th.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C26C081B2C4F3407009F5B06 /* LINESeedKR-Th.ttf */; };
+		C26C08292C4F4A2C009F5B06 /* MyPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C08282C4F4A2C009F5B06 /* MyPageController.swift */; };
+		C26C082B2C4F6B46009F5B06 /* CustomTableViewCell.swift .swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C082A2C4F6B46009F5B06 /* CustomTableViewCell.swift .swift */; };
 		DA24C3632C4F5E9B00822C63 /* logo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA24C3622C4F5E9B00822C63 /* logo.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,8 @@
 		C26C08192C4F3407009F5B06 /* LINESeedKR-Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Bd.ttf"; sourceTree = "<group>"; };
 		C26C081A2C4F3407009F5B06 /* LINESeedKR-Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Rg.ttf"; sourceTree = "<group>"; };
 		C26C081B2C4F3407009F5B06 /* LINESeedKR-Th.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Th.ttf"; sourceTree = "<group>"; };
+		C26C08282C4F4A2C009F5B06 /* MyPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageController.swift; sourceTree = "<group>"; };
+		C26C082A2C4F6B46009F5B06 /* CustomTableViewCell.swift .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomTableViewCell.swift .swift"; sourceTree = "<group>"; };
 		DA24C3622C4F5E9B00822C63 /* logo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = logo.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,8 +96,9 @@
 				270A84A72C4E549200B61721 /* SearchView.swift */,
 				270A84A92C4E54A500B61721 /* BookmarkView.swift */,
 				270A84AF2C4E554200B61721 /* ReservaitionView.swift */,
-				270A84AB2C4E54DC00B61721 /* MyPageView.swift */,
 				270A84AD2C4E550500B61721 /* MovieInfoView.swift */,
+				270A84AB2C4E54DC00B61721 /* MyPageView.swift */,
+				C26C082A2C4F6B46009F5B06 /* CustomTableViewCell.swift .swift */,
 				DA24C3622C4F5E9B00822C63 /* logo.xcassets */,
 			);
 			path = View;
@@ -103,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				270A84B92C4E6BE300B61721 /* MainController.swift */,
+				C26C08282C4F4A2C009F5B06 /* MyPageController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -248,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C26C08292C4F4A2C009F5B06 /* MyPageController.swift in Sources */,
 				270A84A62C4E547C00B61721 /* LoginView.swift in Sources */,
 				270A84A12C4E543C00B61721 /* MainView.swift in Sources */,
 				273F56232C4F36E2004E251B /* UIColor+Hex.swift in Sources */,
@@ -257,6 +264,7 @@
 				276B93D22C4E103C00170CBF /* AppDelegate.swift in Sources */,
 				270A84AC2C4E54DC00B61721 /* MyPageView.swift in Sources */,
 				270A84B82C4E6BCD00B61721 /* UserData.swift in Sources */,
+				C26C082B2C4F6B46009F5B06 /* CustomTableViewCell.swift .swift in Sources */,
 				276B93D42C4E103C00170CBF /* SceneDelegate.swift in Sources */,
 				270A84AA2C4E54A500B61721 /* BookmarkView.swift in Sources */,
 				270A84A42C4E546E00B61721 /* SignUpVIew.swift in Sources */,
