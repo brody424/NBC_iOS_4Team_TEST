@@ -26,6 +26,10 @@
 		276B93DB2C4E103E00170CBF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 276B93DA2C4E103E00170CBF /* Base */; };
 		5F7278612C4F2F8A0033B94E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7278602C4F2F8A0033B94E /* CoreDataManager.swift */; };
 		5F7278632C4F2FCB0033B94E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7278622C4F2FCB0033B94E /* NetworkManager.swift */; };
+		C26C08182C4F324B009F5B06 /* UIFont+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C08172C4F324B009F5B06 /* UIFont+Resource.swift */; };
+		C26C081D2C4F3407009F5B06 /* LINESeedKR-Bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C26C08192C4F3407009F5B06 /* LINESeedKR-Bd.ttf */; };
+		C26C081E2C4F3407009F5B06 /* LINESeedKR-Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C26C081A2C4F3407009F5B06 /* LINESeedKR-Rg.ttf */; };
+		C26C081F2C4F3407009F5B06 /* LINESeedKR-Th.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C26C081B2C4F3407009F5B06 /* LINESeedKR-Th.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +53,10 @@
 		276B93DC2C4E103E00170CBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F7278602C4F2F8A0033B94E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5F7278622C4F2FCB0033B94E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C26C08172C4F324B009F5B06 /* UIFont+Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Resource.swift"; sourceTree = "<group>"; };
+		C26C08192C4F3407009F5B06 /* LINESeedKR-Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Bd.ttf"; sourceTree = "<group>"; };
+		C26C081A2C4F3407009F5B06 /* LINESeedKR-Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Rg.ttf"; sourceTree = "<group>"; };
+		C26C081B2C4F3407009F5B06 /* LINESeedKR-Th.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Th.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +142,7 @@
 				276B93D72C4E103E00170CBF /* Assets.xcassets */,
 				276B93D92C4E103E00170CBF /* LaunchScreen.storyboard */,
 				276B93DC2C4E103E00170CBF /* Info.plist */,
+				C26C081C2C4F3407009F5B06 /* TTF */,
 			);
 			path = MovieReservation_4Team;
 			sourceTree = "<group>";
@@ -141,8 +150,19 @@
 		5F72785F2C4F2F470033B94E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C26C08172C4F324B009F5B06 /* UIFont+Resource.swift */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		C26C081C2C4F3407009F5B06 /* TTF */ = {
+			isa = PBXGroup;
+			children = (
+				C26C08192C4F3407009F5B06 /* LINESeedKR-Bd.ttf */,
+				C26C081A2C4F3407009F5B06 /* LINESeedKR-Rg.ttf */,
+				C26C081B2C4F3407009F5B06 /* LINESeedKR-Th.ttf */,
+			);
+			path = TTF;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +229,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C26C081D2C4F3407009F5B06 /* LINESeedKR-Bd.ttf in Resources */,
+				C26C081E2C4F3407009F5B06 /* LINESeedKR-Rg.ttf in Resources */,
+				C26C081F2C4F3407009F5B06 /* LINESeedKR-Th.ttf in Resources */,
 				276B93D82C4E103E00170CBF /* Assets.xcassets in Resources */,
 				276B93DB2C4E103E00170CBF /* Base in Resources */,
 			);
@@ -234,6 +257,7 @@
 				270A84AA2C4E54A500B61721 /* BookmarkView.swift in Sources */,
 				270A84A42C4E546E00B61721 /* SignUpVIew.swift in Sources */,
 				270A84AE2C4E550500B61721 /* MovieInfoView.swift in Sources */,
+				C26C08182C4F324B009F5B06 /* UIFont+Resource.swift in Sources */,
 				270A84BD2C4E6C1500B61721 /* Manager.swift in Sources */,
 				270A84BA2C4E6BE300B61721 /* MainController.swift in Sources */,
 				270A84B02C4E554200B61721 /* ReservaitionView.swift in Sources */,
