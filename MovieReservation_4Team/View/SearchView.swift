@@ -47,7 +47,7 @@ class SearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableVie
         return label
     }()
     
-    private let clearAllButton: UIButton = {
+    private lazy var clearAllButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("전체 삭제", for: .normal)
         button.setTitleColor(UIColor.gray, for: .normal)
@@ -86,7 +86,7 @@ class SearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableVie
         
         searchLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(60)
-            $0.leading.equalToSuperview().offset(8)
+            $0.centerX.equalToSuperview()
         }
         
         searchBar.snp.makeConstraints {
@@ -113,7 +113,7 @@ class SearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableVie
         }
     }
     
-    // MARK: - UISearchBarDelegate Methods
+    // MARK: - 서치바딜리게이트
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("검색 텍스트: \(searchText)")
@@ -133,7 +133,7 @@ class SearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableVie
         searchBar.becomeFirstResponder()
     }
     
-    // MARK: - UITableViewDataSource Methods
+    // MARK: - 테이블뷰 데이터소스
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentSearches.count
@@ -147,7 +147,7 @@ class SearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableVie
         return cell
     }
     
-    // MARK: - UITableViewDelegate Methods
+    // MARK: - 테이블뷰딜리게이트
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedSearch = recentSearches[indexPath.row]
@@ -155,14 +155,14 @@ class SearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableVie
         searchBar.resignFirstResponder()
     }
     
-    // MARK: - Clear All Button Action
+    // MARK: - 전체삭제 버튼
     
     @objc private func clearAllButtonTapped() {
         recentSearches.removeAll()
         recentSearchesTableView.reloadData()
     }
     
-    // MARK: - Delete Button Action
+    // MARK: - 삭제버튼
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         let index = sender.tag
@@ -187,7 +187,7 @@ class SearchTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.mainWhite
-        label.font = FontNames.mainFont.font()
+        label.font = FontNames.subFont.font()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
