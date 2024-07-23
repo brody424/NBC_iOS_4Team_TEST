@@ -32,7 +32,7 @@ class LoginView: UIViewController {
         // passwordTextField.isSecureTextEntry = true
 
         loginButton.setTitle("Login", for: .normal)
-        loginButton.backgroundColor = UIColor.mainColor
+        loginButton.backgroundColor = UIColor.mainRed
         loginButton.titleLabel?.font = FontNames.subFont.font()
         loginButton.tintColor = .white
         loginButton.layer.cornerRadius = 10
@@ -41,7 +41,7 @@ class LoginView: UIViewController {
         signupButton.tintColor = .white
         signupButton.addTarget(self, action: #selector(buttonTapped), for: .touchDown)
 
-        logoImageView.image = UIImage(named: "nigabox")
+        logoImageView.image = UIImage(named: "LOGO")
         logoImageView.contentMode = .scaleAspectFill
 
         [usernameTextField, passwordTextField, loginButton, signupButton, logoImageView]

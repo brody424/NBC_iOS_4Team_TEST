@@ -40,7 +40,8 @@ extension UIColor {
         return UIColor(hexCode: hexCode)
     }
 
-    static var mainColor: UIColor { return color(named: "mainRed")! }
+    static var mainRed: UIColor { return color(named: "mainRed")! }
     static var mainBlack: UIColor { return color(named: "mainBlack")! }
     static var mainWhite: UIColor { return color(named: "mainWhite")! }
 }
+

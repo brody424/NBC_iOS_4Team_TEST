@@ -13,7 +13,7 @@ class MyPageView: UIView {
     private let informationLabel: UILabel = {
         let label = UILabel()
         label.text = "회원 정보"
-        label.textColor = UIColor.white
+        label.textColor = UIColor.mainWhite
         label.font = FontNames.mainFont.font()
         return label
     }()
@@ -29,19 +29,27 @@ class MyPageView: UIView {
         return imageView
     }()
     
-    private let changeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("프로필 변경", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        return button
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "사용자 이름"
+        label.textColor = UIColor.mainWhite
+        label.font = FontNames.subFont.font()
+        return label
     }()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.isScrollEnabled = false // 스크롤 비활성화
-        tableView.backgroundColor = UIColor.black
+        tableView.backgroundColor = UIColor.mainBlack
         return tableView
+    }()
+    
+    private let logoImage: UIImageView = {
+        let logoImage = UIImageView()
+        logoImage.image = UIImage(named: "LOGO")
+        logoImage.contentMode = .scaleAspectFill
+        return logoImage
     }()
     
     override init(frame: CGRect) {
@@ -60,8 +68,9 @@ class MyPageView: UIView {
         [
             informationLabel,
             Image,
-            changeButton,
-            tableView
+            nameLabel,
+            tableView,
+            logoImage
         ].forEach { self.addSubview($0) }
         
         tableView.dataSource = self
@@ -80,15 +89,20 @@ class MyPageView: UIView {
             $0.width.height.equalTo(160)
         }
         
-        changeButton.snp.makeConstraints {
+        nameLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(Image.snp.bottom).offset(20)
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(changeButton.snp.bottom).offset(20)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(20)
             $0.left.right.equalToSuperview()
             $0.height.equalTo(240) // 각 셀의 높이를 60으로 설정
+        }
+        logoImage.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top .equalTo(tableView.snp.bottom).offset(60)
+            $0.width.equalTo(300)
         }
     }
 }
@@ -126,11 +140,11 @@ extension MyPageView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        headerView.backgroundColor = .white
+        headerView.backgroundColor = UIColor.mainBlack
         
         let titleLabel = UILabel()
         titleLabel.text = "계정"
-        titleLabel.textColor = .gray
+        titleLabel.textColor = UIColor.mainWhite
         titleLabel.font = FontNames.mainFont.font()
         
         headerView.addSubview(titleLabel)
