@@ -9,8 +9,4 @@ import UIKit
 import SnapKit
 
 class MainView: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }

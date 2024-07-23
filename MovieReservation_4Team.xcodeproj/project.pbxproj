@@ -22,7 +22,6 @@
 		273F56232C4F36E2004E251B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F56222C4F36E2004E251B /* UIColor+Hex.swift */; };
 		276B93D22C4E103C00170CBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D12C4E103C00170CBF /* AppDelegate.swift */; };
 		276B93D42C4E103C00170CBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D32C4E103C00170CBF /* SceneDelegate.swift */; };
-		276B93D62C4E103C00170CBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D52C4E103C00170CBF /* ViewController.swift */; };
 		276B93D82C4E103E00170CBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 276B93D72C4E103E00170CBF /* Assets.xcassets */; };
 		276B93DB2C4E103E00170CBF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 276B93DA2C4E103E00170CBF /* Base */; };
 		5F7278612C4F2F8A0033B94E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7278602C4F2F8A0033B94E /* CoreDataManager.swift */; };
@@ -49,7 +48,6 @@
 		276B93CE2C4E103C00170CBF /* MovieReservation_4Team.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieReservation_4Team.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		276B93D12C4E103C00170CBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		276B93D32C4E103C00170CBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		276B93D52C4E103C00170CBF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		276B93D72C4E103E00170CBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		276B93DA2C4E103E00170CBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		276B93DC2C4E103E00170CBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 				270A84BB2C4E6BEF00B61721 /* Manage */,
 				276B93D12C4E103C00170CBF /* AppDelegate.swift */,
 				276B93D32C4E103C00170CBF /* SceneDelegate.swift */,
-				276B93D52C4E103C00170CBF /* ViewController.swift */,
 				276B93D72C4E103E00170CBF /* Assets.xcassets */,
 				276B93D92C4E103E00170CBF /* LaunchScreen.storyboard */,
 				276B93DC2C4E103E00170CBF /* Info.plist */,
@@ -248,7 +245,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				270A84A62C4E547C00B61721 /* LoginView.swift in Sources */,
-				276B93D62C4E103C00170CBF /* ViewController.swift in Sources */,
 				270A84A12C4E543C00B61721 /* MainView.swift in Sources */,
 				273F56232C4F36E2004E251B /* UIColor+Hex.swift in Sources */,
 				5F7278612C4F2F8A0033B94E /* CoreDataManager.swift in Sources */,
