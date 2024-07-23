@@ -44,7 +44,3 @@ extension UIColor {
     static var mainBlack: UIColor { return color(named: "mainBlack")! }
     static var mainWhite: UIColor { return color(named: "mainWhite")! }
 }
-
-
-
-
