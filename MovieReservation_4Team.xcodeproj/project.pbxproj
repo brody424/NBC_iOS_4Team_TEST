@@ -99,7 +99,6 @@
 				270A84AD2C4E550500B61721 /* MovieInfoView.swift */,
 				270A84AB2C4E54DC00B61721 /* MyPageView.swift */,
 				C26C082A2C4F6B46009F5B06 /* CustomTableViewCell.swift .swift */,
-				DA24C3622C4F5E9B00822C63 /* logo.xcassets */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -148,6 +147,7 @@
 				276B93D12C4E103C00170CBF /* AppDelegate.swift */,
 				276B93D32C4E103C00170CBF /* SceneDelegate.swift */,
 				276B93D72C4E103E00170CBF /* Assets.xcassets */,
+				DA24C3622C4F5E9B00822C63 /* logo.xcassets */,
 				276B93D92C4E103E00170CBF /* LaunchScreen.storyboard */,
 				276B93DC2C4E103E00170CBF /* Info.plist */,
 				C26C081C2C4F3407009F5B06 /* TTF */,
