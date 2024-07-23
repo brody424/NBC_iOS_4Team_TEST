@@ -32,9 +32,10 @@ class LoginView: UIViewController {
         // passwordTextField.isSecureTextEntry = true
 
         loginButton.setTitle("Login", for: .normal)
-        loginButton.backgroundColor = .red
+        loginButton.backgroundColor = UIColor.mainColor
+        loginButton.titleLabel?.font = FontNames.subFont.font()
         loginButton.tintColor = .white
-        loginButton.layer.cornerRadius = 5
+        loginButton.layer.cornerRadius = 10
 
         signupButton.setTitle("signup", for: .normal)
         signupButton.tintColor = .white
