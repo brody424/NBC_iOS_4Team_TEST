@@ -22,11 +22,11 @@ class BookmarkVC: UIViewController {
         bookmarkView.frame = view.bounds
         bookmarkView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         bookmarkView.configureNavigationBar(withTitle: "관심 목록",
-                                            rightButtonAction: #selector(settingsButtonTapped),
+                                            rightButtonAction: #selector(userButtonTapped),
                                             target: self)
     }
 
-    @objc private func settingsButtonTapped() {
+    @objc private func userButtonTapped() {
         print("Settings button tapped")
     }
 }
