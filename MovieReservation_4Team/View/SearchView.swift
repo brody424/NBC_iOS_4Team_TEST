@@ -1,14 +1,7 @@
-//
-//  SearchView.swift
-//  MovieReservation_4Team
-//
-//  Created by 4Team on 7/22/24.
-//
-
 import UIKit
 import SnapKit
 
-class SearchView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     private let searchLabel: UILabel = {
         let label = UILabel()
@@ -24,7 +17,7 @@ class SearchView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBa
         search.barStyle = .default
         search.searchBarStyle = .minimal
         
-        // 서치바 색깔 변경
+        // Customize the search bar
         if let searchTextField = search.value(forKey: "searchField") as? UITextField {
             searchTextField.textColor = UIColor.mainWhite
             searchTextField.backgroundColor = .clear
@@ -39,7 +32,6 @@ class SearchView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBa
             )
         }
         
-        // 아이콘 색깔 변경
         if let magnifyingGlass = search.searchTextField.leftView as? UIImageView {
             magnifyingGlass.image = magnifyingGlass.image?.withRenderingMode(.alwaysTemplate)
             magnifyingGlass.tintColor = UIColor.mainWhite
@@ -47,13 +39,32 @@ class SearchView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBa
         return search
     }()
     
-    private let tableView = UITableView()
+    private let recentSearchesLabel: UILabel = {
+        let label = UILabel()
+        label.text = "최근 검색"
+        label.textColor = UIColor.mainWhite
+        label.font = FontNames.mainFont.font()
+        return label
+    }()
     
-    // 샘플 데이터
-    private let movies = ["스마일", "어벤져스", "해리포터", "라라랜드", "나홀로 집에"]
-    private let movieImages = ["image11", "image2", "image3", "image4", "image5"]
-    private var filteredMovies = [String]()
-    private var filteredImages = [String]()
+    private let clearAllButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("전체 삭제", for: .normal)
+        button.setTitleColor(UIColor.gray, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.addTarget(self, action: #selector(clearAllButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private let recentSearchesTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = UIColor.mainBlack
+        tableView.separatorStyle = .none
+        return tableView
+    }()
+    
+    private var recentSearches: [String] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,26 +75,18 @@ class SearchView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBa
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    private func configure() {
         self.backgroundColor = UIColor.mainBlack
         
         searchBar.delegate = self
-        tableView.delegate = self
-        tableView.dataSource = self
+        recentSearchesTableView.dataSource = self
+        recentSearchesTableView.delegate = self
         
-        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieCell")
-        tableView.backgroundColor = UIColor.mainBlack
-        tableView.separatorColor = .white
-        
-        [
-            searchLabel,
-            searchBar,
-            tableView
-        ].forEach { self.addSubview($0) }
+        [searchLabel, searchBar, recentSearchesLabel, clearAllButton, recentSearchesTableView].forEach { self.addSubview($0) }
         
         searchLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(60)
-            $0.centerX.equalToSuperview()
+            $0.leading.equalToSuperview().offset(8)
         }
         
         searchBar.snp.makeConstraints {
@@ -92,108 +95,71 @@ class SearchView: UIView, UITableViewDelegate, UITableViewDataSource, UISearchBa
             $0.trailing.equalToSuperview().offset(-8)
         }
         
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom).offset(10)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+        recentSearchesLabel.snp.makeConstraints {
+            $0.top.equalTo(searchBar.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(8)
         }
         
-        // Initialize with all movies and images
-        filteredMovies = movies
-        filteredImages = movieImages
+        clearAllButton.snp.makeConstraints {
+            $0.centerY.equalTo(recentSearchesLabel)
+            $0.trailing.equalToSuperview().offset(-8)
+        }
+        
+        recentSearchesTableView.snp.makeConstraints {
+            $0.top.equalTo(recentSearchesLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(8)
+            $0.trailing.equalToSuperview().offset(-8)
+            $0.bottom.equalToSuperview().offset(-8)
+        }
     }
     
-    // MARK: - 데이터 소스 매서드
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredMovies.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieTableViewCell
-        cell.configure(with: filteredMovies[indexPath.row], imageName: filteredImages[indexPath.row])
-        return cell
-    }
-    
-    // MARK: - 서치바 딜리게이트 메서드
+    // MARK: - UISearchBarDelegate Methods
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            filteredMovies = movies
-            filteredImages = movieImages
-        } else {
-            filteredMovies = []
-            filteredImages = []
-            for (index, movie) in movies.enumerated() {
-                if movie.lowercased().contains(searchText.lowercased()) {
-                    filteredMovies.append(movie)
-                    filteredImages.append(movieImages[index])
-                }
-            }
-        }
-        tableView.reloadData()
+        print("검색 텍스트: \(searchText)")
     }
     
-    // 키보드 사라짐
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            if !recentSearches.contains(searchText) {
+                recentSearches.insert(searchText, at: 0)
+                recentSearchesTableView.reloadData()
+            }
+        }
         searchBar.resignFirstResponder()
     }
     
-    // 키보드 보임
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.becomeFirstResponder()
     }
-}
-
-class MovieTableViewCell: UITableViewCell {
     
-    private let movieImageView: UIImageView = {
-        let imageview = UIImageView()
-        imageview.contentMode = .scaleToFill
-        imageview.layer.cornerRadius = 10
-        imageview.clipsToBounds = true
-        return imageview
-    }()
-    private let movieTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.mainWhite
-        label.font = FontNames.mainFont.font()
-        label.numberOfLines = 1
-        return label
-    }()
+    // MARK: - UITableViewDataSource Methods
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configure()
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return recentSearches.count
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = recentSearches[indexPath.row]
+        cell.textLabel?.textColor = UIColor.mainWhite
+        cell.backgroundColor = UIColor.mainBlack
+        return cell
     }
     
-    func configure() {
-        [
-            movieImageView,
-            movieTitleLabel
-        ].forEach{ self.addSubview($0) }
-        movieImageView.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview().inset(8)
-            $0.width.equalTo(200) //이미지 넓이
-            $0.height.equalTo(200) // 이미지 높이
-        }
-        
-        movieTitleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(movieImageView.snp.trailing).offset(12)
-            $0.trailing.equalToSuperview().offset(-8)
-        }
+    // MARK: - UITableViewDelegate Methods
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedSearch = recentSearches[indexPath.row]
+        searchBar.text = selectedSearch
+        searchBar.resignFirstResponder()
     }
     
-    func configure(with title: String, imageName: String) {
-        movieTitleLabel.text = title
-        movieImageView.image = UIImage(named: imageName)
-        self.backgroundColor = UIColor.mainBlack
+    // MARK: - Clear All Button Action
+    
+    @objc private func clearAllButtonTapped() {
+        recentSearches.removeAll()
+        recentSearchesTableView.reloadData()
     }
 }
 
