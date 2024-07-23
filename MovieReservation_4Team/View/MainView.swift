@@ -355,6 +355,5 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
             return ""
         }
     }
-}
 
 #Preview("MainView") { MainView() }
