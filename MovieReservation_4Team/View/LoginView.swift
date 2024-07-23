@@ -41,7 +41,7 @@ class LoginView: UIViewController {
         signupButton.tintColor = .white
         signupButton.addTarget(self, action: #selector(buttonTapped), for: .touchDown)
 
-        logoImageView.image = UIImage(named: "nigabox")
+        logoImageView.image = UIImage(named: "LOGO")
         logoImageView.contentMode = .scaleAspectFill
 
         [usernameTextField, passwordTextField, loginButton, signupButton, logoImageView]

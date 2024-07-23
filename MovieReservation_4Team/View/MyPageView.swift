@@ -47,7 +47,7 @@ class MyPageView: UIView {
     
     private let logoImage: UIImageView = {
         let logoImage = UIImageView()
-        logoImage.image = UIImage(named: "nigabox")
+        logoImage.image = UIImage(named: "LOGO")
         logoImage.contentMode = .scaleAspectFill
         return logoImage
     }()
