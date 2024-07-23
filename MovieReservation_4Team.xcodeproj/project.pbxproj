@@ -20,6 +20,9 @@
 		270A84BA2C4E6BE300B61721 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84B92C4E6BE300B61721 /* MainController.swift */; };
 		270A84BD2C4E6C1500B61721 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84BC2C4E6C1500B61721 /* Manager.swift */; };
 		273F56232C4F36E2004E251B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F56222C4F36E2004E251B /* UIColor+Hex.swift */; };
+		273F56272C4F5601004E251B /* BookmarkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F56262C4F5601004E251B /* BookmarkVC.swift */; };
+		273F56292C4F59C8004E251B /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F56282C4F59C8004E251B /* CustomNavBarView.swift */; };
+		273F562B2C4F5EF0004E251B /* CustomNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F562A2C4F5EF0004E251B /* CustomNavVC.swift */; };
 		276B93D22C4E103C00170CBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D12C4E103C00170CBF /* AppDelegate.swift */; };
 		276B93D42C4E103C00170CBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D32C4E103C00170CBF /* SceneDelegate.swift */; };
 		276B93D82C4E103E00170CBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 276B93D72C4E103E00170CBF /* Assets.xcassets */; };
@@ -45,6 +48,9 @@
 		270A84B92C4E6BE300B61721 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		270A84BC2C4E6C1500B61721 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		273F56222C4F36E2004E251B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		273F56262C4F5601004E251B /* BookmarkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkVC.swift; sourceTree = "<group>"; };
+		273F56282C4F59C8004E251B /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
+		273F562A2C4F5EF0004E251B /* CustomNavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavVC.swift; sourceTree = "<group>"; };
 		276B93CE2C4E103C00170CBF /* MovieReservation_4Team.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieReservation_4Team.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		276B93D12C4E103C00170CBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		276B93D32C4E103C00170CBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,10 +94,11 @@
 				270A84A32C4E546E00B61721 /* SignUpVIew.swift */,
 				270A84A02C4E543C00B61721 /* MainView.swift */,
 				270A84A72C4E549200B61721 /* SearchView.swift */,
-				270A84A92C4E54A500B61721 /* BookmarkView.swift */,
 				270A84AF2C4E554200B61721 /* ReservaitionView.swift */,
-				270A84AB2C4E54DC00B61721 /* MyPageView.swift */,
+				270A84A92C4E54A500B61721 /* BookmarkView.swift */,
 				270A84AD2C4E550500B61721 /* MovieInfoView.swift */,
+				270A84AB2C4E54DC00B61721 /* MyPageView.swift */,
+				273F56282C4F59C8004E251B /* CustomNavBarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -100,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				270A84B92C4E6BE300B61721 /* MainController.swift */,
+				273F56262C4F5601004E251B /* BookmarkVC.swift */,
+				273F562A2C4F5EF0004E251B /* CustomNavVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -249,7 +258,10 @@
 				273F56232C4F36E2004E251B /* UIColor+Hex.swift in Sources */,
 				5F7278612C4F2F8A0033B94E /* CoreDataManager.swift in Sources */,
 				5F7278632C4F2FCB0033B94E /* NetworkManager.swift in Sources */,
+				273F562B2C4F5EF0004E251B /* CustomNavVC.swift in Sources */,
 				270A84A82C4E549200B61721 /* SearchView.swift in Sources */,
+				273F56292C4F59C8004E251B /* CustomNavBarView.swift in Sources */,
+				273F56272C4F5601004E251B /* BookmarkVC.swift in Sources */,
 				276B93D22C4E103C00170CBF /* AppDelegate.swift in Sources */,
 				270A84AC2C4E54DC00B61721 /* MyPageView.swift in Sources */,
 				270A84B82C4E6BCD00B61721 /* UserData.swift in Sources */,
