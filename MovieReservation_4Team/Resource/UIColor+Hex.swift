@@ -1,3 +1,4 @@
+
 //
 //  UIColor+Hex.swift
 //  MovieReservation_4Team
@@ -30,9 +31,9 @@ extension UIColor {
     }
 
     static let colors: [String: String] = [
-        "mainColor": "#BB1024",
-        "Black": "#221F1F",
-        "White": "#F5F5F1"
+        "mainRed": "#BB1024",
+        "mainBlack": "#221F1F",
+        "mainWhite": "#F5F5F1"
     ]
 
     static func color(named name: String) -> UIColor? {
@@ -40,11 +41,7 @@ extension UIColor {
         return UIColor(hexCode: hexCode)
     }
 
-    static var mainColor: UIColor { return color(named: "mainColor")! }
-    static var Black: UIColor { return color(named: "Black")! }
-    static var White: UIColor { return color(named: "White")! }
+    static var mainRed: UIColor { return color(named: "mainRed")! }
+    static var mainBlack: UIColor { return color(named: "mainBlack")! }
+    static var mainWhite: UIColor { return color(named: "mainWhite")! }
 }
-
-
-
-
