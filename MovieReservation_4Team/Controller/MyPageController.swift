@@ -5,4 +5,22 @@
 //  Created by t2023-m0117 on 7/23/24.
 //
 
-import Foundation
+import UIKit
+
+class MyPageController: UIViewController {
+    
+    private let myPageView = MyPageView()
+    
+    override func loadView() {
+        self.view = myPageView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.black
+     }
+}
+#Preview {
+    let mypage = MyPageController()
+    return mypage
+}
