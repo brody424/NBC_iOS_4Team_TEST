@@ -24,6 +24,8 @@
 		276B93D62C4E103C00170CBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D52C4E103C00170CBF /* ViewController.swift */; };
 		276B93D82C4E103E00170CBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 276B93D72C4E103E00170CBF /* Assets.xcassets */; };
 		276B93DB2C4E103E00170CBF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 276B93DA2C4E103E00170CBF /* Base */; };
+		5F7278612C4F2F8A0033B94E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7278602C4F2F8A0033B94E /* CoreDataManager.swift */; };
+		5F7278632C4F2FCB0033B94E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7278622C4F2FCB0033B94E /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		276B93D72C4E103E00170CBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		276B93DA2C4E103E00170CBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		276B93DC2C4E103E00170CBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F7278602C4F2F8A0033B94E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		5F7278622C4F2FCB0033B94E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				270A84B72C4E6BCD00B61721 /* UserData.swift */,
+				5F7278602C4F2F8A0033B94E /* CoreDataManager.swift */,
+				5F7278622C4F2FCB0033B94E /* NetworkManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -117,6 +123,7 @@
 		276B93D02C4E103C00170CBF /* MovieReservation_4Team */ = {
 			isa = PBXGroup;
 			children = (
+				5F72785F2C4F2F470033B94E /* Resource */,
 				270A849C2C4E53CA00B61721 /* Model */,
 				270A849D2C4E53EF00B61721 /* View */,
 				270A849E2C4E53F500B61721 /* Controller */,
@@ -129,6 +136,13 @@
 				276B93DC2C4E103E00170CBF /* Info.plist */,
 			);
 			path = MovieReservation_4Team;
+			sourceTree = "<group>";
+		};
+		5F72785F2C4F2F470033B94E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +224,8 @@
 				270A84A62C4E547C00B61721 /* LoginView.swift in Sources */,
 				276B93D62C4E103C00170CBF /* ViewController.swift in Sources */,
 				270A84A12C4E543C00B61721 /* MainView.swift in Sources */,
+				5F7278612C4F2F8A0033B94E /* CoreDataManager.swift in Sources */,
+				5F7278632C4F2FCB0033B94E /* NetworkManager.swift in Sources */,
 				270A84A82C4E549200B61721 /* SearchView.swift in Sources */,
 				276B93D22C4E103C00170CBF /* AppDelegate.swift in Sources */,
 				270A84AC2C4E54DC00B61721 /* MyPageView.swift in Sources */,
