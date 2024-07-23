@@ -147,22 +147,23 @@ class SearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableVie
         return cell
     }
     
-    // MARK: - 테이블뷰딜리게이트
+    // MARK: - 테이블뷰 딜리게이트
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedSearch = recentSearches[indexPath.row]
         searchBar.text = selectedSearch
+        searchBarSearchButtonClicked(searchBar) // Trigger a search
         searchBar.resignFirstResponder()
     }
     
-    // MARK: - 전체삭제 버튼
+    // MARK: - 전체 삭제
     
     @objc private func clearAllButtonTapped() {
         recentSearches.removeAll()
         recentSearchesTableView.reloadData()
     }
     
-    // MARK: - 삭제버튼
+    // MARK: - 개별 삭제
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         let index = sender.tag
