@@ -7,3 +7,12 @@
 
 import UIKit
 import SnapKit
+
+class SignUpVIew: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("tt")
+    }
+
+}
