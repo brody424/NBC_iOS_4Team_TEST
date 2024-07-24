@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		270A84A12C4E543C00B61721 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84A02C4E543C00B61721 /* MainView.swift */; };
-		270A84A42C4E546E00B61721 /* SignUpVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84A32C4E546E00B61721 /* SignUpVIew.swift */; };
+		270A84A42C4E546E00B61721 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84A32C4E546E00B61721 /* SignUpView.swift */; };
 		270A84A62C4E547C00B61721 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84A52C4E547C00B61721 /* LoginView.swift */; };
 		270A84A82C4E549200B61721 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84A72C4E549200B61721 /* SearchView.swift */; };
 		270A84AA2C4E54A500B61721 /* favoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84A92C4E54A500B61721 /* favoritesView.swift */; };
@@ -45,7 +45,7 @@
 
 /* Begin PBXFileReference section */
 		270A84A02C4E543C00B61721 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		270A84A32C4E546E00B61721 /* SignUpVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVIew.swift; sourceTree = "<group>"; };
+		270A84A32C4E546E00B61721 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		270A84A52C4E547C00B61721 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		270A84A72C4E549200B61721 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		270A84A92C4E54A500B61721 /* favoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoritesView.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				270A84A52C4E547C00B61721 /* LoginView.swift */,
-				270A84A32C4E546E00B61721 /* SignUpVIew.swift */,
+				270A84A32C4E546E00B61721 /* SignUpView.swift */,
 				270A84A02C4E543C00B61721 /* MainView.swift */,
 				270A84A72C4E549200B61721 /* SearchView.swift */,
 				270A84AF2C4E554200B61721 /* ReservaitionView.swift */,
@@ -296,7 +296,7 @@
 				276B93D42C4E103C00170CBF /* SceneDelegate.swift in Sources */,
 				270A84AA2C4E54A500B61721 /* favoritesView.swift in Sources */,
 				C29F6C382C4FBD5B0081FA15 /* TabBarController.swift in Sources */,
-				270A84A42C4E546E00B61721 /* SignUpVIew.swift in Sources */,
+				270A84A42C4E546E00B61721 /* SignUpView.swift in Sources */,
 				C26C08332C5088E6009F5B06 /* RecentSearches.swift in Sources */,
 				270A84AE2C4E550500B61721 /* MovieInfoView.swift in Sources */,
 				C26C08182C4F324B009F5B06 /* UIFont+Resource.swift in Sources */,

@@ -36,16 +36,17 @@ class LoginView: UIViewController {
         loginButton.titleLabel?.font = FontNames.subFont.font()
         loginButton.tintColor = .white
         loginButton.layer.cornerRadius = 10
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchDown)
 
         signupButton.setTitle("signup", for: .normal)
         signupButton.tintColor = .white
-        signupButton.addTarget(self, action: #selector(buttonTapped), for: .touchDown)
+        signupButton.addTarget(self, action: #selector(signupButtonTapped), for: .touchDown)
 
         logoImageView.image = UIImage(named: "LOGO")
         logoImageView.contentMode = .scaleAspectFill
 
         [usernameTextField, passwordTextField, loginButton, signupButton, logoImageView]
-                  .forEach { view.addSubview($0) }
+            .forEach { view.addSubview($0) }
 
 
         usernameTextField.snp.makeConstraints {
@@ -79,9 +80,13 @@ class LoginView: UIViewController {
         }
     }
 
-    @objc private func buttonTapped() {
-            self.navigationController?.pushViewController(SignUpVIew(), animated: true)
+    @objc private func signupButtonTapped() {
+        self.navigationController?.pushViewController(SignUpView(), animated: true)
+    }
+    @objc private func loginButtonTapped() {
+        self.navigationController?.pushViewController(MainView(), animated: true)
     }
 }
 
-#Preview("LoginView") {LoginView()}
+    #Preview("LoginView") {LoginView()
+    }
