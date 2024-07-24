@@ -28,7 +28,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let cartNavController = UINavigationController(rootViewController: cartViewController)
         cartNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "cart.fill"), tag: 2)
         
-        let favoritesViewController = FavoritesViewController()
+        let favoritesViewController = MovieInfoViewController()
         let favoritesNavController = UINavigationController(rootViewController: favoritesViewController)
         favoritesNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "heart.fill"), tag: 3)
         

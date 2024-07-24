@@ -22,7 +22,7 @@ class MovieInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 실시간 인기 영화 가져오기
+//        // 실시간 인기 영화 가져오기
         NetworkManager.shared.fetchPopularMovies(page: 1) { movies in
             if let movies = movies {
                 for movie in movies {
@@ -31,14 +31,14 @@ class MovieInfoViewController: UIViewController {
             }
         }
         
-        // 최신 개봉 영화 가져오기
-        NetworkManager.shared.fetchNowPlayingMovies(page: 1) { movies in
-            if let movies = movies {
-                for movie in movies {
-                    print("Title: \(movie.title), ID: \(movie.id), Poster Path: \(movie.posterPath ?? "N/A")")
-                }
-            }
-        }
+//        // 최신 개봉 영화 가져오기
+//        NetworkManager.shared.fetchNowPlayingMovies(page: 1) { movies in
+//            if let movies = movies {
+//                for movie in movies {
+//                    print("Title: \(movie.title), ID: \(movie.id), Poster Path: \(movie.posterPath ?? "N/A")")
+//                }
+//            }
+//        }
         
         // 특정 영화의 상세 정보 가져오기
         NetworkManager.shared.fetchMovieDetail(movieId: 1022789) { movieDetail in

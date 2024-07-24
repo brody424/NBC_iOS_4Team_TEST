@@ -6,25 +6,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//
+//        // 윈도우 생성
+//        window = UIWindow(windowScene: windowScene)
+//
+//        // MainTabBarController 생성
+//        let tabBarController = MovieInfoViewController()
+//
+//        // 네비게이션 컨트롤러 생성 및 루트 뷰 컨트롤러 설정
+//        let navigationController = UINavigationController(rootViewController: tabBarController)
+//
+//        // 네비게이션 컨트롤러의 스타일 설정 (옵션)
+//        navigationController.navigationBar.isTranslucent = false
+//        navigationController.navigationBar.barTintColor = .black
+//        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // 윈도우의 루트 뷰 컨트롤러 설정
+//        window?.rootViewController = navigationController
+//        window?.makeKeyAndVisible()
+//        
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
-
-        // 윈도우 생성
-        window = UIWindow(windowScene: windowScene)
-
-        // MainTabBarController 생성
-        let tabBarController = TabBarController()
-
-        // 네비게이션 컨트롤러 생성 및 루트 뷰 컨트롤러 설정
-        let navigationController = UINavigationController(rootViewController: tabBarController)
-
-        // 네비게이션 컨트롤러의 스타일 설정 (옵션)
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.barTintColor = .black
-        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-
-        // 윈도우의 루트 뷰 컨트롤러 설정
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+          let window = UIWindow(windowScene: windowScene)
+          window.rootViewController = MovieInfoViewController()
+          window.makeKeyAndVisible()
+          self.window = window
     }
 
     // 다른 씬 딜리게이트 메서드는 필요에 따라 추가
