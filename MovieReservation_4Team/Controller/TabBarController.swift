@@ -16,7 +16,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBar.barTintColor = .black
         
         // 탭 바 아이템 생성
-        let mainViewController = MainView()
+        let mainViewController = MainViewController() // MainView가 아닌 MainViewController를 사용
         let mainNavController = UINavigationController(rootViewController: mainViewController)
         mainNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house.fill"), tag: 0)
         
@@ -26,7 +26,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let cartViewController = CartViewController()
         let cartNavController = UINavigationController(rootViewController: cartViewController)
-        cartNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "cart.fill"), tag: 2)
+        cartNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "ticket"), tag: 2)
         
         let favoritesViewController = FavoritesViewController()
         let favoritesNavController = UINavigationController(rootViewController: favoritesViewController)

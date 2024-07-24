@@ -1,11 +1,19 @@
+//
+//  NetworkManager.swift
+//  MovieReservation_4Team
+//
+//  Created by ahnzihyeon on 7/23/24.
+//
+
+
 import Foundation
-
-
+import UIKit // UIKit을 추가합니다.
 
 protocol NetworkManagerProtocol {
     func fetchPopularMovies(page: Int, completion: @escaping ([Movie]?) -> Void)
     func fetchNowPlayingMovies(page: Int, completion: @escaping ([Movie]?) -> Void)
     func fetchMovieDetail(movieId: Int, completion: @escaping (MovieDetail?) -> Void)
+    func loadImage(from urlString: String, into imageView: UIImageView)
 }
 
 class NetworkManager: NetworkManagerProtocol {
@@ -51,7 +59,6 @@ class NetworkManager: NetworkManagerProtocol {
         task.resume()
     }
     
-    
     //MARK: -최신 개봉 영화 가져오기
     func fetchNowPlayingMovies(page: Int, completion: @escaping ([Movie]?) -> Void) {
         let urlString = "\(baseUrl)/movie/now_playing?api_key=\(apiKey)&language=ko-KR&region=KR&page=\(page)"
@@ -88,7 +95,7 @@ class NetworkManager: NetworkManagerProtocol {
         task.resume()
     }
     
-    //MARK: -특정 영화 상세 정보 가져오기 
+    //MARK: -특정 영화 상세 정보 가져오기
     func fetchMovieDetail(movieId: Int, completion: @escaping (MovieDetail?) -> Void) {
         let urlString = "\(baseUrl)/movie/\(movieId)?api_key=\(apiKey)&language=ko-KR"
         guard let url = URL(string: urlString) else {
@@ -122,6 +129,17 @@ class NetworkManager: NetworkManagerProtocol {
         }
         
         task.resume()
+    }
+    
+    // 이미지를 URL에서 로드하는 메서드 추가
+    func loadImage(from urlString: String, into imageView: UIImageView) {
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async {
+                imageView.image = UIImage(data: data)
+            }
+        }.resume()
     }
 }
 
