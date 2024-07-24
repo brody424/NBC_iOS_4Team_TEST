@@ -1,10 +1,3 @@
-//
-//  SearchView.swift
-//  MovieReservation_4Team
-//
-//  Created by t2023-m0117 on 7/24/24.
-//
-
 import UIKit
 import SnapKit
 
@@ -24,7 +17,6 @@ class SearchView: UIView {
         search.barStyle = .default
         search.searchBarStyle = .minimal
         
-        // Customize the search bar
         if let searchTextField = search.value(forKey: "searchField") as? UITextField {
             searchTextField.textColor = UIColor.mainWhite
             searchTextField.backgroundColor = .clear
@@ -62,12 +54,21 @@ class SearchView: UIView {
         return button
     }()
     
-    let recentSearchesTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
-        tableView.backgroundColor = UIColor.mainBlack
-        tableView.separatorStyle = .none
-        return tableView
+    let searchResultsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        // 아이템 사이즈
+        let itemWidth = (UIScreen.main.bounds.width - 24) / 2
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
+    
+        layout.minimumInteritemSpacing = 8
+        layout.minimumLineSpacing = 8
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.mainBlack
+        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCollectionViewCell")
+        return collectionView
     }()
     
     override init(frame: CGRect) {
@@ -81,8 +82,8 @@ class SearchView: UIView {
     
     private func configure() {
         self.backgroundColor = UIColor.mainBlack
-
-        [searchLabel, searchBar, recentSearchesLabel, clearAllButton, recentSearchesTableView].forEach { self.addSubview($0) }
+        
+        [searchLabel, searchBar, recentSearchesLabel, clearAllButton, searchResultsCollectionView].forEach { self.addSubview($0) }
         
         searchLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(60)
@@ -105,59 +106,58 @@ class SearchView: UIView {
             $0.trailing.equalToSuperview().offset(-8)
         }
         
-        recentSearchesTableView.snp.makeConstraints {
-            $0.top.equalTo(recentSearchesLabel.snp.bottom).offset(10)
+        searchResultsCollectionView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(8)
             $0.trailing.equalToSuperview().offset(-8)
-            $0.bottom.equalToSuperview().offset(-8)
+            $0.top.equalTo(searchBar.snp.bottom).offset(10)
+            $0.bottom.equalToSuperview().offset(-85)
         }
     }
 }
 
-class SearchTableViewCell: UITableViewCell {
+class MovieCollectionViewCell: UICollectionViewCell {
     
-    let deleteButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("X", for: .normal)
-        button.setTitleColor(UIColor.gray, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.mainWhite
-        label.font = FontNames.subFont.font()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        label.numberOfLines = 2
         return label
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(deleteButton)
         
-        deleteButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().offset(-8)
-            $0.width.height.equalTo(24)
+        imageView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(imageView.snp.width).multipliedBy(1.5)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(8)
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(deleteButton.snp.leading).offset(-8)
+            $0.top.equalTo(imageView.snp.bottom).offset(5)
+            $0.leading.trailing.equalToSuperview().inset(5)
+            $0.bottom.equalToSuperview().inset(5)
         }
-        
-        contentView.backgroundColor = UIColor.mainBlack
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with text: String) {
-        titleLabel.text = text
+    func configure(with movie: Movie) {
+        titleLabel.text = movie.title
+        if let posterPath = movie.posterPath {
+            let imageUrl = "https://image.tmdb.org/t/p/w500\(posterPath)"
+            NetworkManager.shared.loadImage(from: imageUrl, into: imageView)
+        }
     }
 }
