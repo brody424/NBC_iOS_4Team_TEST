@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  MovieReservation_4Team
-//
-//  Created by t2023-m0023 on 7/22/24.
-//
-
 import UIKit
 
     class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -12,20 +5,26 @@ import UIKit
         var window: UIWindow?
 
         func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//            guard let windowScene = (scene as? UIWindowScene) else { return }
+//
+//            // 윈도우 생성
+//            window = UIWindow(windowScene: windowScene)
+//
+//            // 첫 번째 뷰 컨트롤러 생성
+//            let mainViewController = MainView()
+//            
+//
+//            // 네비게이션 컨트롤러 생성 및 루트 뷰 컨트롤러 설정
+//            let navigationController = UINavigationController(rootViewController: mainViewController)
+//
+//            // 윈도우의 루트 뷰 컨트롤러 설정
+//            window?.rootViewController = navigationController
+//            window?.makeKeyAndVisible()
             guard let windowScene = (scene as? UIWindowScene) else { return }
-
-            // 윈도우 생성
-            window = UIWindow(windowScene: windowScene)
-
-            // 첫 번째 뷰 컨트롤러 생성
-            let mainViewController = MainView()
-
-            // 네비게이션 컨트롤러 생성 및 루트 뷰 컨트롤러 설정
-            let navigationController = UINavigationController(rootViewController: mainViewController)
-
-            // 윈도우의 루트 뷰 컨트롤러 설정
-            window?.rootViewController = navigationController
-            window?.makeKeyAndVisible()
+              let window = UIWindow(windowScene: windowScene)
+              window.rootViewController = MovieInfoViewController()
+              window.makeKeyAndVisible()
+              self.window = window
         }
 
         // 다른 씬 딜리게이트 메서드는 필요에 따라 추가
@@ -60,4 +59,3 @@ import UIKit
 
 
 }
-
