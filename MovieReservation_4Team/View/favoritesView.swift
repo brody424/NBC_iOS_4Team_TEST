@@ -93,16 +93,17 @@ class FavoritesView: UIView, UICollectionViewDataSource, UICollectionViewDelegat
 }
 
 // MARK: - FavoritesViewCell
-// MARK: - FavoritesViewCell
 class FavoritesViewCell: UICollectionViewCell {
+
+    private var isFavorite: Bool = false // 하트 버튼의 상태를 추적하는 변수
 
     // MARK: - UI 요소 정의
     let containerView: UIView = {
         let view = UIView()
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.layer.shadowOpacity = 0.4 // 그림자의 투명도 조절
-        view.layer.shadowRadius = 8 // 그림자의 퍼짐 정도 조절
+        view.layer.shadowOpacity = 0.4
+        view.layer.shadowRadius = 8
         return view
     }()
 
@@ -110,7 +111,7 @@ class FavoritesViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 4
-        imageView.clipsToBounds = true // 이미지 뷰의 모서리도 깎기
+        imageView.clipsToBounds = true
         return imageView
     }()
 
@@ -118,24 +119,26 @@ class FavoritesViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.font = FontNames.subFont2.font()
-        label.textColor = UIColor.mainWhite // 배경색과 대비되는 색상으로 변경
+        label.textColor = UIColor.mainWhite
         return label
     }()
 
     let favoriteButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "heartimage"), for: .normal)
+        button.setImage(UIImage(named: "heartimage"), for: .normal) // 빈 하트 이미지
         return button
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI() // UI 초기화 및 설정
+        setupUI()
+        setupActions()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI() // UI 초기화 및 설정
+        setupUI()
+        setupActions()
     }
 
     private func setupUI() {
@@ -144,35 +147,41 @@ class FavoritesViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(favoriteButton)
 
-        // SnapKit을 사용하여 containerView의 제약 조건 설정
         containerView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().inset(40) // 컨테이너 하단에 여백 추가
+            make.bottom.equalToSuperview().inset(40)
         }
 
-        // SnapKit을 사용하여 imageView의 제약 조건 설정
         imageView.snp.makeConstraints {
-            $0.edges.equalToSuperview() // containerView의 모든 엣지에 맞게 설정
+            $0.edges.equalToSuperview()
         }
 
-        // SnapKit을 사용하여 titleLabel의 제약 조건 설정
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(containerView.snp.bottom).offset(4)
             $0.centerX.equalTo(containerView.snp.centerX)
         }
 
-        // SnapKit을 사용하여 favoriteButton의 제약 조건 설정
         favoriteButton.snp.makeConstraints {
-            $0.bottom.equalTo(imageView.snp.bottom).inset(8) // imageView의 하단에서 8포인트 떨어진 위치
-            $0.trailing.equalTo(imageView.snp.trailing).inset(8) // imageView의 오른쪽에서 8포인트 떨어진 위치
-            $0.width.height.equalTo(30) // 버튼 크기 설정
+            $0.bottom.equalTo(imageView.snp.bottom).inset(8)
+            $0.trailing.equalTo(imageView.snp.trailing).inset(8)
+            $0.width.height.equalTo(30)
         }
     }
 
-    // MARK: - 데이터 구성
+    private func setupActions() {
+        favoriteButton.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
+    }
+
+    @objc private func toggleFavorite() {
+        isFavorite.toggle() // 버튼 클릭 시 상태 반전
+
+        let heartImageName = isFavorite ? "heartfilled" : "heartimage" // 채워진 하트 이미지와 빈 하트 이미지
+        favoriteButton.setImage(UIImage(named: heartImageName), for: .normal)
+    }
+
     func configure(with data: FavoritesView.CollectionViewData) {
-        imageView.image = UIImage(named: data.imageName) // 이미지 설정
-        titleLabel.text = data.title // 제목 설정
+        imageView.image = UIImage(named: data.imageName)
+        titleLabel.text = data.title
     }
 }
 

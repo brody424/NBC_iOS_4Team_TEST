@@ -24,16 +24,16 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let searchNavController = UINavigationController(rootViewController: searchViewController)
         searchNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
-        let cartViewController = CartViewController()
-        let cartNavController = UINavigationController(rootViewController: cartViewController)
-        cartNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "ticket"), tag: 2)
-        
+        let reservaitionViewController = ReservaitionController()
+        let reservaitionNavController = UINavigationController(rootViewController: reservaitionViewController)
+        reservaitionNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "cart.fill"), tag: 2)
+
         let favoritesViewController = FavoritesViewController()
         let favoritesNavController = UINavigationController(rootViewController: favoritesViewController)
         favoritesNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "heart.fill"), tag: 3)
         
         // 뷰 컨트롤러 순서 설정
-        viewControllers = [mainNavController, searchNavController, cartNavController, favoritesNavController]
+        viewControllers = [mainNavController, searchNavController, reservaitionNavController, favoritesNavController]
         
         // 탭 바 레이아웃 커스터마이즈
         if let items = tabBar.items {

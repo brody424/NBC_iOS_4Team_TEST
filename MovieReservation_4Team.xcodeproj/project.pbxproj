@@ -41,7 +41,7 @@
 		C26C08352C508964009F5B06 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C08342C508964009F5B06 /* SearchController.swift */; };
 		C26C08372C509588009F5B06 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C08362C509588009F5B06 /* CustomTableViewCell.swift */; };
 		C29F6C382C4FBD5B0081FA15 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F6C372C4FBD5B0081FA15 /* TabBarController.swift */; };
-		C29F6C3C2C4FC16F0081FA15 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F6C3B2C4FC16F0081FA15 /* CartViewController.swift */; };
+		C29F6C3C2C4FC16F0081FA15 /* ReservaitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F6C3B2C4FC16F0081FA15 /* ReservaitionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +80,7 @@
 		C26C08342C508964009F5B06 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		C26C08362C509588009F5B06 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		C29F6C372C4FBD5B0081FA15 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		C29F6C3B2C4FC16F0081FA15 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		C29F6C3B2C4FC16F0081FA15 /* ReservaitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaitionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +132,7 @@
 				C29F6C372C4FBD5B0081FA15 /* TabBarController.swift */,
 				270A84B92C4E6BE300B61721 /* MainController.swift */,
 				277026D12C50BD2D004CFDAD /* favoritesViewController.swift */,
-				C29F6C3B2C4FC16F0081FA15 /* CartViewController.swift */,
+				C29F6C3B2C4FC16F0081FA15 /* ReservaitionController.swift */,
 				C26C08282C4F4A2C009F5B06 /* MyPageController.swift */,
 				5F7278952C5096400033B94E /* MovieInfoViewController.swift */,
 				C26C08342C508964009F5B06 /* SearchController.swift */,
@@ -290,7 +290,7 @@
 				C26C08372C509588009F5B06 /* CustomTableViewCell.swift in Sources */,
 				270A84A82C4E549200B61721 /* SearchView.swift in Sources */,
 				276B93D22C4E103C00170CBF /* AppDelegate.swift in Sources */,
-				C29F6C3C2C4FC16F0081FA15 /* CartViewController.swift in Sources */,
+				C29F6C3C2C4FC16F0081FA15 /* ReservaitionController.swift in Sources */,
 				270A84AC2C4E54DC00B61721 /* MyPageView.swift in Sources */,
 				277026D22C50BD2D004CFDAD /* favoritesViewController.swift in Sources */,
 				270A84B82C4E6BCD00B61721 /* UserData.swift in Sources */,
