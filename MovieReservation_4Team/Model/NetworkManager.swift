@@ -1,42 +1,12 @@
 import Foundation
 
-struct Movie: Decodable {
-    let id: Int
-    let title: String
-    let posterPath: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case title
-        case posterPath = "poster_path"
-    }
+protocol NetworkManagerProtocol {
+    func fetchPopularMovies(page: Int, completion: @escaping ([Movie]?) -> Void)
+    func fetchNowPlayingMovies(page: Int, completion: @escaping ([Movie]?) -> Void)
+    func fetchMovieDetail(movieId: Int, completion: @escaping (MovieDetail?) -> Void)
 }
 
-struct MovieDetail: Decodable {
-    let title: String
-    let overview: String
-    let releaseDate: String
-    let genres: [Genre]
-    let voteAverage: Double
-    let runtime: Int
-    let posterPath: String?
-    
-    struct Genre: Decodable {
-        let name: String
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case title
-        case overview
-        case releaseDate = "release_date"
-        case genres
-        case voteAverage = "vote_average"
-        case runtime
-        case posterPath = "poster_path"
-    }
-}
-
-class NetworkManager {
+class NetworkManager: NetworkManagerProtocol {
     static let shared = NetworkManager()
     private let apiKey = "c272149d0f0d1ed77d32b7d71522185e"
     private let baseUrl = "https://api.themoviedb.org/3"
