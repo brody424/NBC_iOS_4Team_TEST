@@ -16,7 +16,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBar.barTintColor = .black
         
         // 탭 바 아이템 생성
-        let mainViewController = MainView()
+        let mainViewController = MainViewController() // MainView가 아닌 MainViewController를 사용
         let mainNavController = UINavigationController(rootViewController: mainViewController)
         mainNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house.fill"), tag: 0)
         

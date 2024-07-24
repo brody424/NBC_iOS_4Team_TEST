@@ -84,7 +84,7 @@ class LoginView: UIViewController {
         self.navigationController?.pushViewController(SignUpView(), animated: true)
     }
     @objc private func loginButtonTapped() {
-        self.navigationController?.pushViewController(MainView(), animated: true)
+        self.navigationController?.pushViewController(MainViewController(), animated: true)
     }
 }
 
