@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MainView: UIView {
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -62,7 +62,7 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     let fourthCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150, height: 150)
+        layout.itemSize = CGSize(width: 150, height: 200)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 0
@@ -110,7 +110,7 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     let secondLabel: UILabel = {
         let label = UILabel()
-        label.text = "추천 영화"
+        label.text = "최신 영화"
         label.textColor = UIColor.mainWhite
         label.textAlignment = .center
         return label
@@ -124,23 +124,22 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         return label
     }()
     
-    let firstCollectionViewImages = ["image1", "image2"]
-    let secondCollectionViewImages = ["image3", "image4", "image5"]
-    let thirdCollectionViewImages = ["image6", "image7", "image8"]
-    let fourthCollectionViewImages = ["image9", "image10", "image11"]
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupScrollView()
         setupView()
-        
-        self.title = "MOVIE"
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupScrollView()
+        setupView()
     }
 
     func setupScrollView() {
-        view.addSubview(scrollView)
+        addSubview(scrollView)
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.edges.equalTo(safeAreaLayoutGuide)
         }
         
         scrollView.addSubview(contentView)
@@ -163,18 +162,16 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func setupBackgroundColor() {
-        self.view.backgroundColor = UIColor.mainBlack
+        backgroundColor = UIColor.mainBlack
         contentView.backgroundColor = UIColor.mainBlack
     }
 
     
     func setupFirstCollectionView() {
         contentView.addSubview(firstCollectionView)
-        firstCollectionView.dataSource = self
-        firstCollectionView.delegate = self
         
         firstCollectionView.snp.makeConstraints {
-            $0.top.equalTo(contentView.snp.top).offset(44)
+            $0.top.equalTo(contentView.snp.top).offset(0)
             $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(200)
         }
@@ -187,8 +184,8 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         firstLabelContainer.snp.makeConstraints {
             $0.top.equalTo(firstCollectionView.snp.bottom).offset(20)
             $0.leading.equalTo(contentView.safeAreaLayoutGuide.snp.leading).offset(16)
-            $0.height.equalTo(50)
-            $0.width.equalTo(100)
+            $0.height.equalTo(40)
+            $0.width.equalTo(90)
         }
         
         firstLabel.snp.makeConstraints {
@@ -198,13 +195,11 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func setupSecondCollectionView() {
         contentView.addSubview(secondCollectionView)
-        secondCollectionView.dataSource = self
-        secondCollectionView.delegate = self
         
         secondCollectionView.snp.makeConstraints {
-            $0.top.equalTo(firstLabelContainer.snp.bottom).offset(20)
+            $0.top.equalTo(firstLabelContainer.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(16)
-            $0.height.equalTo(150)
+            $0.height.equalTo(200)
         }
     }
     
@@ -213,10 +208,10 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         secondLabelContainer.addSubview(secondLabel)
         
         secondLabelContainer.snp.makeConstraints {
-            $0.top.equalTo(secondCollectionView.snp.bottom).offset(20)
+            $0.top.equalTo(secondCollectionView.snp.bottom).offset(10)
             $0.leading.equalTo(contentView.safeAreaLayoutGuide.snp.leading).offset(16)
-            $0.height.equalTo(50)
-            $0.width.equalTo(100)
+            $0.height.equalTo(40)
+            $0.width.equalTo(90)
         }
         
         secondLabel.snp.makeConstraints {
@@ -226,13 +221,11 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func setupThirdCollectionView() {
         contentView.addSubview(thirdCollectionView)
-        thirdCollectionView.dataSource = self
-        thirdCollectionView.delegate = self
         
         thirdCollectionView.snp.makeConstraints {
-            $0.top.equalTo(secondLabelContainer.snp.bottom).offset(20)
+            $0.top.equalTo(secondLabelContainer.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(16)
-            $0.height.equalTo(150)
+            $0.height.equalTo(200)
         }
     }
     
@@ -243,8 +236,8 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         thirdLabelContainer.snp.makeConstraints {
             $0.top.equalTo(thirdCollectionView.snp.bottom).offset(20)
             $0.leading.equalTo(contentView.safeAreaLayoutGuide.snp.leading).offset(16)
-            $0.height.equalTo(50)
-            $0.width.equalTo(100)
+            $0.height.equalTo(40)
+            $0.width.equalTo(90)
         }
         
         thirdLabel.snp.makeConstraints {
@@ -254,83 +247,12 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func setupFourthCollectionView() {
         contentView.addSubview(fourthCollectionView)
-        fourthCollectionView.dataSource = self
-        fourthCollectionView.delegate = self
         
         fourthCollectionView.snp.makeConstraints {
-            $0.top.equalTo(thirdLabelContainer.snp.bottom).offset(20)
+            $0.top.equalTo(thirdLabelContainer.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(16)
-            $0.height.equalTo(150)
+            $0.height.equalTo(200)
             $0.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
     }
-    
-    @objc func profileButtonTapped() {
-        print("Profile button tapped")
-    }
-    
-    // MARK: - UICollectionViewDataSource
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView {
-        case firstCollectionView:
-            return firstCollectionViewImages.count
-        case secondCollectionView:
-            return secondCollectionViewImages.count
-        case thirdCollectionView:
-            return thirdCollectionViewImages.count
-        case fourthCollectionView:
-            return fourthCollectionViewImages.count
-        default:
-            return 0
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier(for: collectionView), for: indexPath)
-        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
-        
-        let imageName = imageName(for: collectionView, at: indexPath)
-        let imageView = UIImageView(image: UIImage(named: imageName))
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        cell.contentView.addSubview(imageView)
-        
-        imageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        return cell
-    }
-    
-    private func cellIdentifier(for collectionView: UICollectionView) -> String {
-        switch collectionView {
-        case firstCollectionView:
-            return "FirstCell"
-        case secondCollectionView:
-            return "SecondCell"
-        case thirdCollectionView:
-            return "ThirdCell"
-        case fourthCollectionView:
-            return "FourthCell"
-        default:
-            return "Cell"
-        }
-    }
-    
-    private func imageName(for collectionView: UICollectionView, at indexPath: IndexPath) -> String {
-        switch collectionView {
-        case firstCollectionView:
-            return firstCollectionViewImages[indexPath.item]
-        case secondCollectionView:
-            return secondCollectionViewImages[indexPath.item]
-        case thirdCollectionView:
-            return thirdCollectionViewImages[indexPath.item]
-        case fourthCollectionView:
-            return fourthCollectionViewImages[indexPath.item]
-        default:
-            return ""
-        }
-    }
 }
-#Preview("MainView") { MainView() }
