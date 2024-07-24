@@ -133,8 +133,10 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         super.viewDidLoad()
         setupScrollView()
         setupView()
+        
+        self.title = "MOVIE"
     }
-    
+
     func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints {
@@ -142,6 +144,7 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         }
         
         scrollView.addSubview(contentView)
+
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
@@ -150,7 +153,6 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func setupView() {
         setupBackgroundColor()
-        setupNavigationBar()
         setupFirstCollectionView()
         setupFirstLabel()
         setupSecondCollectionView()
@@ -164,39 +166,7 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         self.view.backgroundColor = UIColor.mainBlack
         contentView.backgroundColor = UIColor.mainBlack
     }
-    
-    func setupNavigationBar() {
-        let navigationBar = UINavigationBar()
-        contentView.addSubview(navigationBar)
-        
-        navigationBar.snp.makeConstraints {
-            $0.top.equalTo(contentView.snp.top)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(44)
-        }
-        
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = true
-        navigationBar.backgroundColor = .mainBlack
-        
-        let titleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.boldSystemFont(ofSize: 20),
-            .foregroundColor: UIColor.mainWhite
-        ]
-        navigationBar.titleTextAttributes = titleAttributes
-        
-        let navigationItem = UINavigationItem(title: "Movie")
-        
-        if let profileImage = UIImage(named: "profile_image") {
-            let profileButton = UIBarButtonItem(image: profileImage, style: .plain, target: self, action: #selector(profileButtonTapped))
-            navigationItem.rightBarButtonItem = profileButton
-        } else {
-            print("프로필 이미지를 찾을 수 없습니다.")
-        }
-        
-        navigationBar.setItems([navigationItem], animated: false)
-    }
+
     
     func setupFirstCollectionView() {
         contentView.addSubview(firstCollectionView)

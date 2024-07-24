@@ -4,26 +4,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        // 윈도우 생성
         window = UIWindow(windowScene: windowScene)
 
-        // MainTabBarController 생성
+        // TabBarController를 루트 뷰 컨트롤러로 설정
         let tabBarController = TabBarController()
-
-        // 네비게이션 컨트롤러 생성 및 루트 뷰 컨트롤러 설정
-        let navigationController = UINavigationController(rootViewController: tabBarController)
-
-        // 네비게이션 컨트롤러의 스타일 설정 (옵션)
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.barTintColor = .black
-        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-
-        // 윈도우의 루트 뷰 컨트롤러 설정
-        window?.rootViewController = navigationController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
 

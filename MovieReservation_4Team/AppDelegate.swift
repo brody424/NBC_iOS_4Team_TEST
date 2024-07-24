@@ -14,6 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.mainRed, // 타이틀 텍스트 색상
+            .font: FontNames.mainFont3.font() ?? UIFont.systemFont(ofSize: 30) // 타이틀 텍스트 폰트 (필요 시 설정)
+        ]
+        UINavigationBar.appearance().titleTextAttributes = textAttributes
+        UINavigationBar.appearance().barTintColor = UIColor.mainBlack
+
         return true
     }
 

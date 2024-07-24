@@ -7,3 +7,7 @@
 
 import UIKit
 import SnapKit
+
+class favoritesView: UIView {
+
+}

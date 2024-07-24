@@ -88,7 +88,7 @@ class MovieInfoView: UIView {
         button.setTitleColor(.mainWhite, for: .normal)
         button.backgroundColor = .mainBlack
         button.titleLabel?.font = FontNames.subFont.font()
-        button.addTarget(self, action: #selector(moreButtonTapped), for: .touchDown)
+        button.addTarget(MovieInfoView.self, action: #selector(moreButtonTapped), for: .touchDown)
         return button
     }()
     //예매하기 버튼
