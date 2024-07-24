@@ -1,8 +1,8 @@
 //
-//  CustomTableViewCell.swift .swift
+//  CustomTableViewCell.swift
 //  MovieReservation_4Team
 //
-//  Created by t2023-m0117 on 7/23/24.
+//  Created by t2023-m0117 on 7/24/24.
 //
 
 import UIKit
