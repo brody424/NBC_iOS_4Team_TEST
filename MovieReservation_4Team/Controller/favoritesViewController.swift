@@ -10,13 +10,24 @@ import SnapKit
 
 class FavoritesViewController: UIViewController {
 
-
     override func viewDidLoad() {
-
         super.viewDidLoad()
-
-        view.backgroundColor = UIColor.mainBlack
-
+        setupFavoritesView()
         self.title = "관심 영화 목록"
     }
+
+    private func setupFavoritesView() {
+        let favoritesView = FavoritesView()
+        view.addSubview(favoritesView)
+
+        favoritesView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+}
+
+
+#Preview {
+    let FavoritesViewController = FavoritesViewController()
+    return FavoritesViewController
 }
