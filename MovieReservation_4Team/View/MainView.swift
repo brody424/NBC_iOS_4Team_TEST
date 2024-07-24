@@ -131,8 +131,9 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupScrollView()
-        setupView()
+//        setupScrollView()
+//        setupView()
+        self.view = MovieInfoView()
     }
     
     func setupScrollView() {
