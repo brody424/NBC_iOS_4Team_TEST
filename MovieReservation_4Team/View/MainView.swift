@@ -1,3 +1,10 @@
+//
+//  MainView.swift
+//  MovieReservation_4Team
+//
+//  Created by 4Team on 7/22/24.
+//
+
 import UIKit
 import SnapKit
 
@@ -29,7 +36,7 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     let secondCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150, height: 150)
+        layout.itemSize = CGSize(width: 150, height: 200)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 0
@@ -42,7 +49,7 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     let thirdCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150, height: 150)
+        layout.itemSize = CGSize(width: 150, height: 200)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 0
@@ -171,7 +178,7 @@ class MainView: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true
-        navigationBar.backgroundColor = .clear
+        navigationBar.backgroundColor = .mainBlack
         
         let titleAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.boldSystemFont(ofSize: 20),
