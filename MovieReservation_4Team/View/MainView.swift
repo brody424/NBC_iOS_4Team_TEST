@@ -234,7 +234,7 @@ class MainView: UIView {
         thirdLabelContainer.addSubview(thirdLabel)
         
         thirdLabelContainer.snp.makeConstraints {
-            $0.top.equalTo(thirdCollectionView.snp.bottom).offset(20)
+            $0.top.equalTo(thirdCollectionView.snp.bottom).offset(10)
             $0.leading.equalTo(contentView.safeAreaLayoutGuide.snp.leading).offset(16)
             $0.height.equalTo(40)
             $0.width.equalTo(90)

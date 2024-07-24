@@ -164,7 +164,7 @@ extension MyPageView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // 셀 선택에 따른 동작을 여기에 추가할 수 있습니다.
+        // 셀 선택에 따른 동작을 여기에 추가
         switch indexPath.row {
         case 0:
             print("회원 정보 선택됨")

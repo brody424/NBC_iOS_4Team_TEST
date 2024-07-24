@@ -1,20 +1,13 @@
-//
-//  MainController.swift
-//  MovieReservation_4Team
-//
-//  Created by t2023-m0023 on 7/22/24.
-//
-
 import UIKit
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     let mainView = MainView()
     
-    let firstCollectionViewImages = ["image1", "image2"]
-    let secondCollectionViewImages = ["image3", "image4", "image5"]
-    let thirdCollectionViewImages = ["image6", "image7", "image8"]
-    let fourthCollectionViewImages = ["image9", "image10", "image11"]
+    var firstCollectionViewMovies: [Movie] = []
+    var secondCollectionViewMovies: [Movie] = []
+    var thirdCollectionViewMovies: [Movie] = []
+    var fourthCollectionViewMovies: [Movie] = []
     
     override func loadView() {
         self.view = mainView
@@ -23,9 +16,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        fetchData()
         
         self.title = "MOVIE"
-        
     }
     
     func setupCollectionView() {
@@ -41,19 +34,53 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         mainView.fourthCollectionView.dataSource = self
         mainView.fourthCollectionView.delegate = self
     }
+    
+    func fetchData() {
+        NetworkManager.shared.fetchPopularMovies(page: 1) { [weak self] movies in
+            guard let self = self, let movies = movies else { return }
+            DispatchQueue.main.async {
+                self.firstCollectionViewMovies = movies
+                self.mainView.firstCollectionView.reloadData()
+            }
+        }
+        
+        NetworkManager.shared.fetchNowPlayingMovies(page: 1) { [weak self] movies in
+            guard let self = self, let movies = movies else { return }
+            DispatchQueue.main.async {
+                self.secondCollectionViewMovies = movies
+                self.mainView.secondCollectionView.reloadData()
+            }
+        }
+        
+        NetworkManager.shared.fetchPopularMovies(page: 1) { [weak self] movies in
+            guard let self = self, let movies = movies else { return }
+            DispatchQueue.main.async {
+                self.thirdCollectionViewMovies = movies
+                self.mainView.thirdCollectionView.reloadData()
+            }
+        }
+        
+        NetworkManager.shared.fetchNowPlayingMovies(page: 1) { [weak self] movies in
+            guard let self = self, let movies = movies else { return }
+            DispatchQueue.main.async {
+                self.fourthCollectionViewMovies = movies
+                self.mainView.fourthCollectionView.reloadData()
+            }
+        }
+    }
 
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case mainView.firstCollectionView:
-            return firstCollectionViewImages.count
+            return firstCollectionViewMovies.count
         case mainView.secondCollectionView:
-            return secondCollectionViewImages.count
+            return secondCollectionViewMovies.count
         case mainView.thirdCollectionView:
-            return thirdCollectionViewImages.count
+            return thirdCollectionViewMovies.count
         case mainView.fourthCollectionView:
-            return fourthCollectionViewImages.count
+            return fourthCollectionViewMovies.count
         default:
             return 0
         }
@@ -63,10 +90,27 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier(for: collectionView), for: indexPath)
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
         
-        let imageName = imageName(for: collectionView, at: indexPath)
-        let imageView = UIImageView(image: UIImage(named: imageName))
+        let movie: Movie
+        switch collectionView {
+        case mainView.firstCollectionView:
+            movie = firstCollectionViewMovies[indexPath.item]
+        case mainView.secondCollectionView:
+            movie = secondCollectionViewMovies[indexPath.item]
+        case mainView.thirdCollectionView:
+            movie = thirdCollectionViewMovies[indexPath.item]
+        case mainView.fourthCollectionView:
+            movie = fourthCollectionViewMovies[indexPath.item]
+        default:
+            fatalError("Unknown collection view")
+        }
+        
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        if let posterPath = movie.posterPath {
+            let imageUrl = "https://image.tmdb.org/t/p/w500\(posterPath)"
+            NetworkManager.shared.loadImage(from: imageUrl, into: imageView)
+        }
         cell.contentView.addSubview(imageView)
         
         imageView.snp.makeConstraints {
@@ -91,21 +135,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    private func imageName(for collectionView: UICollectionView, at indexPath: IndexPath) -> String {
-        switch collectionView {
-        case mainView.firstCollectionView:
-            return firstCollectionViewImages[indexPath.item]
-        case mainView.secondCollectionView:
-            return secondCollectionViewImages[indexPath.item]
-        case mainView.thirdCollectionView:
-            return thirdCollectionViewImages[indexPath.item]
-        case mainView.fourthCollectionView:
-            return fourthCollectionViewImages[indexPath.item]
-        default:
-            return ""
-        }
-    }
-    
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -115,9 +144,30 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         case mainView.secondCollectionView, mainView.thirdCollectionView:
             return CGSize(width: 150, height: 200)
         case mainView.fourthCollectionView:
-            return CGSize(width: 150, height: 200) // 네 번째 컬렉션 뷰 아이템 크기 설정
+            return CGSize(width: 150, height: 200)
         default:
             return CGSize.zero
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie: Movie
+        switch collectionView {
+        case mainView.firstCollectionView:
+            movie = firstCollectionViewMovies[indexPath.item]
+        case mainView.secondCollectionView:
+            movie = secondCollectionViewMovies[indexPath.item]
+        case mainView.thirdCollectionView:
+            movie = thirdCollectionViewMovies[indexPath.item]
+        case mainView.fourthCollectionView:
+            movie = fourthCollectionViewMovies[indexPath.item]
+        default:
+            fatalError("Unknown collection view")
+        }
+        
+        let movieInfoVC = MovieInfoViewController()
+        movieInfoVC.movie = movie
+        navigationController?.pushViewController(movieInfoVC, animated: true)
+    }
 }
+// 쏘리용
