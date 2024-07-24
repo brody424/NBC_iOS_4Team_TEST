@@ -1,10 +1,3 @@
-//
-//  MainController.swift
-//  MovieReservation_4Team
-//
-//  Created by t2023-m0023 on 7/22/24.
-//
-
 import UIKit
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -156,4 +149,25 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             return CGSize.zero
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie: Movie
+        switch collectionView {
+        case mainView.firstCollectionView:
+            movie = firstCollectionViewMovies[indexPath.item]
+        case mainView.secondCollectionView:
+            movie = secondCollectionViewMovies[indexPath.item]
+        case mainView.thirdCollectionView:
+            movie = thirdCollectionViewMovies[indexPath.item]
+        case mainView.fourthCollectionView:
+            movie = fourthCollectionViewMovies[indexPath.item]
+        default:
+            fatalError("Unknown collection view")
+        }
+        
+        let movieInfoVC = MovieInfoViewController()
+        movieInfoVC.movie = movie
+        navigationController?.pushViewController(movieInfoVC, animated: true)
+    }
 }
+// 쏘리용
