@@ -3,6 +3,8 @@ import UIKit
 class MovieInfoViewController: UIViewController {
     var movieInfoView = MovieInfoView()
     
+    
+    
 //    let networkManager: NetworkManagerProtocol //같은 프로토콜 채택 중
 //    init(networkManager: NetworkManagerProtocol) {
 //        self.networkManager = networkManager

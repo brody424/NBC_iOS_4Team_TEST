@@ -1,5 +1,7 @@
 import Foundation
 
+
+
 protocol NetworkManagerProtocol {
     func fetchPopularMovies(page: Int, completion: @escaping ([Movie]?) -> Void)
     func fetchNowPlayingMovies(page: Int, completion: @escaping ([Movie]?) -> Void)
