@@ -52,33 +52,36 @@ class MovieInfoViewController: UIViewController {
                     
                     if let posterPath = movieDetail.posterPath {
                         let fullPosterUrl = "https://image.tmdb.org/t/p/w500/\(posterPath)"
-                        self.loadImage(from: fullPosterUrl)
+                        NetworkManager.shared.loadImage(from: fullPosterUrl) {
+                            image in
+                            self.MainView.imageView.image = image
+                        }
                     }
                 }
             }
         }
     }
     
-    //MARK: -다운로드한 이미지를 movieInfoView.movieImageView에 설정
-    func loadImage(from urlString: String) {
-        guard let url = URL(string: urlString) else { return }
-        
-        // 네트워크에서 이미지 다운로드
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error loading image: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let data = data, let image = UIImage(data: data) else {
-                print("Error: Unable to load image data")
-                return
-            }
-            
-            // 메인 스레드에서 이미지 뷰 업데이트
-            DispatchQueue.main.async {
-                self.movieInfoView.movieImageView.image = image
-            }
-        }.resume()
-    }
+//    //MARK: -다운로드한 이미지를 movieInfoView.movieImageView에 설정
+//    func loadImage(from urlString: String) {
+//        guard let url = URL(string: urlString) else { return }
+//        
+//        // 네트워크에서 이미지 다운로드
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            if let error = error {
+//                print("Error loading image: \(error.localizedDescription)")
+//                return
+//            }
+//            
+//            guard let data = data, let image = UIImage(data: data) else {
+//                print("Error: Unable to load image data")
+//                return
+//            }
+//            
+//            // 메인 스레드에서 이미지 뷰 업데이트
+//            DispatchQueue.main.async {
+//                self.movieInfoView.movieImageView.image = image
+//            }
+//        }.resume()
+//    }
 }
