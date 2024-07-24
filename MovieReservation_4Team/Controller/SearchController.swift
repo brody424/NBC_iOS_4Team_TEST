@@ -1,87 +1,67 @@
-//
-//  SearchController.swift
-//  MovieReservation_4Team
-//
-//  Created by t2023-m0117 on 7/24/24.
-//
-
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class SearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
     
     private let searchView = SearchView()
-    private let recentSearches = RecentSearches()
-    
-    override func loadView() {
-        self.view = searchView
-    }
+    private var searchResults: [Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(searchView)
+        searchView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        searchView.searchResultsCollectionView.dataSource = self
+        searchView.searchResultsCollectionView.delegate = self
         searchView.searchBar.delegate = self
-        searchView.recentSearchesTableView.dataSource = self
-        searchView.recentSearchesTableView.delegate = self
-        searchView.clearAllButton.addTarget(self, action: #selector(clearAllButtonTapped), for: .touchUpInside)
+        
+        searchView.clearAllButton.addTarget(self, action: #selector(clearAllSearches), for: .touchUpInside)
     }
-    
-    // MARK: - 서치바 딜리게이트
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("검색 텍스트: \(searchText)")
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text, !searchText.isEmpty {
-            recentSearches.addSearch(searchText)
-            searchView.recentSearchesTableView.reloadData()
+        if searchText.isEmpty {
+            searchResults = [] // Clear results when search text is empty
+        } else {
+            fetchMovies(with: searchText)
         }
-        searchBar.resignFirstResponder()
+        searchView.searchResultsCollectionView.reloadData()
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.becomeFirstResponder()
+    func fetchMovies(with query: String) {
+        // Example implementation of fetching movies
+        NetworkManager.shared.fetchPopularMovies(page: 1) { [weak self] movies in
+            guard let self = self else { return }
+            self.searchResults = movies?.filter { $0.title.lowercased().contains(query.lowercased()) } ?? []
+            DispatchQueue.main.async {
+                self.searchView.searchResultsCollectionView.reloadData()
+            }
+        }
     }
     
-    // MARK: - 테이블뷰 데이터소스
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recentSearches.searches.count
+    @objc private func clearAllSearches() {
+        // Clear all recent searches (implement your own logic here)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
-        cell.configure(with: recentSearches.searches[indexPath.row])
-        cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped(_:)), for: .touchUpInside)
-        cell.deleteButton.tag = indexPath.row
+    // MARK: - UICollectionViewDataSource
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return searchResults.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCollectionViewCell", for: indexPath) as! MovieCollectionViewCell
+        let movie = searchResults[indexPath.item]
+        cell.configure(with: movie)
         return cell
     }
     
-    // MARK: - 테이블뷰 딜리게이트
+    // MARK: - UICollectionViewDelegateFlowLayout
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedSearch = recentSearches.searches[indexPath.row]
-        searchView.searchBar.text = selectedSearch
-        searchBarSearchButtonClicked(searchView.searchBar) // Trigger a search
-        searchView.searchBar.resignFirstResponder()
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.bounds.width - 16) / 2
+        let height = width * 1.5
+        return CGSize(width: width, height: height)
     }
-    
-    // MARK: - 전체 삭제
-    
-    @objc private func clearAllButtonTapped() {
-        recentSearches.clearAllSearches()
-        searchView.recentSearchesTableView.reloadData()
-    }
-    
-    // MARK: - 개별 삭제
-    
-    @objc private func deleteButtonTapped(_ sender: UIButton) {
-        let index = sender.tag
-        recentSearches.removeSearch(at: index)
-        searchView.recentSearchesTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-    }
-}
-
-#Preview {
-    let Ac = SearchViewController()
-    return Ac
 }

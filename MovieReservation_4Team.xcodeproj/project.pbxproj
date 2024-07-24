@@ -41,6 +41,7 @@
 		C26C08372C509588009F5B06 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C08362C509588009F5B06 /* CustomTableViewCell.swift */; };
 		C29F6C382C4FBD5B0081FA15 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F6C372C4FBD5B0081FA15 /* TabBarController.swift */; };
 		C29F6C3C2C4FC16F0081FA15 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F6C3B2C4FC16F0081FA15 /* CartViewController.swift */; };
+		C2E524E72C50F39E00FB12FE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C2E524E62C50F39E00FB12FE /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2E524E72C50F39E00FB12FE /* Kingfisher in Frameworks */,
 				270A84B32C4E573A00B61721 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,6 +218,7 @@
 			name = MovieReservation_4Team;
 			packageProductDependencies = (
 				270A84B22C4E573A00B61721 /* SnapKit */,
+				C2E524E62C50F39E00FB12FE /* Kingfisher */,
 			);
 			productName = MovieReservation_4Team;
 			productReference = 276B93CE2C4E103C00170CBF /* MovieReservation_4Team.app */;
@@ -247,6 +250,7 @@
 			mainGroup = 276B93C52C4E103C00170CBF;
 			packageReferences = (
 				270A84B12C4E573A00B61721 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C2E524E52C50F39E00FB12FE /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 276B93CF2C4E103C00170CBF /* Products */;
 			projectDirPath = "";
@@ -531,6 +535,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		C2E524E52C50F39E00FB12FE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -538,6 +550,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 270A84B12C4E573A00B61721 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		C2E524E62C50F39E00FB12FE /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2E524E52C50F39E00FB12FE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
