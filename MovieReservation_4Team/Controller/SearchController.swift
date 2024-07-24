@@ -16,13 +16,12 @@ class SearchViewController: UIViewController, UICollectionViewDataSource, UIColl
         searchView.searchResultsCollectionView.dataSource = self
         searchView.searchResultsCollectionView.delegate = self
         searchView.searchBar.delegate = self
-        
-        searchView.clearAllButton.addTarget(self, action: #selector(clearAllSearches), for: .touchUpInside)
+
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            searchResults = [] // Clear results when search text is empty
+            searchResults = [] 
         } else {
             fetchMovies(with: searchText)
         }
@@ -30,7 +29,7 @@ class SearchViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func fetchMovies(with query: String) {
-        // Example implementation of fetching movies
+        // 영화 가져오기 구현 예시
         NetworkManager.shared.fetchPopularMovies(page: 1) { [weak self] movies in
             guard let self = self else { return }
             self.searchResults = movies?.filter { $0.title.lowercased().contains(query.lowercased()) } ?? []
@@ -40,11 +39,7 @@ class SearchViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     
-    @objc private func clearAllSearches() {
-        // Clear all recent searches (implement your own logic here)
-    }
-    
-    // MARK: - UICollectionViewDataSource
+    // MARK: - 컬렉션뷰 데이터 소스
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchResults.count
@@ -57,7 +52,7 @@ class SearchViewController: UIViewController, UICollectionViewDataSource, UIColl
         return cell
     }
     
-    // MARK: - UICollectionViewDelegateFlowLayout
+    // MARK: - 딜리게이트레이아웃
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.bounds.width - 16) / 2

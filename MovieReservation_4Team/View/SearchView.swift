@@ -1,6 +1,5 @@
 import UIKit
 import SnapKit
-import Kingfisher
 
 class SearchView: UIView {
     
@@ -55,16 +54,14 @@ class SearchView: UIView {
         return button
     }()
     
-    // Collection View for search results
     let searchResultsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
-        // Configure item size to fit two items horizontally
-        let itemWidth = (UIScreen.main.bounds.width - 24) / 2  // Adjust 24 for horizontal padding
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)  // Maintain aspect ratio
-        
-        // Set spacing between items and lines
+        // 아이템 사이즈
+        let itemWidth = (UIScreen.main.bounds.width - 24) / 2
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
+    
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         
@@ -113,7 +110,7 @@ class SearchView: UIView {
             $0.leading.equalToSuperview().offset(8)
             $0.trailing.equalToSuperview().offset(-8)
             $0.top.equalTo(searchBar.snp.bottom).offset(10)
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-85)
         }
     }
 }
@@ -142,7 +139,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         imageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(imageView.snp.width).multipliedBy(1.5) // Adjust the aspect ratio as needed
+            $0.height.equalTo(imageView.snp.width).multipliedBy(1.5)
         }
         
         titleLabel.snp.makeConstraints {
@@ -158,9 +155,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func configure(with movie: Movie) {
         titleLabel.text = movie.title
-        if let imagePath = movie.posterPath {
-            let url = URL(string: "https://image.tmdb.org/t/p/w500\(imagePath)")!
-            imageView.kf.setImage(with: url)
+        if let posterPath = movie.posterPath {
+            let imageUrl = "https://image.tmdb.org/t/p/w500\(posterPath)"
+            NetworkManager.shared.loadImage(from: imageUrl, into: imageView)
         }
     }
 }
