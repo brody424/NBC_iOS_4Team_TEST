@@ -141,6 +141,43 @@ class NetworkManager: NetworkManagerProtocol {
             }
         }.resume()
     }
+    
+    // MARK: - 영화 검색하기
+     func searchMovies(query: String, page: Int, completion: @escaping ([Movie]?) -> Void) {
+         let urlString = "\(baseUrl)/search/movie?api_key=\(apiKey)&language=ko-KR&query=\(query)&page=\(page)"
+         guard let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else {
+             print("Invalid URL")
+             completion(nil)
+             return
+         }
+         
+         let task = URLSession.shared.dataTask(with: url) { data, response, error in
+             if let error = error {
+                 print("Error: \(error.localizedDescription)")
+                 completion(nil)
+                 return
+             }
+             
+             guard let data = data else {
+                 print("No data returned")
+                 completion(nil)
+                 return
+             }
+             
+             do {
+                 let decoder = JSONDecoder()
+                 let result = try decoder.decode(MovieResponse.self, from: data)
+                 completion(result.results)
+             } catch let jsonError {
+                 print("JSON error: \(jsonError.localizedDescription)")
+                 print(String(data: data, encoding: .utf8) ?? "No readable data")
+                 completion(nil)
+             }
+         }
+         
+         task.resume()
+     }
+
 }
 
 struct MovieResponse: Decodable {

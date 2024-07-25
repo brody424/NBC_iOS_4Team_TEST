@@ -30,9 +30,9 @@ class SearchViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func fetchMovies(with query: String) {
         // 영화 가져오기 구현 예시
-        NetworkManager.shared.fetchPopularMovies(page: 1) { [weak self] movies in
+        NetworkManager.shared.searchMovies(query: query, page: 1) { [weak self] movies in
             guard let self = self else { return }
-            self.searchResults = movies?.filter { $0.title.lowercased().contains(query.lowercased()) } ?? []
+            self.searchResults = movies ?? []
             DispatchQueue.main.async {
                 self.searchView.searchResultsCollectionView.reloadData()
             }
