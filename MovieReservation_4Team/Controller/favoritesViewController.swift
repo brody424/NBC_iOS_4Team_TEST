@@ -9,23 +9,22 @@ import UIKit
 import SnapKit
 
 class FavoritesViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFavoritesView()
-        self.title = "Wish movie list"
+        self.title = "Wish list"
     }
-
+    
     private func setupFavoritesView() {
         let favoritesView = FavoritesView()
         view.addSubview(favoritesView)
-
+        
         favoritesView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
-
 
 #Preview {
     let FavoritesViewController = FavoritesViewController()

@@ -45,7 +45,7 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         // 기본 프로필 이미지 설정
         profileImageView.image = UIImage(named: "profile")
         profileImageView.contentMode = .scaleAspectFit
-        profileImageView.layer.cornerRadius = 50
+        profileImageView.layer.cornerRadius = 100
         profileImageView.clipsToBounds = true
         profileImageView.isUserInteractionEnabled = true
         // let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectImage))
@@ -58,7 +58,7 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         [emailTextField, passwordTextField, signUpButton, nameTextField, hpTextField, profileImageView, changeProfileButton].forEach { view.addSubview($0) }
 
         profileImageView.snp.makeConstraints {
-            $0.width.height.equalTo(100)
+            $0.width.height.equalTo(200)
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(150)
         }

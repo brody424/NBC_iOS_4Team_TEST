@@ -28,3 +28,8 @@ class MovieInfoViewController: UIViewController {
         }
     }
 }
+
+#Preview {
+    let MovieInfoViewController = MovieInfoViewController()
+    return MovieInfoViewController
+}
