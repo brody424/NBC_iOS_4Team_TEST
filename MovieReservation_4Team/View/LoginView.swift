@@ -169,7 +169,7 @@ class LoginView: UIViewController {
        private func performLogin() -> Bool {
            // 로그인 로직 구현
            // 예시로 로그인 성공을 true로 가정
-           return true
+           return false
        }
 
        private func switchToTabBarController() {
@@ -182,10 +182,14 @@ class LoginView: UIViewController {
                window.makeKeyAndVisible()
            }
        }
-
+//로그인실패시알림
        private func showAlertForLoginFailure() {
            let alert = UIAlertController(title: "Login Failed", message: "Please check your credentials and try again.", preferredStyle: .alert)
            alert.addAction(UIAlertAction(title: "OK", style: .default))
+//실패시 회원가입으로
+           alert.addAction(UIAlertAction(title: "Sign Up", style: .default, handler: { _ in
+               self.signupButtonTapped()
+           }))         
            present(alert, animated: true)
        }
    }
