@@ -86,7 +86,6 @@ class LoginView: UIViewController {
     }
 
     private func setupViews() {
-
         view.backgroundColor = UIColor.mainBlack
         view.addSubview(logoImageView)
         view.addSubview(containerView)
@@ -100,7 +99,6 @@ class LoginView: UIViewController {
     }
 
     private func configureUI() {
-
         logoImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(140)
@@ -125,9 +123,8 @@ class LoginView: UIViewController {
             $0.top.equalTo(idLabel.snp.bottom).offset(8)
         }
 
-
         passwordLabel.snp.makeConstraints {
-            $0.leading.equalTo(containerView.snp.leading).offset(16)
+            $0.leading.equalTo(containerView.snp.leading).offset(24)
             $0.top.equalTo(idTextField.snp.bottom).offset(24)
         }
 
@@ -143,7 +140,6 @@ class LoginView: UIViewController {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(24)
         }
 
-        // 가입 버튼 설정
         signupButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(loginButton.snp.bottom).offset(16)
@@ -155,41 +151,46 @@ class LoginView: UIViewController {
     }
 
     @objc private func loginButtonTapped() {
-           // 로그인 성공 여부 확인
-           let isLoginSuccessful = performLogin()
+        // 로그인 성공 여부 확인
+        let isLoginSuccessful = performLogin()
 
-           if isLoginSuccessful {
-               switchToTabBarController()
-           } else {
-               // 로그인 실패 시 사용자에게 알림
-               showAlertForLoginFailure()
-           }
-       }
+        if isLoginSuccessful {
+            switchToTabBarController()
+        } else {
+            // 로그인 실패 시 사용자에게 알림
+            showAlertForLoginFailure()
+        }
+    }
 
-       private func performLogin() -> Bool {
-           // 로그인 로직 구현
-           // 예시로 로그인 성공을 true로 가정
-           return true
-       }
+    private func performLogin() -> Bool {
+        guard let id = idTextField.text, let password = passwordTextField.text else {
+            return false
+        }
+        return CoreDataManager.shared.validateUser(id: id, password: password)
+    }
 
-       private func switchToTabBarController() {
-           // TabBarController 생성
-           let tabBarController = TabBarController()
+    private func switchToTabBarController() {
+        // TabBarController 생성
+        let tabBarController = TabBarController()
 
-           // 현재 네비게이션 컨트롤러의 루트 뷰 컨트롤러를 TabBarController로 설정
-           if let window = UIApplication.shared.windows.first {
-               window.rootViewController = tabBarController
-               window.makeKeyAndVisible()
-           }
-       }
+        // 현재 네비게이션 컨트롤러의 루트 뷰 컨트롤러를 TabBarController로 설정
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = tabBarController
+            window.makeKeyAndVisible()
+        }
+    }
 
-       private func showAlertForLoginFailure() {
-           let alert = UIAlertController(title: "Login Failed", message: "Please check your credentials and try again.", preferredStyle: .alert)
-           alert.addAction(UIAlertAction(title: "OK", style: .default))
-           present(alert, animated: true)
-       }
-   }
+    private func showAlertForLoginFailure() {
+        let alert = UIAlertController(title: "로그인 실패", message: "Please check your credentials and try again.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        // 실패 시 회원가입으로
+        alert.addAction(UIAlertAction(title: "Sign Up", style: .default, handler: { _ in
+            self.signupButtonTapped()
+        }))
+        present(alert, animated: true)
+    }
+}
 
-#Preview("LoginView")
-{LoginView()
+#Preview("LoginView") {
+    LoginView()
 }
