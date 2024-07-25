@@ -8,6 +8,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
+        
+        // Core Data Manager를 초기화
+        let coreDataManager = CoreDataManager.shared
 
         // 로그인 뷰 컨트롤러를 루트 뷰 컨트롤러로 설정
         let loginViewController = LoginView()
