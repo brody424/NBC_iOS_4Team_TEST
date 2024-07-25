@@ -13,7 +13,7 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFavoritesView()
-        self.title = "관심 영화 목록"
+        self.title = "Wish movie list"
     }
 
     private func setupFavoritesView() {

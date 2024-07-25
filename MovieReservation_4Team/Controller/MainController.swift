@@ -68,7 +68,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
         }
     }
-
+    
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -154,7 +154,10 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let movie: Movie
         switch collectionView {
         case mainView.firstCollectionView:
-            movie = firstCollectionViewMovies[indexPath.item]
+            //🌟🌟 지현- 영화상세보기 화면 이동 안돼서 임시로 설정 해둠 🌟🌟
+            //movie = firstCollectionViewMovies[indexPath.item]
+            let movieInfoVC = MovieInfoViewController()
+            navigationController?.pushViewController(movieInfoVC, animated: true)
         case mainView.secondCollectionView:
             movie = secondCollectionViewMovies[indexPath.item]
         case mainView.thirdCollectionView:
@@ -165,9 +168,10 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             fatalError("Unknown collection view")
         }
         
-        let movieInfoVC = MovieInfoViewController()
-        movieInfoVC.movie = movie
-        navigationController?.pushViewController(movieInfoVC, animated: true)
+        //🌟🌟 지현- 오류나서 아래 주석처리 했음 🌟🌟
+//                let movieInfoVC = MovieInfoViewController()
+//                movieInfoVC.movie = movie
+//                navigationController?.pushViewController(movieInfoVC, animated: true)
     }
 }
 
