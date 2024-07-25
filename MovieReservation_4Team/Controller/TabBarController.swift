@@ -13,7 +13,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         
         // 탭 바 배경색 설정
-        tabBar.barTintColor = .black
+        tabBar.barTintColor = UIColor.mainBlack
         
         // 탭 바 아이템 생성
         let mainViewController = MainViewController() // MainView가 아닌 MainViewController를 사용

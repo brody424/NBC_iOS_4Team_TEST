@@ -29,6 +29,12 @@ class FavoritesView: UIView, UICollectionViewDataSource, UICollectionViewDelegat
             CollectionViewData(title: "movie9", imageName: "image9")
         ]
     }
+    
+    let userButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "person.circle.fill"), for: .normal)
+        return button
+    }()
 
     // MARK: - UICollectionView 설정
     let collectionView: UICollectionView = {
@@ -162,8 +168,8 @@ class FavoritesViewCell: UICollectionViewCell {
         }
 
         favoriteButton.snp.makeConstraints {
-            $0.bottom.equalTo(imageView.snp.bottom).inset(8)
-            $0.trailing.equalTo(imageView.snp.trailing).inset(8)
+            $0.bottom.equalTo(imageView.snp.bottom).inset(4)
+            $0.trailing.equalTo(imageView.snp.trailing).inset(4)
             $0.width.height.equalTo(30)
         }
     }
@@ -177,6 +183,8 @@ class FavoritesViewCell: UICollectionViewCell {
 
         let heartImageName = isFavorite ? "heartfilled" : "heartimage" // 채워진 하트 이미지와 빈 하트 이미지
         favoriteButton.setImage(UIImage(named: heartImageName), for: .normal)
+
+        //하트이미지 클릭시 영화정보 사라지게하는 버튼 구현
     }
 
     func configure(with data: FavoritesView.CollectionViewData) {
