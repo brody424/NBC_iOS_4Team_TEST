@@ -18,7 +18,20 @@ class MyPageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.mainBlack
+        setupNavigation()
      }
+    
+    private func setupNavigation() {
+        myPageView.onEditInfoSelected = { [weak self] in
+            self?.navigateToSignUpView()
+        }
+    }
+    
+    private func navigateToSignUpView() {
+        let signUpViewController = SignUpView()
+        signUpViewController.isUpdating = true
+        navigationController?.pushViewController(signUpViewController, animated: true)
+    }
 }
 #Preview {
     let mypage = MyPageController()

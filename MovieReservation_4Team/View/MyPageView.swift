@@ -1,24 +1,19 @@
-//
-//  MyPageView.swift
-//  MovieReservation_4Team
-//
-//  Created by 4Team on 7/22/24.
-//
-
 import UIKit
 import SnapKit
 
 class MyPageView: UIView {
     
+    var onEditInfoSelected: (() -> Void)?
+    
     private let informationLabel: UILabel = {
         let label = UILabel()
         label.text = "회원 정보"
         label.textColor = UIColor.mainWhite
-        label.font = FontNames.mainFont.font()
+        label.font = FontNames.mainFont3.font()
         return label
     }()
     
-    private let Image: UIImageView = {
+    private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -33,7 +28,7 @@ class MyPageView: UIView {
         let label = UILabel()
         label.text = "사용자 이름"
         label.textColor = UIColor.mainWhite
-        label.font = FontNames.subFont.font()
+        label.font = FontNames.mainFont.font()
         return label
     }()
     
@@ -56,18 +51,20 @@ class MyPageView: UIView {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
+        fetchUserData()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupViews()
         setupConstraints()
+        fetchUserData()
     }
     
     private func setupViews() {
         [
             informationLabel,
-            Image,
+            profileImageView,
             nameLabel,
             tableView,
             logoImage
@@ -80,10 +77,10 @@ class MyPageView: UIView {
     private func setupConstraints() {
         informationLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(70)
+            $0.top.equalToSuperview().offset(60)
         }
         
-        Image.snp.makeConstraints {
+        profileImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(informationLabel.snp.bottom).offset(50)
             $0.width.height.equalTo(160)
@@ -91,7 +88,7 @@ class MyPageView: UIView {
         
         nameLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(Image.snp.bottom).offset(20)
+            $0.top.equalTo(profileImageView.snp.bottom).offset(20)
         }
         
         tableView.snp.makeConstraints {
@@ -99,10 +96,22 @@ class MyPageView: UIView {
             $0.left.right.equalToSuperview()
             $0.height.equalTo(240) // 각 셀의 높이를 60으로 설정
         }
+        
         logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top .equalTo(tableView.snp.bottom).offset(60)
-            $0.width.equalTo(300)
+            $0.top.equalTo(tableView.snp.bottom).offset(30)
+            $0.width.equalTo(150)
+        }
+    }
+    
+    private func fetchUserData() {
+        if let userId = UserDefaults.standard.string(forKey: "loggedInUserId") {
+            if let user = CoreDataManager.shared.fetchUser(byId: userId) {
+                nameLabel.text = user.name
+                if let imageData = user.userprofile {
+                    profileImageView.image = UIImage(data: imageData)
+                }
+            }
         }
     }
 }
@@ -145,7 +154,7 @@ extension MyPageView: UITableViewDataSource, UITableViewDelegate {
         let titleLabel = UILabel()
         titleLabel.text = "계정"
         titleLabel.textColor = UIColor.mainWhite
-        titleLabel.font = FontNames.mainFont.font()
+        titleLabel.font = FontNames.mainFont2.font()
         
         headerView.addSubview(titleLabel)
         
@@ -167,15 +176,71 @@ extension MyPageView: UITableViewDataSource, UITableViewDelegate {
         // 셀 선택에 따른 동작을 여기에 추가
         switch indexPath.row {
         case 0:
+            onEditInfoSelected?()
             print("회원 정보 선택됨")
         case 1:
-            print("로그아웃 선택됨")
+            showLogoutConfirmation()
         case 2:
+            showAccountDeletionConfirmation()
             print("회원 탈퇴 선택됨")
         default:
             break
         }
     }
+    
+    private func showLogoutConfirmation() {
+        let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
+            self.performLogout()
+        }))
+        alert.addAction(UIAlertAction(title: "아니요", style: .cancel, handler: nil))
+        if let viewController = self.window?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    private func performLogout() {
+        // Perform logout operations here
+        // For example, clear user data, navigate to the login screen, etc.
+        UserDefaults.standard.removeObject(forKey: "loggedInUserId")
+        
+        let loginViewController = LoginView()
+        let navigationController = UINavigationController(rootViewController: loginViewController)
+        
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+        }
+    }
+    
+    private func showAccountDeletionConfirmation() {
+        let alert = UIAlertController(title: "회원 탈퇴", message: "정말로 회원 탈퇴하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "예", style: .destructive, handler: { _ in
+            self.performAccountDeletion()
+        }))
+        alert.addAction(UIAlertAction(title: "아니요", style: .cancel, handler: nil))
+        if let viewController = self.window?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    private func performAccountDeletion() {
+        if let userId = UserDefaults.standard.string(forKey: "loggedInUserId") {
+            CoreDataManager.shared.deleteUser(byId: userId)
+            UserDefaults.standard.removeObject(forKey: "loggedInUserId")
+        }
+        
+        let loginViewController = LoginView()
+        let navigationController = UINavigationController(rootViewController: loginViewController)
+        
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+        }
+    }
 }
 
-
+#Preview {
+    let rc = MyPageView()
+    return rc
+}
