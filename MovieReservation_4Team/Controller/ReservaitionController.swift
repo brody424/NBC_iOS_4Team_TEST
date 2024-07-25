@@ -9,7 +9,9 @@ import UIKit
 import SnapKit
 
 class ReservaitionController: UIViewController {
-
+    //사용자가 선택한 영화의 id.
+    var userMovieId: Int?
+    
     private let reservaitionView: ReservaitionView = {
         let view = ReservaitionView()
         view.backgroundColor = .clear // 배경색 조정
