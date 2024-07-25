@@ -9,8 +9,12 @@ import UIKit
 import SnapKit
 
 class ModalViewController: UIViewController {
-    // 예매 인원 수량 카운트
-    var count = 0
+    
+    //사용자가 선택한 영화의 id.
+    var userMovieId: Int?   //0이면 에러처리도 해볼 것. ->  if let/ guard let
+    var numberOfPeople = 0 // 예매 인원 수량 카운트
+    var reservationDate: String = ""  // 예매 날짜 및 시간
+    
     
     //예매하기 버튼
     var reservationButton: UIButton = {
@@ -150,47 +154,43 @@ class ModalViewController: UIViewController {
     
     //MARK: -@objc
     // 값이 변할 때 마다 동작
-    @objc 
+    @objc
     func dateChange(_ sender: UIDatePicker) {
         // 값이 변하면 UIDatePicker에서 날짜를 받아와 형식을 변형해서 Lable에 넣어준다.
-        dateLabel.text = "예매 일정 : " + dateFormat(date: sender.date)
+        reservationDate = dateFormat(date: sender.date)
+        dateLabel.text = "예매 일정 : \(reservationDate)"
     }
     
     @objc
     private func minusButtonTapped(){
-        if count > 0 {
-            count -= 1
-            countLabel.text = "\(count)"
+        if numberOfPeople > 0 {
+            numberOfPeople -= 1
+            countLabel.text = "\(numberOfPeople)"
         }
     }
     
-    @objc
-    private func plusButtonTapped(){
-        count += 1
-         countLabel.text = "\(count)"
-    }
     
     @objc
+    private func plusButtonTapped(){
+        numberOfPeople += 1
+        countLabel.text = "\(numberOfPeople)"
+    }
+    
+    //예약하기 버튼 클릭 시 영화 정보 전달
+    @objc
     private func reservationButtonTapped(){
-        let movie: Movie
+
         let reservationVC = ReservaitionController()
         
-        guard
-          let tab = presentingViewController as? UITabBarController,
-          let nav = tab.selectedViewController as? UINavigationController,
-          let prev = nav.viewControllers.last as? MovieInfoViewController
-        else { return }
+        //옵셔널 타입이라 바인딩해서 사용할 것. 값이 없을 때 처리 필요.
+        let userReservationData = (movieId: userMovieId ?? 0, count: numberOfPeople, date: reservationDate)
         
-        // 모달이 내려가는 코드
-//        dismiss(animated: true) { [weak prev, weak self] in
-//          guard let self, let prev else { return }
-//            prev.selectedMovieData(count: countLabel.text ?? "", date: dateLabel.text ?? "", movieID: <#Int#>)
-//        }
-        
+        //🌟ReservationController에서 위의 데이터를 받아 사용하세요!!
+        print(userReservationData)
         navigationController?.pushViewController(reservationVC, animated: true)
     }
     
-
+    
     
     // 텍스트 필드에 들어갈 텍스트를 DateFormatter 변환
     private func dateFormat(date: Date) -> String {
