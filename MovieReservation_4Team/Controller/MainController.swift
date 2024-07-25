@@ -18,7 +18,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         setupCollectionView()
         fetchData()
         
-        self.title = "MOVIE"
+        self.title = "NIGA BOX"
     }
     
     func setupCollectionView() {
