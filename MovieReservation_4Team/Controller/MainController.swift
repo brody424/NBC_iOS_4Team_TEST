@@ -107,18 +107,23 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        if let posterPath = movie.posterPath {
-            let imageUrl = "https://image.tmdb.org/t/p/w500\(posterPath)"
-            NetworkManager.shared.loadImage(from: imageUrl, into: imageView)
-        }
-        cell.contentView.addSubview(imageView)
         
+        // 첫 번째 컬렉션 뷰는 가로 이미지, 나머지는 세로 포스터
+            if collectionView == mainView.firstCollectionView, let backdropPath = movie.backdropPath {
+                let imageUrl = "https://image.tmdb.org/t/p/w500\(backdropPath)"
+                NetworkManager.shared.loadImage(from: imageUrl, into: imageView)
+            } else if let posterPath = movie.posterPath {
+                let imageUrl = "https://image.tmdb.org/t/p/w500\(posterPath)"
+                NetworkManager.shared.loadImage(from: imageUrl, into: imageView)
+            }
+        cell.contentView.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
         return cell
     }
+    
+    
     
     private func cellIdentifier(for collectionView: UICollectionView) -> String {
         switch collectionView {
@@ -137,13 +142,27 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        switch collectionView {
+//        case mainView.firstCollectionView:
+//            return CGSize(width: UIScreen.main.bounds.width - 32, height: 200)
+//        case mainView.secondCollectionView, mainView.thirdCollectionView:
+//            return CGSize(width: 150, height: 200)
+//        case mainView.fourthCollectionView:
+//            return CGSize(width: 150, height: 200)
+//        default:
+//            return CGSize.zero
+//        }
+//    }
+  
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case mainView.firstCollectionView:
+            // 가로 이미지 크기 설정
             return CGSize(width: UIScreen.main.bounds.width - 32, height: 200)
-        case mainView.secondCollectionView, mainView.thirdCollectionView:
-            return CGSize(width: 150, height: 200)
-        case mainView.fourthCollectionView:
+        case mainView.secondCollectionView, mainView.thirdCollectionView, mainView.fourthCollectionView:
+            // 세로 포스터 크기 설정
             return CGSize(width: 150, height: 200)
         default:
             return CGSize.zero

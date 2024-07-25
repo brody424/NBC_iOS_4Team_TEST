@@ -33,9 +33,21 @@ class MovieInfoViewController: UIViewController {
         present(modalVc, animated: true)
     }
     
+    //ModalVC에서 데이터를 전달 받아오는 메서드
+    func selectedMovieData(count: String, date: String, movieID: Int) {
+      let vc = ReservaitionController()
+      print(count, date, movieID)
+      navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     func readMovieDetail(movieID: Int) {
         // 특정 영화의 상세 정보 가져오기
+        var movieId = 0
         NetworkManager.shared.fetchMovieDetail(movieId: movieID) { movieDetail in
+            movieId = movieID
+            print(movieId)
+            
             if let movieDetail = movieDetail {
                 DispatchQueue.main.async {
                     self.movieInfoView.movieTitleLabel.text = movieDetail.title
