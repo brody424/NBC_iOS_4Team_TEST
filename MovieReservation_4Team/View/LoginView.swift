@@ -2,7 +2,7 @@
 //  LoginView.swift
 //  MovieReservation_4Team
 //
-//  Created by 4Team on 7/22/24.
+//  Created by  on 7/22/24.
 //
 
 import UIKit
@@ -155,16 +155,40 @@ class LoginView: UIViewController {
     }
 
     @objc private func loginButtonTapped() {
-        let tabBarController = TabBarController()
-                let navigationController = UINavigationController(rootViewController: tabBarController)
+           // 로그인 성공 여부 확인
+           let isLoginSuccessful = performLogin()
 
-                // 루트 뷰 컨트롤러를 업데이트
-                if let window = UIApplication.shared.windows.first {
-                    window.rootViewController = navigationController
-                    window.makeKeyAndVisible()
-                }
-    }
-}
+           if isLoginSuccessful {
+               switchToTabBarController()
+           } else {
+               // 로그인 실패 시 사용자에게 알림
+               showAlertForLoginFailure()
+           }
+       }
+
+       private func performLogin() -> Bool {
+           // 로그인 로직 구현
+           // 예시로 로그인 성공을 true로 가정
+           return true
+       }
+
+       private func switchToTabBarController() {
+           // TabBarController 생성
+           let tabBarController = TabBarController()
+
+           // 현재 네비게이션 컨트롤러의 루트 뷰 컨트롤러를 TabBarController로 설정
+           if let window = UIApplication.shared.windows.first {
+               window.rootViewController = tabBarController
+               window.makeKeyAndVisible()
+           }
+       }
+
+       private func showAlertForLoginFailure() {
+           let alert = UIAlertController(title: "Login Failed", message: "Please check your credentials and try again.", preferredStyle: .alert)
+           alert.addAction(UIAlertAction(title: "OK", style: .default))
+           present(alert, animated: true)
+       }
+   }
 
 #Preview("LoginView")
 {LoginView()
