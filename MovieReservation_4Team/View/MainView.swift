@@ -102,15 +102,15 @@ class MainView: UIView {
     
     let firstLabel: UILabel = {
         let label = UILabel()
-        label.text = "개봉 예정"
+        label.text = "최신 영화"
         label.textColor = UIColor.mainWhite
         label.textAlignment = .center
         return label
     }()
-    
+    //실시간 인기, 최신, 추천, 상위 평점
     let secondLabel: UILabel = {
         let label = UILabel()
-        label.text = "최신 영화"
+        label.text = "추천 영화"
         label.textColor = UIColor.mainWhite
         label.textAlignment = .center
         return label
@@ -118,7 +118,7 @@ class MainView: UIView {
     
     let thirdLabel: UILabel = {
         let label = UILabel()
-        label.text = "인기 영화"
+        label.text = "상위 평점"
         label.textColor = UIColor.mainWhite
         label.textAlignment = .center
         return label
