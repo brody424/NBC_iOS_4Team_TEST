@@ -26,6 +26,9 @@
 		276B93DB2C4E103E00170CBF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 276B93DA2C4E103E00170CBF /* Base */; };
 		277026D22C50BD2D004CFDAD /* favoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277026D12C50BD2D004CFDAD /* favoritesViewController.swift */; };
 		277026D42C50DEBF004CFDAD /* favoritesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277026D32C50DEBF004CFDAD /* favoritesViewCell.swift */; };
+		27856A9D2C52890B0055DCF5 /* SearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27856A9C2C52890B0055DCF5 /* SearchViewCell.swift */; };
+		27856AA02C528A0E0055DCF5 /* MovieUserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27856A9E2C528A0E0055DCF5 /* MovieUserData.xcdatamodeld */; };
+		27856AA22C528CC10055DCF5 /* UIView+ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27856AA12C528CC10055DCF5 /* UIView+ParentViewController.swift */; };
 		5F7278612C4F2F8A0033B94E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7278602C4F2F8A0033B94E /* CoreDataManager.swift */; };
 		5F7278632C4F2FCB0033B94E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7278622C4F2FCB0033B94E /* NetworkManager.swift */; };
 		5F7278902C508A9F0033B94E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F72788F2C508A9F0033B94E /* Movie.swift */; };
@@ -44,7 +47,6 @@
 		C29F6C382C4FBD5B0081FA15 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F6C372C4FBD5B0081FA15 /* TabBarController.swift */; };
 		C29F6C3C2C4FC16F0081FA15 /* ReservaitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F6C3B2C4FC16F0081FA15 /* ReservaitionController.swift */; };
 		C29F6C462C524B540081FA15 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		C29F6C492C527B930081FA15 /* MovieUserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C29F6C472C527B920081FA15 /* MovieUserData.xcdatamodeld */; };
 		C2D6DBF52C52179500C2C928 /* Movieuserdata+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D6DBF32C52179500C2C928 /* Movieuserdata+CoreDataClass.swift */; };
 		C2D6DBF62C52179500C2C928 /* Movieuserdata+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D6DBF42C52179500C2C928 /* Movieuserdata+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +72,9 @@
 		276B93DC2C4E103E00170CBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		277026D12C50BD2D004CFDAD /* favoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoritesViewController.swift; sourceTree = "<group>"; };
 		277026D32C50DEBF004CFDAD /* favoritesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoritesViewCell.swift; sourceTree = "<group>"; };
+		27856A9C2C52890B0055DCF5 /* SearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewCell.swift; sourceTree = "<group>"; };
+		27856A9F2C528A0E0055DCF5 /* MovieUserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieUserData.xcdatamodel; sourceTree = "<group>"; };
+		27856AA12C528CC10055DCF5 /* UIView+ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ParentViewController.swift"; sourceTree = "<group>"; };
 		5F7278602C4F2F8A0033B94E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5F7278622C4F2FCB0033B94E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5F72788F2C508A9F0033B94E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -87,7 +92,6 @@
 		C26C08362C509588009F5B06 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		C29F6C372C4FBD5B0081FA15 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C29F6C3B2C4FC16F0081FA15 /* ReservaitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaitionController.swift; sourceTree = "<group>"; };
-		C29F6C482C527B930081FA15 /* MovieUserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieUserData.xcdatamodel; sourceTree = "<group>"; };
 		C2D6DBF32C52179500C2C928 /* Movieuserdata+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movieuserdata+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C2D6DBF42C52179500C2C928 /* Movieuserdata+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movieuserdata+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +129,7 @@
 				270A84A32C4E546E00B61721 /* SignUpView.swift */,
 				270A84A02C4E543C00B61721 /* MainView.swift */,
 				270A84A72C4E549200B61721 /* SearchView.swift */,
+				27856A9C2C52890B0055DCF5 /* SearchViewCell.swift */,
 				270A84AF2C4E554200B61721 /* ReservaitionView.swift */,
 				270A84A92C4E54A500B61721 /* favoritesView.swift */,
 				277026D32C50DEBF004CFDAD /* favoritesViewCell.swift */,
@@ -162,8 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				C2D6DBF32C52179500C2C928 /* Movieuserdata+CoreDataClass.swift */,
-				C29F6C472C527B920081FA15 /* MovieUserData.xcdatamodeld */,
 				C2D6DBF42C52179500C2C928 /* Movieuserdata+CoreDataProperties.swift */,
+				27856A9E2C528A0E0055DCF5 /* MovieUserData.xcdatamodeld */,
 				276B93D02C4E103C00170CBF /* MovieReservation_4Team */,
 				276B93CF2C4E103C00170CBF /* Products */,
 			);
@@ -200,6 +205,7 @@
 			children = (
 				C26C08172C4F324B009F5B06 /* UIFont+Resource.swift */,
 				273F56222C4F36E2004E251B /* UIColor+Hex.swift */,
+				27856AA12C528CC10055DCF5 /* UIView+ParentViewController.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -298,7 +304,7 @@
 				C2D6DBF62C52179500C2C928 /* Movieuserdata+CoreDataProperties.swift in Sources */,
 				C26C08292C4F4A2C009F5B06 /* MyPageController.swift in Sources */,
 				270A84A62C4E547C00B61721 /* LoginView.swift in Sources */,
-				C29F6C492C527B930081FA15 /* MovieUserData.xcdatamodeld in Sources */,
+				27856AA02C528A0E0055DCF5 /* MovieUserData.xcdatamodeld in Sources */,
 				270A84A12C4E543C00B61721 /* MainView.swift in Sources */,
 				273F56232C4F36E2004E251B /* UIColor+Hex.swift in Sources */,
 				5F7278612C4F2F8A0033B94E /* CoreDataManager.swift in Sources */,
@@ -321,9 +327,11 @@
 				C29F6C382C4FBD5B0081FA15 /* TabBarController.swift in Sources */,
 				270A84A42C4E546E00B61721 /* SignUpView.swift in Sources */,
 				C26C08332C5088E6009F5B06 /* RecentSearches.swift in Sources */,
+				27856AA22C528CC10055DCF5 /* UIView+ParentViewController.swift in Sources */,
 				270A84AE2C4E550500B61721 /* MovieInfoView.swift in Sources */,
 				C26C08182C4F324B009F5B06 /* UIFont+Resource.swift in Sources */,
 				270A84BD2C4E6C1500B61721 /* Manager.swift in Sources */,
+				27856A9D2C52890B0055DCF5 /* SearchViewCell.swift in Sources */,
 				5F7278942C508D1E0033B94E /* NetworkManagerMock.swift in Sources */,
 				270A84BA2C4E6BE300B61721 /* MainController.swift in Sources */,
 				270A84B02C4E554200B61721 /* ReservaitionView.swift in Sources */,
@@ -573,14 +581,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		C29F6C472C527B920081FA15 /* MovieUserData.xcdatamodeld */ = {
+		27856A9E2C528A0E0055DCF5 /* MovieUserData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C29F6C482C527B930081FA15 /* MovieUserData.xcdatamodel */,
+				27856A9F2C528A0E0055DCF5 /* MovieUserData.xcdatamodel */,
 			);
-			currentVersion = C29F6C482C527B930081FA15 /* MovieUserData.xcdatamodel */;
+			currentVersion = 27856A9F2C528A0E0055DCF5 /* MovieUserData.xcdatamodel */;
 			name = MovieUserData.xcdatamodeld;
-			path = "/Users/t2023-m0112/Desktop/MyRepository/MyRepository/NBC_iOS_4Team/MovieUserData.xcdatamodeld";
+			path = "/Users/t2023-m0023/Desktop/NBC_iOS_4Team/MovieUserData.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
