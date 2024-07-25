@@ -18,7 +18,25 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         setupCollectionView()
         fetchData()
         
-        self.title = "NIGA BOX"
+        self.title = "NIGABOX"
+        
+        // 프로필 이미지 버튼 추가
+                let profileButton = UIButton(type: .custom)
+                profileButton.setImage(UIImage(named: "profile"), for: .normal) // "profileImage"는 프로젝트에 추가된 이미지 이름입니다.
+                profileButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                profileButton.layer.cornerRadius = 15
+                profileButton.clipsToBounds = true
+                profileButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+                profileButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+                profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+                
+                let profileBarButtonItem = UIBarButtonItem(customView: profileButton)
+                self.navigationItem.rightBarButtonItem = profileBarButtonItem
+        
+    }
+    @objc func profileButtonTapped() {
+        let myPageVC = MyPageController() // 이동할 프로필 페이지
+        self.navigationController?.pushViewController(myPageVC, animated: true)
     }
     
     func setupCollectionView() {
@@ -156,15 +174,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         switch collectionView {
         case mainView.firstCollectionView:
-<<<<<<< HEAD
-            //🌟🌟 지현- 영화상세보기 화면 이동 안돼서 임시로 설정 해둠 🌟🌟
-            movie = firstCollectionViewMovies[indexPath.item]
-//            let movieInfoVC = MovieInfoViewController()
-//            navigationController?.pushViewController(movieInfoVC, animated: true) << 지현코드
-=======
             movie = firstCollectionViewMovies[indexPath.item]
             movieInfoVC.readMovieDetail(movieID: movie.id)
->>>>>>> 61f306d0028fd7fd0a211ca6aa069bf9c40ae621
         case mainView.secondCollectionView:
             movie = secondCollectionViewMovies[indexPath.item]
             movieInfoVC.readMovieDetail(movieID: movie.id)
@@ -177,15 +188,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         default:
             fatalError("Unknown collection view")
         }
-<<<<<<< HEAD
-        
-        //🌟🌟 지현- 오류나서 아래 주석처리 했음 🌟🌟
-                let movieInfoVC = MovieInfoViewController()
-//                movieInfoVC.movie = movie
-                navigationController?.pushViewController(movieInfoVC, animated: true)
-=======
+
         navigationController?.pushViewController(movieInfoVC, animated: true)
->>>>>>> 61f306d0028fd7fd0a211ca6aa069bf9c40ae621
     }
 }
 
