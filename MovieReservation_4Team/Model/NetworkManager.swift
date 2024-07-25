@@ -131,7 +131,7 @@ class NetworkManager: NetworkManagerProtocol {
         task.resume()
     }
     
-    // 이미지를 URL에서 로드하는 메서드 추가
+    //MARK: - 이미지를 URL에서 로드하는 메서드 추가
     func loadImage(from urlString: String, into imageView: UIImageView) {
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -143,42 +143,89 @@ class NetworkManager: NetworkManagerProtocol {
     }
     
     // MARK: - 영화 검색하기
-     func searchMovies(query: String, page: Int, completion: @escaping ([Movie]?) -> Void) {
-         let urlString = "\(baseUrl)/search/movie?api_key=\(apiKey)&language=ko-KR&query=\(query)&page=\(page)"
-         guard let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else {
-             print("Invalid URL")
-             completion(nil)
-             return
-         }
-         
-         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-             if let error = error {
-                 print("Error: \(error.localizedDescription)")
-                 completion(nil)
-                 return
-             }
-             
-             guard let data = data else {
-                 print("No data returned")
-                 completion(nil)
-                 return
-             }
-             
-             do {
-                 let decoder = JSONDecoder()
-                 let result = try decoder.decode(MovieResponse.self, from: data)
-                 completion(result.results)
-             } catch let jsonError {
-                 print("JSON error: \(jsonError.localizedDescription)")
-                 print(String(data: data, encoding: .utf8) ?? "No readable data")
-                 completion(nil)
-             }
-         }
-         
-         task.resume()
-     }
-
+    func searchMovies(query: String, page: Int, completion: @escaping ([Movie]?) -> Void) {
+        let urlString = "\(baseUrl)/search/movie?api_key=\(apiKey)&language=ko-KR&query=\(query)&page=\(page)"
+        guard let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data returned")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(MovieResponse.self, from: data)
+                completion(result.results)
+            } catch let jsonError {
+                print("JSON error: \(jsonError.localizedDescription)")
+                print(String(data: data, encoding: .utf8) ?? "No readable data")
+                completion(nil)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    //MARK: - 공통 영화 가져오기 메서드 추가
+    private func fetchMovies(with urlString: String, completion: @escaping ([Movie]?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data returned")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(MovieResponse.self, from: data)
+                completion(result.results)
+            } catch let jsonError {
+                print("JSON error: \(jsonError.localizedDescription)")
+                print(String(data: data, encoding: .utf8) ?? "No readable data")
+                completion(nil)
+            }
+        }
+        
+        task.resume()
+    }
+    // MARK: - 추천 영화 가져오기
+    func fetchRecommendedMovies(movieId: Int, completion: @escaping ([Movie]?) -> Void) {
+        let urlString = "\(baseUrl)/movie/\(movieId)/recommendations?api_key=\(apiKey)&language=ko-KR&region=KR"
+        fetchMovies(with: urlString, completion: completion)
+    }
+    
+    // MARK: - 상위 평점 영화 가져오기
+    func fetchTopRatedMovies(page: Int, completion: @escaping ([Movie]?) -> Void) {
+        let urlString = "\(baseUrl)/movie/top_rated?api_key=\(apiKey)&language=ko-KR&region=KR&page=\(page)"
+        fetchMovies(with: urlString, completion: completion)
+    }
 }
+
+
 
 struct MovieResponse: Decodable {
     let results: [Movie]
