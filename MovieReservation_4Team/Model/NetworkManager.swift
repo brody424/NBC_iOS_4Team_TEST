@@ -33,7 +33,7 @@ class NetworkManager {
             }
         }.resume()
     }
-    
+  
     //MARK: -실시간 인기 영화 가져오기
     func fetchPopularMovies(page: Int, completion: @escaping ([Movie]?) -> Void) {
         let urlString = "\(baseUrl)/movie/popular?api_key=\(apiKey)&language=ko-KR&region=KR&page=\(page)"

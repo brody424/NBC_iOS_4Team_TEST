@@ -20,7 +20,7 @@ class MovieInfoViewController: UIViewController {
         super.viewDidLoad()
         movieInfoView.reservationButton.addTarget(self, action: #selector(showModal), for: .touchDown)
         
-        readMovieDetail()
+//        readMovieDetail()
     }
     
     // [예약하기] 버튼 클릭 시 모달 띄우기
@@ -33,9 +33,9 @@ class MovieInfoViewController: UIViewController {
         present(modalVc, animated: true)
     }
     
-    func readMovieDetail() {
+    func readMovieDetail(movieID: Int) {
         // 특정 영화의 상세 정보 가져오기
-        NetworkManager.shared.fetchMovieDetail(movieId: 1022789) { movieDetail in
+        NetworkManager.shared.fetchMovieDetail(movieId: movieID) { movieDetail in
             if let movieDetail = movieDetail {
                 DispatchQueue.main.async {
                     self.movieInfoView.movieTitleLabel.text = movieDetail.title
