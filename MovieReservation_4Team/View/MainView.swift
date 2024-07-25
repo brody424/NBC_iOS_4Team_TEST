@@ -19,7 +19,7 @@ class MainView: UIView {
         let view = UIView()
         return view
     }()
-    
+   
     let firstCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 200)
@@ -73,54 +73,30 @@ class MainView: UIView {
         return collectionView
     }()
     
-    let firstLabelContainer: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.mainWhite.cgColor
-        view.backgroundColor = UIColor.clear
-        return view
-    }()
-    
-    let secondLabelContainer: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.mainWhite.cgColor
-        view.backgroundColor = UIColor.clear
-        return view
-    }()
-    
-    let thirdLabelContainer: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.mainWhite.cgColor
-        view.backgroundColor = UIColor.clear
-        return view
-    }()
-    
     let firstLabel: UILabel = {
         let label = UILabel()
-        label.text = "개봉 예정"
+        label.text = "Coming Soon"
         label.textColor = UIColor.mainWhite
-        label.textAlignment = .center
+        label.textAlignment = .left
+        label.font = FontNames.mainFont.font()
         return label
     }()
     
     let secondLabel: UILabel = {
         let label = UILabel()
-        label.text = "최신 영화"
+        label.text = "Recommend Movies"
         label.textColor = UIColor.mainWhite
-        label.textAlignment = .center
+        label.textAlignment = .left
+        label.font = FontNames.mainFont.font()
         return label
     }()
     
     let thirdLabel: UILabel = {
         let label = UILabel()
-        label.text = "인기 영화"
+        label.text = "Top Rating"
         label.textColor = UIColor.mainWhite
-        label.textAlignment = .center
+        label.textAlignment = .left
+        label.font = FontNames.mainFont.font()
         return label
     }()
     
@@ -178,18 +154,13 @@ class MainView: UIView {
     }
     
     func setupFirstLabel() {
-        contentView.addSubview(firstLabelContainer)
-        firstLabelContainer.addSubview(firstLabel)
-        
-        firstLabelContainer.snp.makeConstraints {
-            $0.top.equalTo(firstCollectionView.snp.bottom).offset(20)
-            $0.leading.equalTo(contentView.safeAreaLayoutGuide.snp.leading).offset(16)
-            $0.height.equalTo(40)
-            $0.width.equalTo(90)
-        }
+        contentView.addSubview(firstLabel)
         
         firstLabel.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(8)
+            $0.top.equalTo(firstCollectionView.snp.bottom).offset(10)
+            $0.leading.equalTo(contentView.snp.leading).offset(16) // 컬렉션 뷰와 동일한 leading offset 설정
+            $0.height.equalTo(30)
+            $0.width.equalTo(150)
         }
     }
     
@@ -197,25 +168,20 @@ class MainView: UIView {
         contentView.addSubview(secondCollectionView)
         
         secondCollectionView.snp.makeConstraints {
-            $0.top.equalTo(firstLabelContainer.snp.bottom).offset(10)
+            $0.top.equalTo(firstLabel.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(200)
         }
     }
     
     func setupSecondLabel() {
-        contentView.addSubview(secondLabelContainer)
-        secondLabelContainer.addSubview(secondLabel)
-        
-        secondLabelContainer.snp.makeConstraints {
-            $0.top.equalTo(secondCollectionView.snp.bottom).offset(10)
-            $0.leading.equalTo(contentView.safeAreaLayoutGuide.snp.leading).offset(16)
-            $0.height.equalTo(40)
-            $0.width.equalTo(90)
-        }
+        contentView.addSubview(secondLabel)
         
         secondLabel.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(8)
+            $0.top.equalTo(secondCollectionView.snp.bottom).offset(10)
+            $0.leading.equalTo(contentView.snp.leading).offset(16) // 컬렉션 뷰와 동일한 leading offset 설정
+            $0.height.equalTo(30)
+            $0.width.equalTo(200)
         }
     }
     
@@ -223,25 +189,20 @@ class MainView: UIView {
         contentView.addSubview(thirdCollectionView)
         
         thirdCollectionView.snp.makeConstraints {
-            $0.top.equalTo(secondLabelContainer.snp.bottom).offset(10)
+            $0.top.equalTo(secondLabel.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(200)
         }
     }
     
     func setupThirdLabel() {
-        contentView.addSubview(thirdLabelContainer)
-        thirdLabelContainer.addSubview(thirdLabel)
-        
-        thirdLabelContainer.snp.makeConstraints {
-            $0.top.equalTo(thirdCollectionView.snp.bottom).offset(10)
-            $0.leading.equalTo(contentView.safeAreaLayoutGuide.snp.leading).offset(16)
-            $0.height.equalTo(40)
-            $0.width.equalTo(90)
-        }
+        contentView.addSubview(thirdLabel)
         
         thirdLabel.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(8)
+            $0.top.equalTo(thirdCollectionView.snp.bottom).offset(10)
+            $0.leading.equalTo(contentView.snp.leading).offset(16) // 컬렉션 뷰와 동일한 leading offset 설정
+            $0.height.equalTo(30)
+            $0.width.equalTo(150)
         }
     }
     
@@ -249,7 +210,7 @@ class MainView: UIView {
         contentView.addSubview(fourthCollectionView)
         
         fourthCollectionView.snp.makeConstraints {
-            $0.top.equalTo(thirdLabelContainer.snp.bottom).offset(10)
+            $0.top.equalTo(thirdLabel.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(200)
             $0.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-20)

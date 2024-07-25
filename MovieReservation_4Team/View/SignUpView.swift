@@ -100,7 +100,7 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         button.backgroundColor = UIColor.mainRed
         button.tintColor = .white
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchDown)
+        button.addTarget(self, action: #selector(signupButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -209,8 +209,26 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
 
 
-    @objc private func loginButtonTapped() {
+    @objc private func signupButtonTapped() {
+        guard let id = idTextField.text, !id.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty,
+              let name = nameTextField.text, !name.isEmpty,
+              let phone = hpTextField.text, !phone.isEmpty else {
+            showAlertForLoginFailure(message: "작성하세요.")
+            return
+        }
+        
+        let userProfileImageData = profileImageView.image?.pngData()
+        
+        CoreDataManager.shared.saveUser(name: name, phone: phone, id: id, password: password, userprofile: userProfileImageData)
+        
         self.navigationController?.pushViewController(LoginView(), animated: true)
+    }
+    
+    private func showAlertForLoginFailure(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true, completion: nil)
     }
 }
 
