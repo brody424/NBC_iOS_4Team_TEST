@@ -70,6 +70,7 @@ class CoreDataManager {
         }
     }
     
+    // id에 해당하는 사용자를 Core Data 데이터베이스에서 가져오는 역할
     func fetchUser(byId id: String) -> Movieuserdata? {
         let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
@@ -82,7 +83,8 @@ class CoreDataManager {
             return nil
         }
     }
-    
+
+    // id와 password가 Core Data에 저장된 사용자 데이터와 일치하는지 확인
     func validateUser(id: String, password: String) -> Bool {
         let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@ AND password == %@", id, password)
