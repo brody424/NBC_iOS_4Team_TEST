@@ -8,24 +8,24 @@
 import CoreData
 
 class CoreDataManager {
-    static let shared = CoreDataManager() // 싱글톤 인스턴스 사용
+    static let shared = CoreDataManager()
     
-    private init() {} // private initializer 설정
-
+    private init() {}
+    
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "MovieReservation_4Team") // Core Data 모델 이름
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        let container = NSPersistentContainer(name: "MovieReservation_4Team") // 모델 파일의 이름과 일치해야 함
+        container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
+        }
         return container
     }()
-
+    
     var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
-
+    
     func saveUser(name: String, phone: String, id: String, password: String, userprofile: Data?) {
         let user = Movieuserdata(context: context)
         user.name = name
@@ -40,7 +40,7 @@ class CoreDataManager {
             print("Failed to save user: \(error)")
         }
     }
-
+    
     func updateUser(id: String, name: String?, phone: String?, password: String?, userprofile: Data?) {
         let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
@@ -69,7 +69,7 @@ class CoreDataManager {
             print("Failed to update user: \(error)")
         }
     }
-
+    
     func fetchUser(byId id: String) -> Movieuserdata? {
         let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
@@ -80,6 +80,19 @@ class CoreDataManager {
         } catch {
             print("Failed to fetch user: \(error)")
             return nil
+        }
+    }
+    
+    func validateUser(id: String, password: String) -> Bool {
+        let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@ AND password == %@", id, password)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            return !results.isEmpty
+        } catch {
+            print("Failed to validate user: \(error)")
+            return false
         }
     }
 }
