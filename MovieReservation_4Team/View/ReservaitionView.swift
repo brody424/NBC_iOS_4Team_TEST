@@ -126,9 +126,9 @@ class ReservaitionView: UIView {
         ].forEach { self.addSubview($0) }
 
         ticketImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(100)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalToSuperview().offset(130)
+            $0.leading.equalToSuperview().offset(25)
+            $0.trailing.equalToSuperview().offset(-25)
             $0.bottom.equalToSuperview().offset(-120)
         }
 
@@ -140,7 +140,7 @@ class ReservaitionView: UIView {
         }
 
         runTimeLabel.snp.makeConstraints {
-            $0.top.equalTo(movieImageview.snp.bottom).offset(80)
+            $0.top.equalTo(movieImageview.snp.bottom).offset(60)
             $0.centerX.equalToSuperview()
         }
 
