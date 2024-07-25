@@ -131,7 +131,7 @@ class NetworkManager: NetworkManagerProtocol {
         task.resume()
     }
     
-    // 이미지를 URL에서 로드하는 메서드 추가
+    //MARK: - 이미지를 URL에서 로드하는 메서드 추가
     func loadImage(from urlString: String, into imageView: UIImageView) {
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -177,8 +177,21 @@ class NetworkManager: NetworkManagerProtocol {
          
          task.resume()
      }
+    
+    // MARK: - 추천 영화 가져오기
+        func fetchRecommendedMovies(movieId: Int, completion: @escaping ([Movie]?) -> Void) {
+            let urlString = "\(baseUrl)/movie/\(movieId)/recommendations?api_key=\(apiKey)&language=ko-KR&region=KR"
+            fetchMovies(with: urlString, completion: completion)
+        }
 
+        // MARK: - 상위 평점 영화 가져오기
+        func fetchTopRatedMovies(page: Int, completion: @escaping ([Movie]?) -> Void) {
+            let urlString = "\(baseUrl)/movie/top_rated?api_key=\(apiKey)&language=ko-KR&region=KR&page=\(page)"
+            fetchMovies(with: urlString, completion: completion)
+        }
 }
+
+
 
 struct MovieResponse: Decodable {
     let results: [Movie]
