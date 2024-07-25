@@ -11,10 +11,12 @@ struct Movie: Decodable {
     let id: Int
     let title: String
     let posterPath: String?
+    let backdropPath: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
     }
 }
