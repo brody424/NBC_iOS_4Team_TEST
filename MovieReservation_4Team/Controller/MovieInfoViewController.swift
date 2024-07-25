@@ -77,3 +77,8 @@ class MovieInfoViewController: UIViewController {
         }.resume()
     }
 }
+
+#Preview {
+    let MovieInfoViewController = MovieInfoViewController()
+    return MovieInfoViewController
+}
