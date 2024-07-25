@@ -158,6 +158,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
         if let posterPath = movie.posterPath {
             let imageUrl = "https://image.tmdb.org/t/p/w500\(posterPath)"
             NetworkManager.shared.loadImage(from: imageUrl, into: imageView)
+        } else {
+            imageView.image = nil
         }
     }
 }
