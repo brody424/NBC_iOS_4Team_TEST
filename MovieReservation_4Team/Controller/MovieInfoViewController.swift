@@ -1,6 +1,9 @@
 import UIKit
 class MovieInfoViewController: UIViewController {
     
+    //main뷰컨에서 선택된 영화의 id.
+    var userMovieId = 0
+    
     var movieInfoView = MovieInfoView()
     
     //  let networkManager: NetworkManagerProtocol //같은 프로토콜 채택 중
@@ -27,26 +30,20 @@ class MovieInfoViewController: UIViewController {
     @objc
     func showModal(){
         let modalVc = ModalViewController()
+        modalVc.userMovieId = self.userMovieId
         if let modal = modalVc.sheetPresentationController {
             modal.detents = [.medium()]
         }
         present(modalVc, animated: true)
     }
     
-    //ModalVC에서 데이터를 전달 받아오는 메서드
-    func selectedMovieData(count: String, date: String, movieID: Int) {
-      let vc = ReservaitionController()
-      print(count, date, movieID)
-      navigationController?.pushViewController(vc, animated: true)
-    }
     
     
     func readMovieDetail(movieID: Int) {
+        userMovieId = movieID
+        
         // 특정 영화의 상세 정보 가져오기
-        var movieId = 0
-        NetworkManager.shared.fetchMovieDetail(movieId: movieID) { movieDetail in
-            movieId = movieID
-            print(movieId)
+        NetworkManager.shared.fetchMovieDetail(movieId: userMovieId) { movieDetail in
             
             if let movieDetail = movieDetail {
                 DispatchQueue.main.async {
