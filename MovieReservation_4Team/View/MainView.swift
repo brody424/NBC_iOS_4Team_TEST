@@ -38,7 +38,7 @@ class MainView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 150, height: 200)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.mainBlack
@@ -51,7 +51,7 @@ class MainView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 150, height: 200)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.mainBlack
@@ -64,7 +64,7 @@ class MainView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 150, height: 200)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.mainBlack
@@ -72,7 +72,7 @@ class MainView: UIView {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "FourthCell")
         return collectionView
     }()
-    
+
     let firstLabel: UILabel = {
         let label = UILabel()
         label.text = "Coming Soon"
