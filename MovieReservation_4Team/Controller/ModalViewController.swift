@@ -172,12 +172,25 @@ class ModalViewController: UIViewController {
     
     @objc
     private func reservationButtonTapped(){
-//        let movie: Movie
-        print(countLabel.text)
-        print(dateLabel.text)
-//        print(movie.id)
+        let movie: Movie
+        let reservationVC = ReservaitionController()
+        
+        guard
+          let tab = presentingViewController as? UITabBarController,
+          let nav = tab.selectedViewController as? UINavigationController,
+          let prev = nav.viewControllers.last as? MovieInfoViewController
+        else { return }
+        
+        // 모달이 내려가는 코드
+//        dismiss(animated: true) { [weak prev, weak self] in
+//          guard let self, let prev else { return }
+//            prev.selectedMovieData(count: countLabel.text ?? "", date: dateLabel.text ?? "", movieID: <#Int#>)
+//        }
+        
+        navigationController?.pushViewController(reservationVC, animated: true)
     }
     
+
     
     // 텍스트 필드에 들어갈 텍스트를 DateFormatter 변환
     private func dateFormat(date: Date) -> String {

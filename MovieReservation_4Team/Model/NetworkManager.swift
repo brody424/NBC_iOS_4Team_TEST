@@ -25,6 +25,7 @@ class NetworkManager {
     
     //MARK: - 이미지를 URL에서 로드하는 메서드 추가
     func loadImage(from urlString: String, into imageView: UIImageView) {
+        
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else { return }
@@ -33,6 +34,42 @@ class NetworkManager {
             }
         }.resume()
     }
+
+    
+    // MARK: - 가로 이미지 가져오기
+      func fetchMovieBackdropImage(movieId: Int, completion: @escaping (String?) -> Void) {
+          let urlString = "\(baseUrl)/movie/\(movieId)?api_key=\(apiKey)&language=ko-KR"
+          guard let url = URL(string: urlString) else {
+              print("Invalid URL")
+              completion(nil)
+              return
+          }
+          
+          let task = URLSession.shared.dataTask(with: url) { data, response, error in
+              if let error = error {
+                  print("Error: \(error.localizedDescription)")
+                  completion(nil)
+                  return
+              }
+              
+              guard let data = data else {
+                  print("No data returned")
+                  completion(nil)
+                  return
+              }
+              
+              do {
+                  let decoder = JSONDecoder()
+                  let movieDetail = try decoder.decode(MovieDetail.self, from: data)
+                  completion(movieDetail.backdropPath)
+              } catch let jsonError {
+                  print("JSON error: \(jsonError.localizedDescription)")
+                  completion(nil)
+              }
+          }
+          
+          task.resume()
+      }
   
     //MARK: -실시간 인기 영화 가져오기
     func fetchPopularMovies(page: Int, completion: @escaping ([Movie]?) -> Void) {
