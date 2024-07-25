@@ -13,7 +13,7 @@ class CoreDataManager {
     private init() {}
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "MovieReservation_4Team") // 모델 파일의 이름과 일치해야 함
+        let container = NSPersistentContainer(name: "MovieUserData") // 모델 파일의 이름과 일치해야 함
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
