@@ -170,4 +170,4 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         navigationController?.pushViewController(movieInfoVC, animated: true)
     }
 }
-// 쏘리용
+
