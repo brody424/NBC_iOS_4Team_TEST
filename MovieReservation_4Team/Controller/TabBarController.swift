@@ -13,7 +13,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         
         // 탭 바 배경색 설정
-        tabBar.barTintColor = .black
+        tabBar.barTintColor = UIColor.mainBlack
         
         // 탭 바 아이템 생성
         let mainViewController = MainViewController() // MainView가 아닌 MainViewController를 사용
@@ -26,7 +26,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let reservaitionViewController = ReservaitionController()
         let reservaitionNavController = UINavigationController(rootViewController: reservaitionViewController)
-        reservaitionNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "cart.fill"), tag: 2)
+        reservaitionNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "ticket"), tag: 2)
 
         let favoritesViewController = FavoritesViewController()
         let favoritesNavController = UINavigationController(rootViewController: favoritesViewController)

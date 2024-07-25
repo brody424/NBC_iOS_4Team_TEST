@@ -2,14 +2,7 @@ import UIKit
 import SnapKit
 
 class SearchView: UIView {
-    
-    let searchLabel: UILabel = {
-        let label = UILabel()
-        label.text = "검 색"
-        label.textColor = UIColor.mainWhite
-        label.font = FontNames.mainFont.font()
-        return label
-    }()
+
     
     let searchBar: UISearchBar = {
         let search = UISearchBar()
@@ -83,15 +76,15 @@ class SearchView: UIView {
     private func configure() {
         self.backgroundColor = UIColor.mainBlack
         
-        [searchLabel, searchBar, recentSearchesLabel, clearAllButton, searchResultsCollectionView].forEach { self.addSubview($0) }
+        [ searchBar, recentSearchesLabel, clearAllButton, searchResultsCollectionView].forEach { self.addSubview($0) }
         
-        searchLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(60)
-            $0.centerX.equalToSuperview()
-        }
+//        searchLabel.snp.makeConstraints {
+//            $0.top.equalToSuperview().offset(60)
+//            $0.centerX.equalToSuperview()
+//        }
         
         searchBar.snp.makeConstraints {
-            $0.top.equalTo(searchLabel.snp.bottom).offset(10)
+            $0.top.equalToSuperview().offset(100)
             $0.leading.equalToSuperview().offset(8)
             $0.trailing.equalToSuperview().offset(-8)
         }
@@ -163,3 +156,5 @@ class MovieCollectionViewCell: UICollectionViewCell {
         }
     }
 }
+
+#Preview("SearchView") { SearchView() }

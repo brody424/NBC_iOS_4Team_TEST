@@ -18,7 +18,25 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         setupCollectionView()
         fetchData()
         
-        self.title = "MOVIE"
+        self.title = "NIGABOX"
+        
+        // 프로필 이미지 버튼 추가
+                let profileButton = UIButton(type: .custom)
+                profileButton.setImage(UIImage(named: "profile"), for: .normal) // "profileImage"는 프로젝트에 추가된 이미지 이름입니다.
+                profileButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                profileButton.layer.cornerRadius = 15
+                profileButton.clipsToBounds = true
+                profileButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+                profileButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+                profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+                
+                let profileBarButtonItem = UIBarButtonItem(customView: profileButton)
+                self.navigationItem.rightBarButtonItem = profileBarButtonItem
+        
+    }
+    @objc func profileButtonTapped() {
+        let myPageVC = MyPageController() // 이동할 프로필 페이지
+        self.navigationController?.pushViewController(myPageVC, animated: true)
     }
     
     func setupCollectionView() {
@@ -168,7 +186,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             return CGSize.zero
         }
     }
-    
+    //실시간 인기, 최신, 추천, 상위 평점
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie: Movie
         let movieInfoVC = MovieInfoViewController()
@@ -189,6 +207,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         default:
             fatalError("Unknown collection view")
         }
+
         navigationController?.pushViewController(movieInfoVC, animated: true)
     }
 }
