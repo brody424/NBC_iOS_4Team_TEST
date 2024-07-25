@@ -152,26 +152,40 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     //실시간 인기, 최신, 추천, 상위 평점
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie: Movie
+        let movieInfoVC = MovieInfoViewController()
+        
         switch collectionView {
         case mainView.firstCollectionView:
+<<<<<<< HEAD
             //🌟🌟 지현- 영화상세보기 화면 이동 안돼서 임시로 설정 해둠 🌟🌟
             movie = firstCollectionViewMovies[indexPath.item]
 //            let movieInfoVC = MovieInfoViewController()
 //            navigationController?.pushViewController(movieInfoVC, animated: true) << 지현코드
+=======
+            movie = firstCollectionViewMovies[indexPath.item]
+            movieInfoVC.readMovieDetail(movieID: movie.id)
+>>>>>>> 61f306d0028fd7fd0a211ca6aa069bf9c40ae621
         case mainView.secondCollectionView:
             movie = secondCollectionViewMovies[indexPath.item]
+            movieInfoVC.readMovieDetail(movieID: movie.id)
         case mainView.thirdCollectionView:
             movie = thirdCollectionViewMovies[indexPath.item]
+            movieInfoVC.readMovieDetail(movieID: movie.id)
         case mainView.fourthCollectionView:
             movie = fourthCollectionViewMovies[indexPath.item]
+            movieInfoVC.readMovieDetail(movieID: movie.id)
         default:
             fatalError("Unknown collection view")
         }
+<<<<<<< HEAD
         
         //🌟🌟 지현- 오류나서 아래 주석처리 했음 🌟🌟
                 let movieInfoVC = MovieInfoViewController()
 //                movieInfoVC.movie = movie
                 navigationController?.pushViewController(movieInfoVC, animated: true)
+=======
+        navigationController?.pushViewController(movieInfoVC, animated: true)
+>>>>>>> 61f306d0028fd7fd0a211ca6aa069bf9c40ae621
     }
 }
 
