@@ -158,3 +158,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
 }
 
 #Preview("SearchView") { SearchView() }
+
+
+
+
+
