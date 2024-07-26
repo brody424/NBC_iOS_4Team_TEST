@@ -21,7 +21,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         fetchData()
         startSlideTimer() // 타이머 시작
         
-        self.title = "NIGABOX"
+        self.navigationItem.title = "NIGABOX"
         
         // 프로필 이미지 버튼 추가
         let profileButton = UIButton(type: .custom)
@@ -62,8 +62,10 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             DispatchQueue.main.async {
                 self.firstCollectionViewMovies = movies
                 self.mainView.firstCollectionView.reloadData()
+                self.updatePageLabel() // 페이지 레이블 업데이트
             }
         }
+    
         
         NetworkManager.shared.fetchNowPlayingMovies(page: 1) { [weak self] movies in
             guard let self = self, let movies = movies else { return }
@@ -88,6 +90,12 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.mainView.fourthCollectionView.reloadData()
             }
         }
+    }
+    
+    func updatePageLabel() {
+        let currentPage = Int(round(mainView.firstCollectionView.contentOffset.x / mainView.firstCollectionView.frame.width))
+        let totalPage = firstCollectionViewMovies.count
+        mainView.pageLabel.text = "\(currentPage + 1) / \(totalPage)"
     }
     
     // MARK: - UICollectionViewDataSource
@@ -201,29 +209,27 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         default:
             fatalError("Unknown collection view")
         }
-        
         navigationController?.pushViewController(movieInfoVC, animated: true)
     }
     
-    // MARK: - 슬라이드 타이머 설정
-    
+    // 자동 슬라이드 기능
     func startSlideTimer() {
-        slideTimer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(slideToNextItem), userInfo: nil, repeats: true)
+        slideTimer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(slideToNext), userInfo: nil, repeats: true)
     }
     
-    func stopSlideTimer() {
-        slideTimer?.invalidate()
-        slideTimer = nil
-    }
-    
-    @objc func slideToNextItem() {
+    @objc func slideToNext() {
         let collectionView = mainView.firstCollectionView
-        
-        let visibleItems = collectionView.indexPathsForVisibleItems.sorted()
-        guard let currentItem = visibleItems.first else { return }
-        
-        let nextItem = IndexPath(item: (currentItem.item + 1) % firstCollectionViewMovies.count, section: currentItem.section)
-        
-        collectionView.scrollToItem(at: nextItem, at: .centeredHorizontally, animated: true)
+        let visibleItems = collectionView.indexPathsForVisibleItems
+        if let currentItem = visibleItems.first {
+            let nextItem = IndexPath(item: (currentItem.item + 1) % firstCollectionViewMovies.count, section: currentItem.section)
+            collectionView.scrollToItem(at: nextItem, at: .centeredHorizontally, animated: true)
+            updatePageLabel() // 페이지 레이블 업데이트
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == mainView.firstCollectionView {
+            updatePageLabel()
+        }
     }
 }
