@@ -43,7 +43,7 @@ class MyPageView: UIView {
     private let logoImage: UIImageView = {
         let logoImage = UIImageView()
         logoImage.image = UIImage(named: "LOGO")
-        logoImage.contentMode = .scaleAspectFill
+        logoImage.contentMode = .scaleAspectFit
         return logoImage
     }()
     
@@ -52,6 +52,9 @@ class MyPageView: UIView {
         setupViews()
         setupConstraints()
         fetchUserData()
+        
+        // 사용자의 업데이트 데이터 알람
+        NotificationCenter.default.addObserver(self, selector: #selector(userDataUpdated), name: NSNotification.Name("UserDataUpdated"), object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -59,6 +62,17 @@ class MyPageView: UIView {
         setupViews()
         setupConstraints()
         fetchUserData()
+        
+        // 업데이트 데이터 알람
+        NotificationCenter.default.addObserver(self, selector: #selector(userDataUpdated), name: NSNotification.Name("UserDataUpdated"), object: nil)
+    }
+    
+    @objc private func userDataUpdated() {
+        fetchUserData()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("UserDataUpdated"), object: nil)
     }
     
     private func setupViews() {
@@ -99,8 +113,8 @@ class MyPageView: UIView {
         
         logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(tableView.snp.bottom).offset(30)
-            $0.width.equalTo(150)
+            $0.top.equalTo(tableView.snp.bottom).offset(10)
+            $0.width.equalTo(200)
         }
     }
     
