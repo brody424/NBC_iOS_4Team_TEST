@@ -37,13 +37,15 @@ class MainView: UIView {
         return label
     }()
     
-    let firstLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Coming Soon"
-        label.textColor = UIColor.mainWhite
-        label.textAlignment = .left
-        label.font = FontNames.mainFont.font()
-        return label
+    let firstButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Coming Soon", for: .normal)
+        button.setTitleColor(UIColor.mainWhite, for: .normal)
+        button.titleLabel?.font = FontNames.mainFont.font()
+        button.contentHorizontalAlignment = .left
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 40)
+        button.semanticContentAttribute = .forceLeftToRight
+        return button
     }()
     
     let secondCollectionView: UICollectionView = {
@@ -59,13 +61,15 @@ class MainView: UIView {
         return collectionView
     }()
     
-    let secondLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Recommend Movies"
-        label.textColor = UIColor.mainWhite
-        label.textAlignment = .left
-        label.font = FontNames.mainFont.font()
-        return label
+    let secondButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Latest Movies", for: .normal)
+        button.setTitleColor(UIColor.mainWhite, for: .normal)
+        button.titleLabel?.font = FontNames.mainFont.font()
+        button.contentHorizontalAlignment = .left
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 40)
+        button.semanticContentAttribute = .forceLeftToRight
+        return button
     }()
     
     let thirdCollectionView: UICollectionView = {
@@ -81,13 +85,15 @@ class MainView: UIView {
         return collectionView
     }()
     
-    let thirdLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Top Rating"
-        label.textColor = UIColor.mainWhite
-        label.textAlignment = .left
-        label.font = FontNames.mainFont.font()
-        return label
+    let thirdButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Genre", for: .normal)
+        button.setTitleColor(UIColor.mainWhite, for: .normal)
+        button.titleLabel?.font = FontNames.mainFont.font()
+        button.contentHorizontalAlignment = .left
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 40)
+        button.semanticContentAttribute = .forceLeftToRight
+        return button
     }()
     
     let fourthCollectionView: UICollectionView = {
@@ -128,16 +134,16 @@ class MainView: UIView {
             $0.width.equalToSuperview()
         }
     }
-    
+
     func setupView() {
         setupBackgroundColor()
         setupFirstCollectionView()
         setupPageLabel()
-        setupFirstLabel()
+        setupFirstButton()
         setupSecondCollectionView()
-        setupSecondLabel()
+        setupSecondButton()
         setupThirdCollectionView()
-        setupThirdLabel()
+        setupThirdButton()
         setupFourthCollectionView()
     }
     
@@ -160,21 +166,30 @@ class MainView: UIView {
         contentView.addSubview(pageLabel)
         
         pageLabel.snp.makeConstraints {
-            $0.bottom.equalTo(firstCollectionView.snp.bottom).offset(-10)
+            $0.bottom.equalTo(firstCollectionView.snp.bottom).offset(0)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(20)
             $0.width.equalTo(60) // 페이지 레이블 너비 설정
         }
     }
     
-    func setupFirstLabel() {
-        contentView.addSubview(firstLabel)
+    func setupFirstButton() {
+        contentView.addSubview(firstButton)
         
-        firstLabel.snp.makeConstraints {
-            $0.top.equalTo(firstCollectionView.snp.bottom).offset(10)
-            $0.leading.equalTo(contentView.snp.leading).offset(16) // 컬렉션 뷰와 동일한 leading offset 설정
+        firstButton.snp.makeConstraints {
+            $0.top.equalTo(firstCollectionView.snp.bottom).offset(30)
+            $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(30)
-            $0.width.equalTo(150)
+        }
+        
+        let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+        arrowImageView.tintColor = UIColor.mainWhite
+        firstButton.addSubview(arrowImageView)
+        
+        arrowImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.width.height.equalTo(20)
         }
     }
     
@@ -182,20 +197,29 @@ class MainView: UIView {
         contentView.addSubview(secondCollectionView)
         
         secondCollectionView.snp.makeConstraints {
-            $0.top.equalTo(firstLabel.snp.bottom).offset(10)
+            $0.top.equalTo(firstButton.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(200)
         }
     }
     
-    func setupSecondLabel() {
-        contentView.addSubview(secondLabel)
+    func setupSecondButton() {
+        contentView.addSubview(secondButton)
         
-        secondLabel.snp.makeConstraints {
-            $0.top.equalTo(secondCollectionView.snp.bottom).offset(10)
-            $0.leading.equalTo(contentView.snp.leading).offset(16) // 컬렉션 뷰와 동일한 leading offset 설정
+        secondButton.snp.makeConstraints {
+            $0.top.equalTo(secondCollectionView.snp.bottom).offset(20)
+            $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(30)
-            $0.width.equalTo(200)
+        }
+        
+        let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+        arrowImageView.tintColor = UIColor.mainWhite
+        secondButton.addSubview(arrowImageView)
+        
+        arrowImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.width.height.equalTo(20)
         }
     }
     
@@ -203,20 +227,29 @@ class MainView: UIView {
         contentView.addSubview(thirdCollectionView)
         
         thirdCollectionView.snp.makeConstraints {
-            $0.top.equalTo(secondLabel.snp.bottom).offset(10)
+            $0.top.equalTo(secondButton.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(200)
         }
     }
     
-    func setupThirdLabel() {
-        contentView.addSubview(thirdLabel)
+    func setupThirdButton() {
+        contentView.addSubview(thirdButton)
         
-        thirdLabel.snp.makeConstraints {
-            $0.top.equalTo(thirdCollectionView.snp.bottom).offset(10)
-            $0.leading.equalTo(contentView.snp.leading).offset(16) // 컬렉션 뷰와 동일한 leading offset 설정
+        thirdButton.snp.makeConstraints {
+            $0.top.equalTo(thirdCollectionView.snp.bottom).offset(20)
+            $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(30)
-            $0.width.equalTo(150)
+        }
+        
+        let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+        arrowImageView.tintColor = UIColor.mainWhite
+        thirdButton.addSubview(arrowImageView)
+        
+        arrowImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.width.height.equalTo(20)
         }
     }
     
@@ -224,7 +257,7 @@ class MainView: UIView {
         contentView.addSubview(fourthCollectionView)
         
         fourthCollectionView.snp.makeConstraints {
-            $0.top.equalTo(thirdLabel.snp.bottom).offset(10)
+            $0.top.equalTo(thirdButton.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(200)
             $0.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-20)
