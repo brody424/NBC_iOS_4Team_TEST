@@ -27,7 +27,7 @@ class CoreDataManager {
     }
     
     func saveUser(name: String, phone: String, id: String, password: String, userprofile: Data?) {
-        let user = Movieuserdata(context: context)
+        let user = UserData(context: context)
         user.name = name
         user.phone = phone
         user.id = id
@@ -42,7 +42,7 @@ class CoreDataManager {
     }
     
     func updateUser(id: String, name: String?, phone: String?, password: String?, userprofile: Data?) {
-        let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
+        let fetchRequest: NSFetchRequest<UserData> = UserData.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
         do {
@@ -71,8 +71,8 @@ class CoreDataManager {
     }
     
     // id에 해당하는 사용자를 Core Data 데이터베이스에서 가져오는 역할
-    func fetchUser(byId id: String) -> Movieuserdata? {
-        let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
+    func fetchUser(byId id: String) -> UserData? {
+        let fetchRequest: NSFetchRequest<UserData> = UserData.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
         do {
@@ -86,7 +86,7 @@ class CoreDataManager {
 
     // id와 password가 Core Data에 저장된 사용자 데이터와 일치하는지 확인
     func validateUser(id: String, password: String) -> Bool {
-        let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
+        let fetchRequest: NSFetchRequest<UserData> = UserData.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@ AND password == %@", id, password)
         
         do {
@@ -99,7 +99,7 @@ class CoreDataManager {
     }
     
     func deleteUser(byId id: String) {
-        let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
+        let fetchRequest: NSFetchRequest<UserData> = UserData.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
         do {
