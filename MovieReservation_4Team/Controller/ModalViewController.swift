@@ -17,7 +17,7 @@ class ModalViewController: UIViewController {
     
     
     //예매하기 버튼
-    var reservationButton: UIButton = {
+    lazy var reservationButton: UIButton = {
         let button = UIButton()
         button.setTitle("예매하기", for: .normal)
         button.setTitleColor(.mainWhite, for: .normal)
@@ -51,7 +51,7 @@ class ModalViewController: UIViewController {
     }()
     
     // + 버튼
-    var plusButton: UIButton = {
+    lazy var plusButton: UIButton = {
         let button = UIButton()
         button.setTitle("+", for: .normal)
         button.setTitleColor(.mainWhite, for: .normal)
@@ -69,7 +69,7 @@ class ModalViewController: UIViewController {
     }()
     
     // - 버튼
-    var minusButton: UIButton = {
+   lazy var minusButton: UIButton = {
         let button = UIButton()
         button.setTitle("-", for: .normal)
         button.setTitleColor(.mainWhite, for: .normal)
