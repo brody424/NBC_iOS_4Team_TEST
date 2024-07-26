@@ -1,14 +1,9 @@
-//
-//  SignUpVIew.swift
-//  MovieReservation_4Team
-//
-//  Created by 4Team on 7/22/24.
-//
-
 import UIKit
 import SnapKit
 
 class SignUpVIew: UIView {
+
+    var isUpdating: Bool = false
 
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -25,6 +20,10 @@ class SignUpVIew: UIView {
         button.setTitle("프로필 변경", for: .normal)
         button.titleLabel?.font = FontNames.mainFont.font()
         button.setTitleColor(UIColor.mainRed, for: .normal)
+<<<<<<< HEAD
+=======
+        button.addTarget(self, action: #selector(selectImage), for: .touchUpInside)
+>>>>>>> e3e738422b44b1b88d70da3477f21852bf6ab995
         return button
     }()
 
@@ -43,7 +42,11 @@ class SignUpVIew: UIView {
         textField.backgroundColor = UIColor.mainWhite
         return textField
     }()
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> e3e738422b44b1b88d70da3477f21852bf6ab995
     let passwordLabel: UILabel = {
         let label = UILabel()
         label.text = "Password"
@@ -51,7 +54,11 @@ class SignUpVIew: UIView {
         label.font = FontNames.subFont2.font()
         return label
     }()
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> e3e738422b44b1b88d70da3477f21852bf6ab995
     let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "비밀번호를 입력하세요"
@@ -109,6 +116,9 @@ class SignUpVIew: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureUI()
+        if isUpdating {
+            fetchUserData() // Load user data if updating
+        }
     }
 
     private func configureUI() {
@@ -193,5 +203,76 @@ class SignUpVIew: UIView {
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.top.equalTo(hpTextField.snp.bottom).offset(32)
         }
+<<<<<<< HEAD
     }
+=======
+
+        signUpButton.setTitle(isUpdating ? "Update" : "Sign Up", for: .normal)
+    }
+
+    @objc private func selectImage() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.originalImage] as? UIImage {
+            profileImageView.image = selectedImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
+
+    @objc private func signupButtonTapped() {
+        guard let id = idTextField.text, !id.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty,
+              let name = nameTextField.text, !name.isEmpty,
+              let phone = hpTextField.text, !phone.isEmpty else {
+            showAlertForLoginFailure(message: "모든 필드를 작성해주세요.")
+            return
+        }
+        
+        let userProfileImageData = profileImageView.image?.pngData()
+        
+        if isUpdating {
+            // Update existing user
+            if let userId = UserDefaults.standard.string(forKey: "loggedInUserId") {
+                CoreDataManager.shared.updateUser(id: userId, name: name, phone: phone, password: password, userprofile: userProfileImageData)
+                
+                // Navigate back to MyPageController after update
+                navigationController?.popViewController(animated: true)
+            }
+        } else {
+            // Save new user
+            CoreDataManager.shared.saveUser(name: name, phone: phone, id: id, password: password, userprofile: userProfileImageData)
+            
+            // Save the user ID to UserDefaults
+            UserDefaults.standard.set(id, forKey: "loggedInUserId")
+            
+            // Navigate back to MyPageController after sign up
+            navigationController?.popViewController(animated: true)
+        }
+    }
+
+    private func showAlertForLoginFailure(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func fetchUserData() {
+        if let userId = UserDefaults.standard.string(forKey: "loggedInUserId") {
+            if let user = CoreDataManager.shared.fetchUser(byId: userId) {
+                idTextField.text = user.id
+                nameTextField.text = user.name
+                passwordTextField.text = user.password
+                hpTextField.text = user.phone
+                if let imageData = user.userprofile {
+                    profileImageView.image = UIImage(data: imageData)
+                }
+            }
+        }
+    }
+>>>>>>> e3e738422b44b1b88d70da3477f21852bf6ab995
 }

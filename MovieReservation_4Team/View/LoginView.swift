@@ -146,4 +146,57 @@ class LoginView: UIView {
             $0.top.equalTo(loginButton.snp.bottom).offset(16)
         }
     }
+<<<<<<< HEAD
+=======
+
+    @objc private func signupButtonTapped() {
+        self.navigationController?.pushViewController(SignUpView(), animated: true)
+    }
+
+    @objc private func loginButtonTapped() {
+        // 로그인 성공 여부 확인
+        let isLoginSuccessful = performLogin()
+
+        if isLoginSuccessful {
+            UserDefaults.standard.set(idTextField.text, forKey: "loggedInUserId")
+            
+            switchToTabBarController()
+        } else {
+            // 로그인 실패 시 사용자에게 알림
+            showAlertForLoginFailure()
+        }
+    }
+
+    private func performLogin() -> Bool {
+        guard let id = idTextField.text, let password = passwordTextField.text else {
+            return false
+        }
+        return CoreDataManager.shared.validateUser(id: id, password: password)
+    }
+
+    private func switchToTabBarController() {
+        // TabBarController 생성
+        let tabBarController = TabBarController()
+
+        // 현재 네비게이션 컨트롤러의 루트 뷰 컨트롤러를 TabBarController로 설정
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = tabBarController
+            window.makeKeyAndVisible()
+        }
+    }
+
+    private func showAlertForLoginFailure() {
+        let alert = UIAlertController(title: "로그인 실패", message: "Please check your credentials and try again.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        // 실패 시 회원가입으로
+        alert.addAction(UIAlertAction(title: "Sign Up", style: .default, handler: { _ in
+            self.signupButtonTapped()
+        }))
+        present(alert, animated: true)
+    }
+}
+
+#Preview("LoginView") {
+    LoginView()
+>>>>>>> e3e738422b44b1b88d70da3477f21852bf6ab995
 }
