@@ -5,7 +5,7 @@
         <attribute name="movieID" optional="YES" attributeType="String"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserData" inverseName="favorites" inverseEntity="UserData"/>
     </entity>
-    <entity name="MovieReservation" representedClassName="MovieReservation" syncable="YES" codeGenerationType="class">
+    <entity name="Reservation" representedClassName="Reservation" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="movieID" optional="YES" attributeType="String"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -19,6 +19,6 @@
         <attribute name="phone" optional="YES" attributeType="String"/>
         <attribute name="userprofile" optional="YES" attributeType="Binary"/>
         <relationship name="favorites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FavoriteMovie" inverseName="user" inverseEntity="FavoriteMovie"/>
-        <relationship name="reservations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MovieReservation" inverseName="user" inverseEntity="MovieReservation"/>
+        <relationship name="reservations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reservation" inverseName="user" inverseEntity="Reservation"/>
     </entity>
 </model>
