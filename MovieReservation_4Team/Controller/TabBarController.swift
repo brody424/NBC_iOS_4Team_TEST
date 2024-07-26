@@ -14,23 +14,25 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         // 탭 바 배경색 설정
         tabBar.barTintColor = UIColor.mainBlack
+        tabBar.tintColor = UIColor.mainRed // 선택된 아이템 색상 설정
+        tabBar.unselectedItemTintColor = UIColor.lightGray // 선택되지 않은 아이템 색상 설정
         
         // 탭 바 아이템 생성
         let mainViewController = MainViewController() // MainView가 아닌 MainViewController를 사용
         let mainNavController = UINavigationController(rootViewController: mainViewController)
-        mainNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house.fill"), tag: 0)
+        mainNavController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 0)
         
         let searchViewController = SearchViewController()
         let searchNavController = UINavigationController(rootViewController: searchViewController)
-        searchNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "magnifyingglass"), tag: 1)
+        searchNavController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
         let reservaitionViewController = ReservaitionController()
         let reservaitionNavController = UINavigationController(rootViewController: reservaitionViewController)
-        reservaitionNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "ticket"), tag: 2)
+        reservaitionNavController.tabBarItem = UITabBarItem(title: "Reservation", image: UIImage(systemName: "ticket"), tag: 2)
 
         let favoritesViewController = FavoritesViewController()
         let favoritesNavController = UINavigationController(rootViewController: favoritesViewController)
-        favoritesNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "heart.fill"), tag: 3)
+        favoritesNavController.tabBarItem = UITabBarItem(title: "Wish List", image: UIImage(systemName: "heart.fill"), tag: 3)
         
         // 뷰 컨트롤러 순서 설정
         viewControllers = [mainNavController, searchNavController, reservaitionNavController, favoritesNavController]
