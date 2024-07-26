@@ -1,10 +1,3 @@
-//
-//  MainView.swift
-//  MovieReservation_4Team
-//
-//  Created by 4Team on 7/22/24.
-//
-
 import UIKit
 import SnapKit
 
@@ -34,45 +27,16 @@ class MainView: UIView {
         return collectionView
     }()
     
-    let secondCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150, height: 200)
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.mainBlack
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "SecondCell")
-        return collectionView
+    let pageLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.lightGray
+        label.textAlignment = .center
+        label.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        return label
     }()
     
-    let thirdCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150, height: 200)
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.mainBlack
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ThirdCell")
-        return collectionView
-    }()
-    
-    let fourthCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150, height: 200)
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.mainBlack
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "FourthCell")
-        return collectionView
-    }()
-
     let firstLabel: UILabel = {
         let label = UILabel()
         label.text = "Coming Soon"
@@ -80,6 +44,19 @@ class MainView: UIView {
         label.textAlignment = .left
         label.font = FontNames.mainFont.font()
         return label
+    }()
+    
+    let secondCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 150, height: 200)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 0
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.mainBlack
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "SecondCell")
+        return collectionView
     }()
     
     let secondLabel: UILabel = {
@@ -91,6 +68,19 @@ class MainView: UIView {
         return label
     }()
     
+    let thirdCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 150, height: 200)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 0
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.mainBlack
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ThirdCell")
+        return collectionView
+    }()
+    
     let thirdLabel: UILabel = {
         let label = UILabel()
         label.text = "Top Rating"
@@ -98,6 +88,19 @@ class MainView: UIView {
         label.textAlignment = .left
         label.font = FontNames.mainFont.font()
         return label
+    }()
+    
+    let fourthCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 150, height: 200)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 0
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.mainBlack
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "FourthCell")
+        return collectionView
     }()
     
     override init(frame: CGRect) {
@@ -129,6 +132,7 @@ class MainView: UIView {
     func setupView() {
         setupBackgroundColor()
         setupFirstCollectionView()
+        setupPageLabel()
         setupFirstLabel()
         setupSecondCollectionView()
         setupSecondLabel()
@@ -142,7 +146,6 @@ class MainView: UIView {
         contentView.backgroundColor = UIColor.mainBlack
     }
 
-    
     func setupFirstCollectionView() {
         contentView.addSubview(firstCollectionView)
         
@@ -150,6 +153,17 @@ class MainView: UIView {
             $0.top.equalTo(contentView.snp.top).offset(0)
             $0.leading.trailing.equalTo(contentView).inset(16)
             $0.height.equalTo(200)
+        }
+    }
+    
+    func setupPageLabel() {
+        contentView.addSubview(pageLabel)
+        
+        pageLabel.snp.makeConstraints {
+            $0.bottom.equalTo(firstCollectionView.snp.bottom).offset(-10)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(20)
+            $0.width.equalTo(60) // 페이지 레이블 너비 설정
         }
     }
     

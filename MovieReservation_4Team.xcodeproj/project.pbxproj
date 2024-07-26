@@ -307,6 +307,7 @@
 				270A84A12C4E543C00B61721 /* MainView.swift in Sources */,
 				273F56232C4F36E2004E251B /* UIColor+Hex.swift in Sources */,
 				5F7278612C4F2F8A0033B94E /* CoreDataManager.swift in Sources */,
+				C29F6C4C2C5336880081FA15 /* MovieUserData.xcdatamodeld in Sources */,
 				5F7278632C4F2FCB0033B94E /* NetworkManager.swift in Sources */,
 				C26C08372C509588009F5B06 /* CustomTableViewCell.swift in Sources */,
 				270A84A82C4E549200B61721 /* SearchView.swift in Sources */,
