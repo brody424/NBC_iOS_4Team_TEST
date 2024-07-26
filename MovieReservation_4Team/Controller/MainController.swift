@@ -8,6 +8,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     var secondCollectionViewMovies: [Movie] = []
     var thirdCollectionViewMovies: [Movie] = []
     var fourthCollectionViewMovies: [Movie] = []
+    var selectedCategoryMovies: [Movie] = []
     
     var slideTimer: Timer?
     
@@ -35,6 +36,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         let profileBarButtonItem = UIBarButtonItem(customView: profileButton)
         self.navigationItem.rightBarButtonItem = profileBarButtonItem
+        
+        // 카테고리 버튼에 액션 추가
+        mainView.firstButton.addTarget(self, action: #selector(showFirstCategory), for: .touchUpInside)
+        mainView.secondButton.addTarget(self, action: #selector(showSecondCategory), for: .touchUpInside)
+        mainView.thirdButton.addTarget(self, action: #selector(showThirdCategory), for: .touchUpInside)
     }
     
     @objc func profileButtonTapped() {
@@ -66,8 +72,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
         }
     
-        
-        NetworkManager.shared.fetchNowPlayingMovies(page: 1) { [weak self] movies in
+        NetworkManager.shared.fetchUpcomingMovies(page: 2) { [weak self] movies in
             guard let self = self, let movies = movies else { return }
             DispatchQueue.main.async {
                 self.secondCollectionViewMovies = movies
@@ -75,7 +80,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
         }
         
-        NetworkManager.shared.fetchPopularMovies(page: 1) { [weak self] movies in
+        // 여기에서 third와 fourth 컬렉션의 데이터 소스를 바꿈
+        NetworkManager.shared.fetchNowPlayingMovies(page: 4) { [weak self] movies in
             guard let self = self, let movies = movies else { return }
             DispatchQueue.main.async {
                 self.thirdCollectionViewMovies = movies
@@ -83,7 +89,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
         }
         
-        NetworkManager.shared.fetchNowPlayingMovies(page: 1) { [weak self] movies in
+        NetworkManager.shared.fetchMoviesByGenre(genreId: 27, page: 1) { [weak self] movies in
             guard let self = self, let movies = movies else { return }
             DispatchQueue.main.async {
                 self.fourthCollectionViewMovies = movies
@@ -111,19 +117,13 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         case mainView.fourthCollectionView:
             return fourthCollectionViewMovies.count
         default:
-            return 0
+            return selectedCategoryMovies.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier(for: collectionView), for: indexPath)
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
-        
-        cell.contentView.layer.cornerRadius = 10
-        cell.contentView.layer.shadowColor = UIColor.black.cgColor
-        cell.contentView.layer.shadowOpacity = 10
-        cell.contentView.layer.shadowOffset = CGSize(width: 0, height: 10)
-        cell.contentView.layer.shadowRadius = 8
         
         let movie: Movie
         switch collectionView {
@@ -136,12 +136,13 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         case mainView.fourthCollectionView:
             movie = fourthCollectionViewMovies[indexPath.item]
         default:
-            fatalError("Unknown collection view")
+            movie = selectedCategoryMovies[indexPath.item]
         }
         
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 10 // 외곽을 살짝 둥글게 설정
         
         // 첫 번째 컬렉션 뷰는 가로 이미지, 나머지는 세로 포스터
         if collectionView == mainView.firstCollectionView, let backdropPath = movie.backdropPath {
@@ -169,7 +170,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         case mainView.fourthCollectionView:
             return "FourthCell"
         default:
-            return "Cell"
+            return "CategoryCell"
         }
     }
     
@@ -184,7 +185,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             // 세로 포스터 크기 설정
             return CGSize(width: 150, height: 200)
         default:
-            return CGSize.zero
+            let width = (UIScreen.main.bounds.width - 40) / 3 // 3개의 아이템을 한 줄에 배치하고, 아이템 사이의 간격 10을 고려
+            return CGSize(width: width, height: width * 1.5) // 높이는 너비의 1.5배로 설정
         }
     }
     
@@ -207,9 +209,12 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             movie = fourthCollectionViewMovies[indexPath.item]
             movieInfoVC.readMovieDetail(movieID: movie.id)
         default:
-            fatalError("Unknown collection view")
+            movie = selectedCategoryMovies[indexPath.item]
+            movieInfoVC.readMovieDetail(movieID: movie.id)
         }
-        navigationController?.pushViewController(movieInfoVC, animated: true)
+        dismiss(animated: true) { [weak self] in
+            self?.navigationController?.pushViewController(movieInfoVC, animated: true)
+        }
     }
     
     // 자동 슬라이드 기능
@@ -231,5 +236,44 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         if scrollView == mainView.firstCollectionView {
             updatePageLabel()
         }
+    }
+    
+    @objc func showFirstCategory() {
+        selectedCategoryMovies = secondCollectionViewMovies
+        showCategoryModal(title: "Coming Soon")
+    }
+    
+    @objc func showSecondCategory() {
+        selectedCategoryMovies = thirdCollectionViewMovies
+        showCategoryModal(title: "Latest Movies")
+    }
+    
+    @objc func showThirdCategory() {
+        selectedCategoryMovies = fourthCollectionViewMovies
+        showCategoryModal(title: "Genre")
+    }
+    
+    func showCategoryModal(title: String) {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 10
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .mainBlack
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CategoryCell")
+        
+        let modalViewController = UIViewController()
+        modalViewController.view.backgroundColor = .mainBlack
+        modalViewController.title = title
+        modalViewController.view.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalTo(modalViewController.view.safeAreaLayoutGuide).inset(10)
+        }
+        
+        let navController = UINavigationController(rootViewController: modalViewController)
+        present(navController, animated: true, completion: nil)
     }
 }
