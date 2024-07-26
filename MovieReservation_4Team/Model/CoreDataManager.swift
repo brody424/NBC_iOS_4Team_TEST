@@ -96,4 +96,21 @@ class CoreDataManager {
             return false
         }
     }
+    
+    func deleteUser(byId id: String) {
+        let fetchRequest: NSFetchRequest<Movieuserdata> = Movieuserdata.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                context.delete(user)
+                try context.save()
+            } else {
+                print("User with id \(id) not found")
+            }
+        } catch {
+            print("Failed to delete user: \(error)")
+        }
+    }
 }

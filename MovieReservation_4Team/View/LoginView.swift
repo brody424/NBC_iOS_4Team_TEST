@@ -155,6 +155,8 @@ class LoginView: UIViewController {
         let isLoginSuccessful = performLogin()
 
         if isLoginSuccessful {
+            UserDefaults.standard.set(idTextField.text, forKey: "loggedInUserId")
+            
             switchToTabBarController()
         } else {
             // 로그인 실패 시 사용자에게 알림
