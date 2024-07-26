@@ -107,6 +107,18 @@ class NetworkManager {
     }
     
     
+    //MARK: -장르별 영화 검색
+    // genreId - 액션: 28/ 애니메이션 : 16/ 공포 : 27/ 로맨스: 10749 / 코미디 : 35
+    func fetchMoviesByGenre(genreId: Int, page: Int, completion: @escaping ([Movie]?) -> Void) {
+        let urlString = "\(baseUrl)/discover/movie?api_key=\(apiKey)&language=ko-KR&with_genres=\(genreId)&page=\(page)"
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        fetchMovies(with: urlString, completion: completion)
+    }
     
     //MARK: -특정 영화의 예고편 가져오기
 //        NetworkManager.shared.fetchMovieTrailers(movieId: 1022789) { trailers in
@@ -114,7 +126,7 @@ class NetworkManager {
 //                for trailer in trailers {
 //                    print("Trailer Name: \(trailer.name), Trailer Key: \(trailer.key), Trailer Site: \(trailer.site), Trailer Type: \(trailer.type)")
 //                }
-//                
+//
 //                if let youtubeTrailer = trailers.first(where: { $0.site == "YouTube" }) {
 //                    DispatchQueue.main.async {
 //                        self.movieInfoView.configureTrailerView(with: youtubeTrailer.key)

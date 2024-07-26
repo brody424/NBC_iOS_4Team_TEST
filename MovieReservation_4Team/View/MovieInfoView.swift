@@ -84,7 +84,7 @@ class MovieInfoView: UIView {
         return description
     }()
     //더보기 기능
-    var moreButton: UIButton = {
+    lazy var moreButton: UIButton = {
         let button = UIButton()
         button.setTitle("...더보기", for: .normal)
         button.setTitleColor(.mainWhite, for: .normal)
