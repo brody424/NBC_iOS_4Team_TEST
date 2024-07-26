@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class ReservaitionView: UIView {
-    
+
     // MARK: - UI 요소 정의
     private let ticketImageView: UIImageView = {
         let imageView = UIImageView()
@@ -17,7 +17,7 @@ class ReservaitionView: UIView {
         imageView.clipsToBounds = true
         return imageView
     }()
-    
+
     private let movieImageview: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -102,17 +102,27 @@ class ReservaitionView: UIView {
         return label
     }()
 
+    let noReservationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "예매된 영화가 없습니다"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textAlignment = .center
+        label.isHidden = true // 초기에는 숨김
+        return label
+    }()
+
     // MARK: - 초기화
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
     }
-    
+
     private func setupUI() {
         [
             ticketImageView,
@@ -123,6 +133,7 @@ class ReservaitionView: UIView {
             ticketQuantityLabel,
             separatorLine1,
             separatorLine2,
+            noReservationLabel
         ].forEach { self.addSubview($0) }
 
         ticketImageView.snp.makeConstraints {
@@ -172,6 +183,10 @@ class ReservaitionView: UIView {
             $0.top.equalTo(dateLabel.snp.bottom).offset(16)
             $0.centerX.equalToSuperview()
         }
+
+        noReservationLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
 
     // MARK: - 데이터 구성
@@ -179,5 +194,28 @@ class ReservaitionView: UIView {
         ticketImageView.image = ticketImage
         movieImageview.image = movieImage
     }
-}
 
+    func showNoReservationMessage() {
+        noReservationLabel.isHidden = false
+        ticketImageView.isHidden = true
+        movieImageview.isHidden = true
+        runTimeLabel.isHidden = true
+        movieTitleLabel.isHidden = true
+        dateLabel.isHidden = true
+        ticketQuantityLabel.isHidden = true
+        separatorLine1.isHidden = true
+        separatorLine2.isHidden = true
+    }
+
+    func hideNoReservationMessage() {
+        noReservationLabel.isHidden = true
+        ticketImageView.isHidden = false
+        movieImageview.isHidden = false
+        runTimeLabel.isHidden = false
+        movieTitleLabel.isHidden = false
+        dateLabel.isHidden = false
+        ticketQuantityLabel.isHidden = false
+        separatorLine1.isHidden = false
+        separatorLine2.isHidden = false
+    }
+}
