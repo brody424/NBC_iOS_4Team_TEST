@@ -160,7 +160,7 @@ class MainView: UIView {
         contentView.addSubview(pageLabel)
         
         pageLabel.snp.makeConstraints {
-            $0.bottom.equalTo(firstCollectionView.snp.bottom).offset(-10)
+            $0.bottom.equalTo(firstCollectionView.snp.bottom).offset(0)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(20)
             $0.width.equalTo(60) // 페이지 레이블 너비 설정

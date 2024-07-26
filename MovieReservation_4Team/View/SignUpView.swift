@@ -221,6 +221,9 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             if let userId = UserDefaults.standard.string(forKey: "loggedInUserId") {
                 CoreDataManager.shared.updateUser(id: userId, name: name, phone: phone, password: password, userprofile: userProfileImageData)
                 
+                // Post notification for user data update
+                NotificationCenter.default.post(name: NSNotification.Name("UserDataUpdated"), object: nil)
+                
                 // Navigate back to MyPageController after update
                 navigationController?.popViewController(animated: true)
             }
@@ -231,10 +234,14 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             // Save the user ID to UserDefaults
             UserDefaults.standard.set(id, forKey: "loggedInUserId")
             
+            // Post notification for user data update
+            NotificationCenter.default.post(name: NSNotification.Name("UserDataUpdated"), object: nil)
+            
             // Navigate back to MyPageController after sign up
             navigationController?.popViewController(animated: true)
         }
     }
+
 
     private func showAlertForLoginFailure(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
