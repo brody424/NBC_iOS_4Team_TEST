@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LoginView: UIViewController {
+class LoginView: UIView {
 
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -56,7 +56,6 @@ class LoginView: UIViewController {
         button.titleLabel?.font = FontNames.subFont2.font()
         button.setTitleColor(UIColor.mainWhite, for: .normal)
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -65,7 +64,6 @@ class LoginView: UIViewController {
         button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = FontNames.subFont.font()
         button.setTitleColor(UIColor.mainWhite, for: .normal)
-        button.addTarget(self, action: #selector(signupButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -78,17 +76,20 @@ class LoginView: UIViewController {
         return view
     }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupViews()
         configureUI()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     private func setupViews() {
-        view.backgroundColor = UIColor.mainBlack
-        view.addSubview(logoImageView)
-        view.addSubview(containerView)
+        backgroundColor = UIColor.mainBlack//확인
+        addSubview(logoImageView)
+        addSubview(containerView)
 
         containerView.addSubview(idLabel)
         containerView.addSubview(idTextField)
@@ -145,52 +146,4 @@ class LoginView: UIViewController {
             $0.top.equalTo(loginButton.snp.bottom).offset(16)
         }
     }
-
-    @objc private func signupButtonTapped() {
-        self.navigationController?.pushViewController(SignUpView(), animated: true)
-    }
-
-    @objc private func loginButtonTapped() {
-        // 로그인 성공 여부 확인
-        let isLoginSuccessful = performLogin()
-
-        if isLoginSuccessful {
-            switchToTabBarController()
-        } else {
-            // 로그인 실패 시 사용자에게 알림
-            showAlertForLoginFailure()
-        }
-    }
-
-    private func performLogin() -> Bool {
-        guard let id = idTextField.text, let password = passwordTextField.text else {
-            return false
-        }
-        return CoreDataManager.shared.validateUser(id: id, password: password)
-    }
-
-    private func switchToTabBarController() {
-        // TabBarController 생성
-        let tabBarController = TabBarController()
-
-        // 현재 네비게이션 컨트롤러의 루트 뷰 컨트롤러를 TabBarController로 설정
-        if let window = UIApplication.shared.windows.first {
-            window.rootViewController = tabBarController
-            window.makeKeyAndVisible()
-        }
-    }
-
-    private func showAlertForLoginFailure() {
-        let alert = UIAlertController(title: "로그인 실패", message: "Please check your credentials and try again.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        // 실패 시 회원가입으로
-        alert.addAction(UIAlertAction(title: "Sign Up", style: .default, handler: { _ in
-            self.signupButtonTapped()
-        }))
-        present(alert, animated: true)
-    }
-}
-
-#Preview("LoginView") {
-    LoginView()
 }

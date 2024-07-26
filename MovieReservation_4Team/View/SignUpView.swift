@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SignUpVIew: UIView {
 
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -17,8 +17,6 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         imageView.layer.cornerRadius = 70
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
-        // let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectImage))
-        //  profileImageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
 
@@ -27,8 +25,6 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         button.setTitle("프로필 변경", for: .normal)
         button.titleLabel?.font = FontNames.mainFont.font()
         button.setTitleColor(UIColor.mainRed, for: .normal)
-        button.addTarget(self, action: #selector(selectImage), for: .touchUpInside)
-
         return button
     }()
 
@@ -47,6 +43,7 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         textField.backgroundColor = UIColor.mainWhite
         return textField
     }()
+
     let passwordLabel: UILabel = {
         let label = UILabel()
         label.text = "Password"
@@ -54,6 +51,7 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         label.font = FontNames.subFont2.font()
         return label
     }()
+
     let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "비밀번호를 입력하세요"
@@ -94,37 +92,41 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         return textField
     }()
 
-   lazy var signUpButton: UIButton = {
+    lazy var signUpButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = UIColor.mainRed
         button.tintColor = .white
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(signupButtonTapped), for: .touchUpInside)
         return button
     }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureUI()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         configureUI()
     }
 
     private func configureUI() {
-        view.backgroundColor = UIColor.mainBlack
+        backgroundColor = UIColor.mainBlack
 
         [
             profileImageView,
             changeProfileButton,
-            idLabel, 
+            idLabel,
             idTextField,
-            passwordLabel, 
+            passwordLabel,
             passwordTextField,
-            nameLabel, 
+            nameLabel,
             nameTextField,
-            hpLabel, 
+            hpLabel,
             hpTextField,
             signUpButton
-        ].forEach { view.addSubview($0) }
+        ].forEach { addSubview($0) }
 
         profileImageView.snp.makeConstraints {
             $0.width.height.equalTo(140)
@@ -179,6 +181,7 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.top.equalTo(nameTextField.snp.bottom).offset(8)
         }
+
         hpTextField.snp.makeConstraints {
             $0.height.equalTo(40)
             $0.leading.trailing.equalToSuperview().inset(24)
@@ -190,46 +193,5 @@ class SignUpView: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.top.equalTo(hpTextField.snp.bottom).offset(32)
         }
-
-
-    }
-
-    @objc private func selectImage() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true, completion: nil)
-    }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
-        if let selectedImage = info[.originalImage] as? UIImage {
-            profileImageView.image = selectedImage
-        }
-        dismiss(animated: true, completion: nil)
-    }
-
-
-    @objc private func signupButtonTapped() {
-        guard let id = idTextField.text, !id.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty,
-              let name = nameTextField.text, !name.isEmpty,
-              let phone = hpTextField.text, !phone.isEmpty else {
-            showAlertForLoginFailure(message: "작성하세요.")
-            return
-        }
-        
-        let userProfileImageData = profileImageView.image?.pngData()
-        
-        CoreDataManager.shared.saveUser(name: name, phone: phone, id: id, password: password, userprofile: userProfileImageData)
-        
-        self.navigationController?.pushViewController(LoginView(), animated: true)
-    }
-    
-    private func showAlertForLoginFailure(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true, completion: nil)
     }
 }
-
-#Preview("SignUpView") {SignUpView()}
