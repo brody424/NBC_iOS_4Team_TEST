@@ -19,10 +19,6 @@
 		270A84B82C4E6BCD00B61721 /* UserData2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84B72C4E6BCD00B61721 /* UserData2.swift */; };
 		270A84BA2C4E6BE300B61721 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84B92C4E6BE300B61721 /* MainController.swift */; };
 		270A84BD2C4E6C1500B61721 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A84BC2C4E6C1500B61721 /* Manager.swift */; };
-		272ADB6B2C53866000748904 /* FavoriteMovie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272ADB672C53866000748904 /* FavoriteMovie+CoreDataClass.swift */; };
-		272ADB6C2C53866000748904 /* FavoriteMovie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272ADB682C53866000748904 /* FavoriteMovie+CoreDataProperties.swift */; };
-		272ADB6D2C53866000748904 /* MovieReservation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272ADB692C53866000748904 /* MovieReservation+CoreDataClass.swift */; };
-		272ADB6E2C53866000748904 /* MovieReservation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272ADB6A2C53866000748904 /* MovieReservation+CoreDataProperties.swift */; };
 		273F56232C4F36E2004E251B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F56222C4F36E2004E251B /* UIColor+Hex.swift */; };
 		276B93D22C4E103C00170CBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D12C4E103C00170CBF /* AppDelegate.swift */; };
 		276B93D42C4E103C00170CBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276B93D32C4E103C00170CBF /* SceneDelegate.swift */; };
@@ -69,10 +65,6 @@
 		270A84B72C4E6BCD00B61721 /* UserData2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData2.swift; sourceTree = "<group>"; };
 		270A84B92C4E6BE300B61721 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		270A84BC2C4E6C1500B61721 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
-		272ADB672C53866000748904 /* FavoriteMovie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMovie+CoreDataClass.swift"; sourceTree = "<group>"; };
-		272ADB682C53866000748904 /* FavoriteMovie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMovie+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		272ADB692C53866000748904 /* MovieReservation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieReservation+CoreDataClass.swift"; sourceTree = "<group>"; };
-		272ADB6A2C53866000748904 /* MovieReservation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieReservation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		273F56222C4F36E2004E251B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		276B93CE2C4E103C00170CBF /* MovieReservation_4Team.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieReservation_4Team.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		276B93D12C4E103C00170CBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -178,10 +170,6 @@
 		276B93C52C4E103C00170CBF = {
 			isa = PBXGroup;
 			children = (
-				272ADB672C53866000748904 /* FavoriteMovie+CoreDataClass.swift */,
-				272ADB682C53866000748904 /* FavoriteMovie+CoreDataProperties.swift */,
-				272ADB692C53866000748904 /* MovieReservation+CoreDataClass.swift */,
-				272ADB6A2C53866000748904 /* MovieReservation+CoreDataProperties.swift */,
 				C2D6DBF32C52179500C2C928 /* UserData+CoreDataClass.swift */,
 				C2D6DBF42C52179500C2C928 /* UserData+CoreDataProperties.swift */,
 				C29F6C582C538F750081FA15 /* MovieUserData.xcdatamodeld */,
@@ -354,10 +342,6 @@
 				270A84B02C4E554200B61721 /* ReservaitionView.swift in Sources */,
 				C29F6C512C537E470081FA15 /* Genre.swift in Sources */,
 				5F7278922C508ACF0033B94E /* MovieDetail.swift in Sources */,
-				272ADB6B2C53866000748904 /* FavoriteMovie+CoreDataClass.swift in Sources */,
-				272ADB6C2C53866000748904 /* FavoriteMovie+CoreDataProperties.swift in Sources */,
-				272ADB6D2C53866000748904 /* MovieReservation+CoreDataClass.swift in Sources */,
-				272ADB6E2C53866000748904 /* MovieReservation+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
